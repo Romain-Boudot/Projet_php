@@ -58,6 +58,9 @@
 
             <h1>MARCASSIN</h1>
 
+            <hr>
+            <br>
+
             <form action="http://localhost/pages/login.php" method="post">
                 
                 <div class="input-group mb-3">
