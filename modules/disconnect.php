@@ -3,7 +3,7 @@
     session_start();
     session_unset();
     session_destroy();
-    header('location: http://localhost/index');
+    header('location: http://localhost');
     exit();
 
 ?>
