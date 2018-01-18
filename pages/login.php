@@ -15,11 +15,11 @@
         
         // on recupére le password de la table qui correspond au login du visiteur
         
-        $data = $db->query("SELECT id, mdp FROM test where login='" . $login . "'");
+        $data = $db->query("SELECT id, password, last_name, first_name FROM users where login='" . $login . "'");
 
         $data = $data->fetch();
 
-        if ( $data['mdp'] != $password ) {
+        if ( $data['password'] != $password ) {
 
             setcookie('login', $login, time() + 24*3600*7);
         
@@ -27,6 +27,8 @@
             
             setcookie('login', $login, time() + 24*3600*7, null, null, false, true);
             $_SESSION['id'] = $data['id'];
+            $_SESSION['last_name'] = $data['last_name'];
+            $_SESSION['first_name'] = $data['first_name'];
             $_SESSION['login'] = $login;
 
             header('Location: http://localhost');
@@ -38,9 +40,11 @@
 
 ?>
 <!DOCTYPE html>
+
 <html>
 
     <head>
+
         <title>Identifiez-vous</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <style>
@@ -50,6 +54,7 @@
                 padding: 20px;
             }
         </style>
+
     </head>
 
     <body>

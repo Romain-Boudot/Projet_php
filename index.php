@@ -14,15 +14,13 @@
     <title>Talk with me!</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" href="css/main.css">
-    <?php include '/var/www/html/include/bootstrap_css.html'; ?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 </head>
 
 <body>
-    page d'acceuil
-    <br>
-    <a href="http://localhost/modules/disconnect.php">déconnexion</a>
-    <br>
-    <a href="http://localhost/pages/existepas.html">erreur 404</a>
+    
+    
+
 </body>
 
 </html>
