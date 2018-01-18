@@ -14,7 +14,7 @@
     <title>Talk with me!</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" href="css/main.css">
-    <?php include 'include/bootstrap_css.html'; ?>
+    <?php include '/var/www/html/include/bootstrap_css.html'; ?>
 </head>
 
 <body>

@@ -42,18 +42,42 @@
 
     <head>
         <title>Identifiez-vous</title>
+        <?php include '/var/www/html/include/bootstrap_css.html'; ?>
+        <style>
+            #wrapper{
+                width: 500px;
+                margin-top: 20vh;
+                padding: 20px;
+            }
+        </style>
     </head>
 
-    <form action="http://localhost/pages/login.php" method="post">
+    <body>
+
+        <div id="wrapper" class="mx-auto text-center border rounded bg-light">
+
+            <form action="http://localhost/pages/login.php" method="post">
+                
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1" style="width: 150px;">Nom d'utilisateur</span>
+                    </div>
+                    <input type="text" name="login" class="form-control" value="<?php if(isset($_COOKIE['login'])) echo $_COOKIE['login'];?>" >
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1" style="width: 150px;">Mot de passe</span>
+                    </div>
+                    <input type="password" name="password" class="form-control" value="<?php if(isset($_COOKIE['login'])) echo $_COOKIE['login'];?>" >
+                </div>
+
+                <button class="btn btn-outline-primary" type="submit">connection</button>
+
+            </form>
         
-        <?php 
-            if(isset($_COOKIE['login']))
-                echo "<input type='text' name='login' value='".$_COOKIE['login']."'>";
-            else
-                echo "<input type='text' name='login'>";
-        ?>
-        <input type="password" name="password">
-        <button type="submit">connect</button>
-    </form>
+        </div>
+
+    </body>
 
 </html>
