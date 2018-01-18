@@ -56,6 +56,8 @@
 
         <div id="wrapper" class="mx-auto text-center border rounded bg-light">
 
+            <h1>MARCASSIN</h1>
+
             <form action="http://localhost/pages/login.php" method="post">
                 
                 <div class="input-group mb-3">
