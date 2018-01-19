@@ -1,12 +1,15 @@
 <?php 
+    //demarrage ou reprise de session ! super important a mettre toujours en premier !
     session_start();
 
+    // les variables !
+    include $_SERVER['DOCUMENT_ROOT'] . '/include/var.php';
+    
+
     if(isset($_POST) && !empty($_POST['login']) && !empty($_POST['password'])) {
-        
-        echo "<script>alert('coucou')</script>";
 
         try {
-            $db = new PDO('mysql:host=localhost;dbname=projet_php;charset=utf8', 'webclient', 'webpassword'); 
+            $db = new PDO($request_db, $login_db, $password_db); 
         } catch(Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -21,7 +24,7 @@
 
         if ( $data['password'] != $password ) {
 
-            setcookie('login', $login, time() + 24*3600*7);
+            // code mot de passe incorecte
         
         } else {
             
@@ -31,7 +34,7 @@
             $_SESSION['first_name'] = $data['first_name'];
             $_SESSION['login'] = $login;
 
-            header('Location: http://localhost');
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '');
             exit();
             
         }
@@ -66,7 +69,7 @@
             <hr>
             <br>
 
-            <form action="http://localhost/pages/login.php" method="post">
+            <form action="http://<?php echo $_SERVER['HTTP_HOST']; ?>/pages/login.php" method="post">
                 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">

@@ -15,7 +15,7 @@
     <div id="container">
         <h1 class="display-3">erreur 404</h1>
         <p>Votre page est introuvable</p>
-        <a class="btn btn-primary btn-lg" href="http://localhost" role="button">Retour</a>
+        <a class="btn btn-primary btn-lg" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>" role="button">Retour</a>
     </div>
     
     </div>
