@@ -17,7 +17,6 @@
         extract($_POST);
         
         // on recupére le password de la table qui correspond au login du visiteur
-        
         $data = $db->query("SELECT id, password, last_name, first_name FROM users where login='" . $login . "'");
 
         $data = $data->fetch();
@@ -49,7 +48,7 @@
     <head>
 
         <title>Identifiez-vous</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <?php echo $bootstrap_css; ?> 
         <style>
             #wrapper{
                 width: 500px;
@@ -85,7 +84,7 @@
                     <input type="password" name="password" class="form-control" value="<?php if(isset($_COOKIE['login'])) echo $_COOKIE['login'];?>" >
                 </div>
 
-                <button class="btn btn-outline-primary" type="submit">connection</button>
+                <button class="btn btn-outline-primary" type="submit">connexion</button>
 
             </form>
         

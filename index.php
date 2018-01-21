@@ -99,10 +99,12 @@
 <html>
 
 <head>
+
     <title>Talk with me!</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <?php echo $bootstrap_css; ?>
+      
 </head>
 
 <body>
@@ -112,11 +114,11 @@
 
         <div class="d-flex">
             <span class="navbar-text text-warning"><?php echo $_SESSION['login']; ?></span>
-            <a class='btn btn-outline-secondary ml-4' href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/pages/create_room.php" role="button">Créer une salle</a>
+            <a class='btn btn-outline-secondary ml-4' href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/pages/room_settings.php" role="button">Créer une salle</a>
             <button type="button" class="btn btn-outline-secondary ml-2">
                 Notifications<span class="badge badge-light ml-1">4</span>
             </button>
-            <a class="btn btn-outline-secondary ml-2" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php" role="button">deconnexion</a>
+            <a class="btn btn-outline-secondary ml-2" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php" role="button">Déconnexion</a>
         </div>
 
     </nav>
