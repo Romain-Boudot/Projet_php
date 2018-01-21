@@ -1,52 +1,21 @@
 <?php
-    //demarrage ou reprise de session ! super important a mettre toujours en premier !
+    // load or reload a session ! have to be the first line
     session_start();
 
-    // test de connexion au site
+    // test of the login of the user
     if (!isset($_SESSION['login'])) {
         header("location: http://" . $_SERVER['HTTP_HOST'] . "/pages/login.php");
         exit();
     }
 
-    // les variables !
+    // variable
     include $_SERVER['DOCUMENT_ROOT'] . '/include/var.php';
 
-    //connexion à la base de donnée
+    // connection to the database
     try {
         $db = new PDO($request_db, $login_db, $password_db); 
     } catch(Exception $e) {
         die('Erreur : ' . $e->getMessage());
-    }
-
-    function get_users() {
-
-        $users = $db->query("SELECT id, login, last_name, first_name FROM users");
-    
-        $users = $users->fetchAll(PDO::FETCH_ASSOC);
-        
-        echo '<table class="table">';
-        echo '<thead>';
-        echo '<tr>';
-        echo '<th scope="col">Prenom</th>';
-        echo '<th scope="col">Nom</th>';
-        echo '<th scope="col">Pseudo</th>';
-        echo '</tr>';
-        echo '</thead>';
-        echo '<tbody>';
-        
-        
-        for($i = 0; $i < sizeof($users); $i++) {
-            if ($users[$i]['id'] == $_SESSION['id']) continue;
-            echo '<tr>';
-            echo '<th scope="row">' . $users[$i]['first_name'] . '</th>';
-            echo '<th scope="row">' . $users[$i]['last_name'] . '</th>';
-            echo '<th scope="row">' . $users[$i]['login'] . '</th>';
-            echo '</tr>';
-        }
-              
-        echo '</tbody>';
-        echo '</table>';
-
     }
 
 ?>
@@ -54,7 +23,7 @@
 <html>
 
 <head>
-    <title>Création de page</title>
+    <title>Création de salle</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" href="../css/main.css">
     <?php echo $bootstrap_css; ?>    
@@ -123,7 +92,7 @@
 
     <div>
 
-    <script src="../javascript/search.js"></script>
+    <script src="../javascript/room_settings.js"></script>
 </body>
 
 

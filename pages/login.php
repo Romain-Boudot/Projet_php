@@ -1,8 +1,8 @@
 <?php 
-    //demarrage ou reprise de session ! super important a mettre toujours en premier !
+    // load or reload a session ! have to be the first line
     session_start();
 
-    // les variables !
+    // variable
     include $_SERVER['DOCUMENT_ROOT'] . '/include/var.php';
     
 

@@ -1,8 +1,8 @@
 <?php
-    //demarrage ou reprise de session ! super important a mettre toujours en premier !
+    // load or reload a session ! have to be the first line
     session_start();
 
-    // test de connexion au site
+    // test of the login of the user
     if (!isset($_SESSION['login'])) {
         header("location: http://" . $_SERVER['HTTP_HOST'] . "/pages/login.php");
         exit();

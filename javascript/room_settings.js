@@ -129,6 +129,7 @@ function del_user(target) {
     parent = document.getElementById('invited_users')
 
     for(var i = 0; i < invited_users.length; i++) {
+
         if(invited_users[i] == target.id) {
 
             // we delete the user id of the invited list
@@ -139,6 +140,7 @@ function del_user(target) {
 
             return
         }
+        
     }
 
     if(parent.childElementCount == 1) {
