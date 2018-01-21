@@ -144,9 +144,7 @@
             } else {
 
                 echo "<div class='jumbotron jumbotron-fluid border border-secondary rounded p-4'>";
-                
                 echo "<p class='d-inline'>Vous n'avez accès à aucune salle, mais vous pouvez en créer une !</p>";
-
                 echo "</div>";
 
             }
