@@ -114,7 +114,7 @@
 
         <div class="d-flex">
             <span class="navbar-text text-warning"><?php echo $_SESSION['login']; ?></span>
-            <a class='btn btn-outline-secondary ml-4' href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/pages/room_settings.php" role="button">Créer une salle</a>
+            <a class='btn btn-outline-secondary ml-4' href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/pages/create_room.php" role="button">Créer une salle</a>
             <button type="button" class="btn btn-outline-secondary ml-2">
                 Notifications<span class="badge badge-light ml-1">4</span>
             </button>
