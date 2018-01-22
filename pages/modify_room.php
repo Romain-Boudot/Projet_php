@@ -2,11 +2,16 @@
     // load or reload a session ! have to be the first line
     session_start();
 
+    header("Content-type: text/html;charset=UTF-8");
+
     // test of the login of the user
     if (!isset($_SESSION['login'])) {
         header("location: http://" . $_SERVER['HTTP_HOST'] . "/pages/login.php");
         exit();
     }
+
+    // variable
+    include $_SERVER['DOCUMENT_ROOT'] . '/include/var.php';
 
     // test of the presence of GET in URI
     if(isset($_GET) && isset($_GET['id'])) {
@@ -24,41 +29,27 @@
     }
 
     // test of the owner of the room
-    $owner = $db->query("SELECT adminid FROM room WHERE id = " . $room_id);
-    echo $owner;
-    exit();
+    $owner = $db->query('SELECT adminid FROM room WHERE id = ' . $room_id);
+    $owner = $owner->fetch();
+    $owner = $owner['adminid'];
 
-    // variable
-    include $_SERVER['DOCUMENT_ROOT'] . '/include/var.php';
-
-    function get_users() {
-
-        $users = $db->query("SELECT id, login, last_name, first_name FROM users WHERE ");
+    if($owner != $_SESSION['id']) {
+        echo 'CE N\'EST PAS VOTRE SALLE VOUS N\'AVEZ RIEN A FAIRE ICI';
+        exit();
+    }
     
-        $users = $users->fetchAll(PDO::FETCH_ASSOC);
-        
-        echo '<table class="table">';
-        echo '<thead>';
-        echo '<tr>';
-        echo '<th scope="col">Prenom</th>';
-        echo '<th scope="col">Nom</th>';
-        echo '<th scope="col">Pseudo</th>';
-        echo '</tr>';
-        echo '</thead>';
-        echo '<tbody>';
-        
-        
-        for($i = 0; $i < sizeof($users); $i++) {
-            if ($users[$i]['id'] == $_SESSION['id']) continue;
-            echo '<tr>';
-            echo '<th scope="row">' . $users[$i]['first_name'] . '</th>';
-            echo '<th scope="row">' . $users[$i]['last_name'] . '</th>';
-            echo '<th scope="row">' . $users[$i]['login'] . '</th>';
-            echo '</tr>';
-        }
-              
-        echo '</tbody>';
-        echo '</table>';
+    $users = $db->query("SELECT id, login, last_name, first_name FROM users WHERE EXISTS ( SELECT userid FROM assouser WHERE userid = id AND roomid = " . $room_id . ")");
+
+    $users = $users->fetchAll(PDO::FETCH_ASSOC);
+    
+    function get_users($id, $login, $last_name, $first_name) {
+
+        echo "<div id='" . $id . "' onclick='del_user(this)'>";
+        echo "<button type='button' class='close' onclick='expulse_user(this)' aria-label='Close'>";
+        echo "<span style='font-size: 80%' aria-hidden='true'>expulser</span>";
+        echo "</button>";
+        echo "" . $login . " - " . $last_name . " - " . $first_name . "";
+        echo "</div>";
 
     }
 
@@ -76,6 +67,7 @@
 <body>
 
     <div id="current_id" hidden><?php echo $_SESSION['id'] ?></div>
+    <div id="room_id" hidden><?php echo $_GET['id'] ?></div>
     
     <nav class="navbar fixed-top navbar-dark bg-dark">
         <a class="navbar-brand" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>">MARCASSIN</a>
@@ -93,7 +85,7 @@
 
         <div id="wrapper" class='container border rounded p-4 text-center bg-light'>
 
-            <h2>Création de salle</h2>
+            <h2>Modification de salle</h2>
 
             <hr>
             <br>
@@ -117,26 +109,37 @@
                 <div id="search_result" class="p-2 border text-left mb-1" style="display: none">
                     <div id="search_result_title">Résultats de la recherche<hr></div>
                     <div id="search_element"></div>
-                </div>
+                </div> 
 
                 <div id="invited_users" class="container p-3 w-100 border text-left">
-                    <div id="nobody_added" style="display: block">
-                        Vous n'avez ajouté personne dans votre salle.
-                    </div>
-                </div>
+                    <?php 
+                    
+                    for($i = 0; $i < sizeof($users); $i++) {
 
-                </div>
+                        if($users[$i]['id'] == $_SESSION['id']) continue;
+                        get_users($users[$i]['id'], $users[$i]['login'], $users[$i]['last_name'], $users[$i]['first_name']);
+                        
+                    }
+                    echo '<hr>';
+                    
+                    ?>
+                    <div id="nobody_added" style="display: block">Vous n'avez ajouté personne dans votre salle.</div>
+                </div>                
 
                 <a role="button" class="btn btn-secondary mr-3 mt-3" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>">Annuler</a>
-                <button type="button" onclick="send_modification()" class="btn btn-primary mt-3">Valider</button>
+                <button type="button" onclick="send_modification()" class="btn btn-primary mt-3">Modifier</button>
+                <button type="button" onclick="delete_room()" class="btn btn-danger ml-3 mt-3">Suprimer</button>
 
             </div>
 
         </div>
 
-    <div>
+    </div>
 
+    <script src="../javascript/search.js"></script>
     <script src="../javascript/room_settings.js"></script>
+    <script src="../javascript/modify_room.js"></script>
+
 </body>
 
 

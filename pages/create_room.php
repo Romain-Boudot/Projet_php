@@ -24,8 +24,8 @@
 
 <head>
     <title>Création de salle</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <link rel="stylesheet" href="../css/main.css">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../css/main.css"/>
     <?php echo $bootstrap_css; ?>    
 </head>
 
@@ -60,14 +60,14 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1" style="width: 180px;">Nom de la salle</span>
                     </div>
-                    <input type="text" id="name" class="form-control" placeholder="random things">
+                    <input type="text" id="name" class="form-control" placeholder="random things"/>
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1" style="width: 180px;">Recherche d'utilisateur</span>
+                        <span class="input-group-text" id="basic-addon2" style="width: 180px;">Recherche d'utilisateur</span>
                     </div>
-                    <input id="search" type="text" class="form-control" placeholder="Pseudo, nom ou prénom" onkeyup="search_db(this.value)">
+                    <input id="search" type="text" class="form-control" placeholder="Pseudo, nom ou prénom" onkeyup="search_db(this.value)"/>
                 </div>
 
                 <div id="search_result" class="p-2 border text-left mb-1" style="display: none">
@@ -76,23 +76,22 @@
                 </div>
 
                 <div id="invited_users" class="container p-3 w-100 border text-left">
-                    <div id="nobody_added" style="display: block">
-                        Vous n'avez ajouté personne dans votre salle.
-                    </div>
-                </div>
-
+                    <div id="nobody_added" style="display: block">Vous n'avez ajouté personne dans votre salle.</div>
                 </div>
 
                 <a role="button" class="btn btn-secondary mr-3 mt-3" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>">Annuler</a>
-                <button type="button" onclick="send_creation()" class="btn btn-primary mt-3">Valider</button>
+                <button type="button" onclick="send_creation()" class="btn btn-primary mt-3">Créer</button>
 
             </div>
 
         </div>
 
-    <div>
+    </div>
 
+    <script src="../javascript/search.js"></script>
     <script src="../javascript/room_settings.js"></script>
+    <script src="../javascript/create_room.js"></script>
+
 </body>
 
 
