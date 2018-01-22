@@ -136,7 +136,6 @@
 
     </div>
 
-    <script src="../javascript/search.js"></script>
     <script src="../javascript/room_settings.js"></script>
     <script src="../javascript/modify_room.js"></script>
 

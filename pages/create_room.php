@@ -11,13 +11,6 @@
     // variable
     include $_SERVER['DOCUMENT_ROOT'] . '/include/var.php';
 
-    // connection to the database
-    try {
-        $db = new PDO($request_db, $login_db, $password_db); 
-    } catch(Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -88,7 +81,6 @@
 
     </div>
 
-    <script src="../javascript/search.js"></script>
     <script src="../javascript/room_settings.js"></script>
     <script src="../javascript/create_room.js"></script>
 

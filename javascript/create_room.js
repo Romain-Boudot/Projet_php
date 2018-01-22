@@ -34,8 +34,6 @@ function send_creation() {
 // callback of send_creation()
 function validation(answer) {
 
-    alert(answer)
-
     answer = JSON.parse(answer)
 
     if(answer[0] == 0) {   

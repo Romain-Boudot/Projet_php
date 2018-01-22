@@ -38,7 +38,7 @@
     $data = $data->fetchAll(PDO::FETCH_ASSOC);
 
     function get_basic_room($name, $author, $last_message, $id) {
-        echo "<div class='jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable' onclick='alert(\"$id\")'>";
+        echo "<div class='jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable' oonclick='location.href=http://" . $_SERVER['HTTP_HOST'] . "/pages/room.php?=" . $id . ")'>";
             
         echo '<div class="d-inline-flex border border-bottom-0 border-left-0 border-top-0 border-secondary p-2">';
         echo $name;
@@ -56,7 +56,7 @@
     }
 
     function get_admin_room($name, $author, $last_message, $id) {
-        echo '<div class="jumbotron jumbotron-fluid border border-primary rounded p-0">';
+        echo '<div class="jumbotron jumbotron-fluid border border-primary rounded p-0 clickable" onclick="location.href=http://' . $_SERVER['HTTP_HOST'] . '/pages/room.php?=' . $id . ')">';
             
         echo '<div class="d-inline-flex border border-bottom-0 border-left-0 border-top-0 border-primary p-2">';
         echo $name;
