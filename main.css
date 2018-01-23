@@ -1,0 +1,38 @@
+#room_container {
+    margin-top: 100px;
+    max-width: 1200px;
+}
+
+#creation_container {
+    margin-top: 100px;
+    max-width: 900px;
+}
+
+#search_container {
+    max-height: 300px;
+}
+
+#wrapper{
+    width: 500px;
+    margin-top: 20vh;
+    padding: 20px;
+}
+.mw-1200 {
+    max-width: 1200px;
+}
+
+.mt-100px {
+    margin-top: 100px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.bg-grey {
+    background-color: rgb(196, 196, 196);
+}
+
+.minw-100px {
+    min-width: 100px;
+}

@@ -1,4 +1,8 @@
 <?php
+    // load or reload a session ! have to be the first line
+    session_start();
+    include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
+
     // we return some json array
     header("Content-type: text/javascript");
 

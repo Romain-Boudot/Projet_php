@@ -21,7 +21,7 @@ function send_creation() {
     xhr.onreadystatechange = function() {
             
         if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-            validation(xhr.responseText);
+            creation_callback(xhr.responseText);
         }
         
     }
@@ -32,7 +32,7 @@ function send_creation() {
 }
 
 // callback of send_creation()
-function validation(answer) {
+function creation_callback(answer) {
 
     answer = JSON.parse(answer)
 
