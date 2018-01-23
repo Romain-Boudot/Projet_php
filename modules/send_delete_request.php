@@ -15,7 +15,7 @@
 
         try {
             $db = new PDO($request_db, $login_db, $password_db); 
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch(Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }

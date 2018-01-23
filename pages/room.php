@@ -15,14 +15,15 @@
 
         try {
             $db = new PDO($request_db, $login_db, $password_db); 
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch(Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
 
         $room_id = $_GET['id'];
+        $id = $_SESSION['id'];
 
-        $answer = $db->query('SELECT userid, roomid, isvalidate FROM assouser WHERE roomid =' . $room_id);
+        $answer = $db->query('SELECT userid, roomid, isvalidate FROM assouser WHERE roomid =' . $room_id . ' AND userid = ' . $id);
         $answer = $answer->fetch();
         $is_validate = $answer['isvalidate'];
 
