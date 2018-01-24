@@ -1,40 +1,51 @@
-// used in 
-// 
-//
-
-var allready_invited = []
+var invited_users = []
+var current_room_id = document.getElementById('room_id').innerHTML
+var current_user_id = document.getElementById('current_id').innerHTML
 
 
-// fonction triggered quand on load la page
+// fonction de récuperation de l'objet XMLHTTPrequest ( xhr )
 
-window.onload = function() {
-    get_allready_invited_users()
-}
+function getXMLHTTP() {
+
     
+    // vérifie si le module 'xhr' est supporter
 
-// récupere les utilisateur deja dans la salleactuelle
+    if(window.XMLHttpRequest || window.ActiveXObject) {
+        
+        if(window.ActiveXObject) {
 
-function get_allready_invited_users() {
+            try {
+
+                var xhr = new ActiveXObject("Msxml2.XMLHTTP");
+                return xhr
+
+            } catch(e) {
+
+                var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                return xhr
+
+            }
+
+        } else {
+
+            var xhr = new XMLHttpRequest(); 
+            return xhr
+
+        }
+        
+    } else {
 
 
-    // par récuperation de tout les enfant de invited_users
-
-    var temp = document.getElementById('invited_users').children
-
-    if(temp.length <= 1) {
-        return
+        // sinon alerter l'utilisateur que son navigateur ne le supporte pas
+        
+        alert("Votre navigateur ne supporte pas l'XMLhttpRequest")
+        
     }
     
-
-    // on les ajoute un par un dans allready_invited
-
-    for(var i = 0; i < (temp.length -2 ); i++) {
-
-        allready_invited[allready_invited.length] = temp[i].id
-
-    }
-    
 }
+
+
+
 
 function send_modification() {
     alert('send modif')

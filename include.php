@@ -14,6 +14,10 @@
     $location_modify    =   'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/modify_room/index.php';
     $location_room      =   'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room/index.php';
 
+    // module :
+    $create_room_module =   $_SERVER['DOCUMENT_ROOT'] . '/modules/send_creation_request.php';
+    $delete_room_module =   $_SERVER['DOCUMENT_ROOT'] . '/modules/send_delete_request.php';
+
     // path on the server
     $path_login         =   $_SERVER['DOCUMENT_ROOT'] . '/talk_with_me/login';
     $path_create        =   $_SERVER['DOCUMENT_ROOT'] . '/talk_with_me/create_room';

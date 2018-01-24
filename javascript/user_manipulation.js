@@ -1,8 +1,23 @@
+// used in 
+// 
+//
+
 var allready_invited = []
 
-get_allready_invited_users()
+
+// fonction triggered quand on load la page
+
+window.onload = function() {
+    get_allready_invited_users()
+}
+    
+
+// récupere les utilisateur deja dans la salleactuelle
 
 function get_allready_invited_users() {
+
+
+    // par récuperation de tout les enfant de invited_users
 
     var temp = document.getElementById('invited_users').children
 
@@ -10,6 +25,9 @@ function get_allready_invited_users() {
         return
     }
     
+
+    // on les ajoute un par un dans allready_invited
+
     for(var i = 0; i < (temp.length -2 ); i++) {
 
         allready_invited[allready_invited.length] = temp[i].id
@@ -17,6 +35,9 @@ function get_allready_invited_users() {
     }
     
 }
+
+
+// ajoute un utilisateur a partir de la recherche 
 
 function add_user(target) {
 
@@ -28,10 +49,14 @@ function add_user(target) {
         if(allready_invited[i] == target.id) return
     }
 
+
     // we add the user id to the invited list
+    
     invited_users[invited_users.length] = target.id
     
+
     // we copy the information of the clicked id to create a new one in the invited list of user
+    
     var newdiv = document.createElement("div")
     newdiv.id = target.id
     newdiv.setAttribute("onclick", "del_user(this)")
