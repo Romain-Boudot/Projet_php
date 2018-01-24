@@ -2,8 +2,6 @@
 // 
 //
 
-var allready_invited = []
-
 
 // fonction triggered quand on load la page
 
@@ -54,7 +52,7 @@ function delete_room() {
         
     }
 
-    xhr.open('POST', '../modules/send_delete_request.php', true);
+    xhr.open('POST', '../../modules/send_delete_request.php', true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send('id=' + current_room_id);
 }

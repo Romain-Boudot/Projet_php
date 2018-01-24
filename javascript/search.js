@@ -2,6 +2,7 @@
 
 function search_db(search_key_word) {
 
+
     xhr = getXMLHTTP() // récuperation de l'objet xhr
 
 
@@ -31,7 +32,7 @@ function search_db(search_key_word) {
         // ouvre une requete xhr vers le module search_request.php en GET avec comme parametre le but de la recherche
         // pouis l'envoie
 
-        xhr.open("GET", "../modules/search_request.php?search=" + search_key_word, true);
+        xhr.open("GET", "../../modules/search_request.php?search=" + search_key_word, true);
         xhr.send(null);
         
     } else { // si la recherche est vide

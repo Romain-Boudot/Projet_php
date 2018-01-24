@@ -1,43 +1,5 @@
-// used in 
-// 
-//
-
-var allready_invited = []
-
-
-// fonction triggered quand on load la page
-
-window.onload = function() {
-    get_allready_invited_users()
-}
-    
-
-// récupere les utilisateur deja dans la salleactuelle
-
-function get_allready_invited_users() {
-
-
-    // par récuperation de tout les enfant de invited_users
-
-    var temp = document.getElementById('invited_users').children
-
-    if(temp.length <= 1) {
-        return
-    }
-    
-
-    // on les ajoute un par un dans allready_invited
-
-    for(var i = 0; i < (temp.length -2 ); i++) {
-
-        allready_invited[allready_invited.length] = temp[i].id
-
-    }
-    
-}
-
-
 // ajoute un utilisateur a partir de la recherche 
+var allready_invited = []
 
 function add_user(target) {
 

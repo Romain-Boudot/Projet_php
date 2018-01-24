@@ -52,7 +52,7 @@ function send_creation() {
     // encodage de l'url
     // envoie de la requete
 
-    xhr.open('POST', '../modules/send_creation_request.php', true);
+    xhr.open('POST', '../../modules/send_creation_request.php', true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(data);
 }
@@ -62,6 +62,8 @@ function send_creation() {
 
 function creation_callback(answer) {
 
+
+    alert(answer)
 
     // la page php renvoie l'état de la requete sous forme JSON
 
@@ -76,12 +78,12 @@ function creation_callback(answer) {
     if(answer[0] == 0) {
 
         alert("Votre salle a bien été créée")
-        location.href = "../index.php" // redirection vers l'accueil 
+        location.href = "../../index.php" // redirection vers l'accueil 
 
     } else if(answer[0] == 2 ) {
 
         alert("Votre session a expirée")
-        location.href = "../index.php" // redirection vers l'accueil 
+        location.href = "../../index.php" // redirection vers l'accueil 
 
     } else {
 

@@ -1,15 +1,10 @@
 <?php
     // load or reload a session ! have to be the first line
     session_start();
+    include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
 
     // test of the login of the user
-    if (!isset($_SESSION['login'])) {
-        header("location: http://" . $_SERVER['HTTP_HOST'] . "/pages/login.php");
-        exit();
-    }
-
-    // variable
-    include $_SERVER['DOCUMENT_ROOT'] . '/include/var.php';
+    login_test();
 
 ?>
 <!DOCTYPE html>
@@ -18,13 +13,14 @@
 <head>
     <title>Création de salle</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-    <link rel="stylesheet" href="../css/main.css"/>
+    <link rel="stylesheet" href="../../main.css"/>
     <?php echo $bootstrap_css; ?>    
 </head>
 
 <body>
 
     <div id="current_id" hidden><?php echo $_SESSION['id'] ?></div>
+    <div id="room_id" hidden><?php echo $_GET['id'] ?></div>
     
     <nav class="navbar fixed-top navbar-dark bg-dark">
         <a class="navbar-brand" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>">MARCASSIN</a>
@@ -40,7 +36,7 @@
 
     <div id="creation_container" class="container">
 
-        <div id="wrapper" class='container border rounded p-4 text-center bg-light'>
+        <div class='container border rounded p-4 text-center bg-light'>
 
             <h2>Création de salle</h2>
 
@@ -53,7 +49,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1" style="width: 180px;">Nom de la salle</span>
                     </div>
-                    <input type="text" id="name" class="form-control" placeholder="random things"/>
+                    <input type="text" id="name" class="form-control" maxlength="30" placeholder="random things"/>
                 </div>
 
                 <div class="input-group mb-3">
@@ -81,8 +77,10 @@
 
     </div>
 
-    <script src="../javascript/room_settings.js"></script>
-    <script src="../javascript/create_room.js"></script>
+    <script src="../../javascript/XMLHTTPrequest.js"></script>
+    <script src="../../javascript/search.js"></script>
+    <script src="../../javascript/user_manipulation.js"></script>
+    <script src="../../javascript/create_room.js"></script>
 
 </body>
 

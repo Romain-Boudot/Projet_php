@@ -3,6 +3,14 @@
     session_start();
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
 
+
+    // check if session is up
+    if (!isset($_SESSION['login'])) {
+        echo "[[-2]]";
+        exit();
+    }
+
+
     // we return some json array
     header("Content-type: text/javascript");
 
@@ -13,13 +21,7 @@
         exit();
     }
 
-    include $_SERVER['DOCUMENT_ROOT'] . '/include/var.php';
-
-    try {
-        $db = new PDO($request_db, $login_db, $password_db); 
-    } catch(Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
+    $db = data_base_connexion();
 
     // we are searching for users
     $users = $db->query("SELECT id, login, last_name, first_name FROM users WHERE login like '%" . $search . "%'");

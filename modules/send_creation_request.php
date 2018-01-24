@@ -10,10 +10,8 @@
         echo "[2]";
         exit();
     }
-
-    include '../include/var.php';
     
-    function check_duplicate($id) {
+    function check_duplicate($id, $invited_users) {
         
         for($j = 0; $j < sizeof($invited_users); $j++) {
             if($id == $invited_users[$j]) return true;
@@ -25,15 +23,10 @@
     
     if(isset($_POST) && isset($_POST['name'])) {
         
-        $invited_users;
+        $invited_users = [];
         $room_name = $_POST['name'];
         
-        try {
-            $db = new PDO($request_db, $login_db, $password_db); 
-            //$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(Exception $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
+        $db = data_base_connexion();
 
         if(isset($_POST['user'])) {
 
@@ -43,7 +36,7 @@
             for($i = 0; $i < sizeof($user); $i++) {
 
                 if($user[$i] == $_SESSION['id']) continue;
-                if(check_duplicate($user[$i]) == true) continue;
+                if(check_duplicate($user[$i], $invited_users) == true) continue;
 
                 $invited_users[sizeof($invited_users)] = $user[$i];
 

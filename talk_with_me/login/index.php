@@ -3,13 +3,6 @@
     session_start();
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
 
-    // Afficher les erreurs à l'écran
-    ini_set('display_errors', 1);
-    // Enregistrer les erreurs dans un fichier de log
-    ini_set('log_errors', 1);
-    // Nom du fichier qui enregistre les logs (attention aux droits à l'écriture)
-    ini_set('error_log', dirname(__file__) . '/log_error_php.txt');
-
     if(isset($_POST) && !empty($_POST['login']) && !empty($_POST['password'])) {
 
         $db = data_base_connexion();

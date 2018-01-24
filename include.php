@@ -1,5 +1,12 @@
 <?php // THIS CAN ONLY BE INCLUDE
 
+    // Afficher les erreurs à l'écran
+    ini_set('display_errors', 1);
+    // Enregistrer les erreurs dans un fichier de log
+    ini_set('log_errors', 1);
+    // Nom du fichier qui enregistre les logs (attention aux droits à l'écriture)
+    ini_set('error_log', dirname(__file__) . '/log_error_php.txt');
+
     $_SERVER['HTTP_HOST']; //adress of the loaded page
 
     $bootstrap_css      =   '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">';
