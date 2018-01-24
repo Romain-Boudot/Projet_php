@@ -77,9 +77,9 @@
         echo '</div>';
         echo '<div class="col"></div>';
         echo '<div class="w-100 bg-secondary text-white p-4 text-truncate">';
-        echo $last_message;        
+        echo $last_message;
         echo '</div>';
-        echo '</button>';
+        echo '</div>';
 
     }
 
@@ -116,6 +116,16 @@
         echo '</div>';
         echo '</div>';
     
+    }
+
+    function show_message($author, $content, $message_date) {
+
+        echo '<div class="container-fluid bg-light p-3 rounded">';
+        echo '<span class="font-weight-light pr-2 text-little">' . $message_date . '</span>';
+        echo '<span class="text-danger border border-bottom-0 border-top-0 border-left-0 border-secondary pr-2 mr-2">' . $author . '</span>';
+        echo $content;
+        echo '</div>';
+
     }
 
 ?>
