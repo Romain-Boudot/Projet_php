@@ -68,7 +68,7 @@
 
     function get_basic_room($name, $author, $last_message, $id) {
     
-        echo '<div class="row jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/pages/room.php?id=' . $id . '\'">';        
+        echo '<div class="row jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room/index.php?id=' . $id . '\'">';        
         echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-secondary p-2 text-center">';
         echo $name;
         echo '</div>';
@@ -85,7 +85,7 @@
 
     function get_admin_room($name, $author, $last_message, $id) {
 
-        echo '<div class="row jumbotron jumbotron-fluid border border-primary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/pages/room.php?id=' . $id . '\'">';
+        echo '<div class="row jumbotron jumbotron-fluid border border-primary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room/index.php?id=' . $id . '\'">';
         echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-primary p-2 text-center">';
         echo $name;
         echo '</div>';

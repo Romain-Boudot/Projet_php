@@ -1,15 +1,10 @@
 <?php
+    // load or reload a session ! have to be the first line
     session_start();
-    
-    header("Content-type: text/html");
+    include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
 
-    // check if session is up
-    if (!isset($_SESSION['login'])) {
-        header("location: http://" . $_SERVER['HTTP_HOST'] . "/pages/login.php");
-        exit();
-    }
-
-    include '../include/var.php';
+    // test of the login of the user
+    login_test();
 
     if(isset($_GET) && isset($_GET['id'])) {
 
@@ -36,7 +31,7 @@
 
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 
 <head>
 

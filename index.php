@@ -63,26 +63,30 @@
 
         <?php
 
-            if(!is_null($data[0]['name'])) {
-    
-                for($i = 0; $i < sizeof($data); $i++) {
+            if(sizeof($data) > 0) {
+
+                if(!is_null($data[0]['name'])) {
                     
-                    if($data[$i]['isadmin'] === "1") {
-                        get_admin_room($data[$i]['name'], $data[$i]['author'], " testeuuuuuuu", $data[$i]['rid']);
-                    } else if($data[$i]['isvalidate'] === "0") {
-                        get_validation_room($data[$i]['name'], $data[$i]['author'], $data[$i]['id']);
-                    } else {
-                        get_basic_room($data[$i]['name'], $data[$i]['author'], " testeuuuuuuu", $data[$i]['rid']);
+                    for($i = 0; $i < sizeof($data); $i++) {
+                        
+                        if($data[$i]['isadmin'] === "1") {
+                            get_admin_room($data[$i]['name'], $data[$i]['author'], " testeuuuuuuu", $data[$i]['rid']);
+                        } else if($data[$i]['isvalidate'] === "0") {
+                            get_validation_room($data[$i]['name'], $data[$i]['author'], $data[$i]['rid']);
+                        } else {
+                            get_basic_room($data[$i]['name'], $data[$i]['author'], " testeuuuuuuu", $data[$i]['rid']);
+                        }
+                        
                     }
                     
                 }
-            
-            } else {
 
+            } else {
+                    
                 echo "<div class='jumbotron jumbotron-fluid border border-secondary rounded p-4'>";
                 echo "<p class='d-inline'>Vous n'avez accès à aucune salle, mais vous pouvez en créer une !</p>";
                 echo "</div>";
-
+                
             }
 
         ?>
