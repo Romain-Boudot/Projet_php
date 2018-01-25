@@ -1,0 +1,2 @@
+ErrorDocument 404 /var/www/html/talk_with_me/error/404.php
+DirectoryIndex index.php index.html /var/www/html/talk_with_me/error/404.php

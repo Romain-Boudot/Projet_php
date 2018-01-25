@@ -28,7 +28,7 @@
 
     $users = $users->fetchAll(PDO::FETCH_ASSOC);
 
-    if(sizeof($users) > 15) {
+    if(sizeof($users) > 25) {
         echo "[[-1]]";
         exit;
     }

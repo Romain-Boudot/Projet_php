@@ -93,6 +93,8 @@
 
     </div>
 
+    <script src="javascript/validation_room.js"></script>
+
 </body>
 
 </html>

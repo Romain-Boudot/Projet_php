@@ -68,7 +68,7 @@
 
     function get_basic_room($name, $author, $last_message, $id) {
     
-        echo '<div class="row jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room/index.php?id=' . $id . '\'">';        
+        echo '<div id="id' . $id . '" class="row jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room/index.php?id=' . $id . '\'">';        
         echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-secondary p-2 text-center">';
         echo $name;
         echo '</div>';
@@ -85,7 +85,7 @@
 
     function get_admin_room($name, $author, $last_message, $id) {
 
-        echo '<div class="row jumbotron jumbotron-fluid border border-primary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room/index.php?id=' . $id . '\'">';
+        echo '<div id="id' . $id . '" class="row jumbotron jumbotron-fluid border border-primary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room/index.php?id=' . $id . '\'">';
         echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-primary p-2 text-center">';
         echo $name;
         echo '</div>';
@@ -102,7 +102,7 @@
 
     function get_validation_room($name, $author, $id) {
 
-        echo '<div class="row jumbotron jumbotron-fluid border border-success rounded p-0">';
+        echo '<div id="id' . $id . '" class="row jumbotron jumbotron-fluid border border-success rounded p-0">';
         echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-success p-2 text-center">';
         echo $name;
         echo '</div>';
@@ -111,8 +111,8 @@
         echo '</div>';
         echo '<div class="col"></div>';
         echo '<div class="w-100 bg-success text-white p-4 ">';
-        echo '<a class="btn w-25 minw-100px btn-light mr-3 p-1" href="#" role="button">accepter</a>';
-        echo '<a class="btn w-25 minw-100px btn-danger p-1" href="#" role="button">refuser</a>';
+        echo '<button type="button" class="btn w-25 minw-100px btn-light mr-3 p-1" onclick="accept(' . $id . ')" role="button">accepter</a>';
+        echo '<button type="button" class="btn w-25 minw-100px btn-danger p-1" onclick="refuse(' . $id . ')" role="button">refuser</a>';
         echo '</div>';
         echo '</div>';
     

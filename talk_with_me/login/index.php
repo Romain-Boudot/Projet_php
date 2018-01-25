@@ -3,6 +3,12 @@
     session_start();
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
 
+    // check if session is up
+    if (isset($_SESSION['login'])) {
+        header('location: http://' . $_SERVER['HTTP_HOST']);
+        exit();
+    }
+
     if(isset($_POST) && !empty($_POST['login']) && !empty($_POST['password'])) {
 
         $db = data_base_connexion();
@@ -10,11 +16,11 @@
         extract($_POST);
         
         // on recupére le password de la table qui correspond au login du visiteur
-        $data = $db->query("SELECT id, password, last_name, first_name FROM users where login='" . $login . "'");
+        $data = $db->query("SELECT id, password, last_name, first_name, active FROM users where login='" . $login . "'");
 
         $data = $data->fetch();
 
-        if ( $data['password'] != $password ) {
+        if ( $data['password'] != $password || $data['active'] == 0) {
 
             // code mot de passe incorecte
         
