@@ -33,10 +33,8 @@
     $path_delete        =   $_SERVER['DOCUMENT_ROOT'] . '/talk_with_me/modify_room';
     $path_room          =   $_SERVER['DOCUMENT_ROOT'] . '/talk_with_me/room';
 
-    // fonction :
-    // - login_test()
-    // - data_base_connexion() return dabase PDO objet
-    
+
+    // fonction login test
 
     function login_test($test) {
 
@@ -65,9 +63,5 @@
         }
             
     }
-
-    /* if ($test == 'login') header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/login');
-    else echo $test;
-    exit(); */
 
 ?>

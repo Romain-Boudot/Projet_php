@@ -76,17 +76,19 @@
         }
 
 
-        public function include_bootstrap_css() {
+        public function print_html($target) {
 
-            echo $this::bootstrap_css;
+            switch ($target) {
+                
+                case 'bs_css':
+                    echo $this::bootstrap_css;
+                    break;
+                case 'bs_js':
+                    echo $this::bootstrap_js;
+                    break;
 
-        }
-
-
-        public function include_bootstrap_js() {
-
-            echo $this::bootstrap_js;
-
+            }
+            
         }
 
 
@@ -99,11 +101,11 @@
                     for($i = 0; $i < sizeof($data); $i++) {
                         
                         if($data[$i]['isadmin'] === "1") {
-                            get_admin_room($data[$i]['name'], $data[$i]['author'], " testeuuuuuuu", $data[$i]['rid']);
+                            $this->get_admin_room($data[$i]['name'], $data[$i]['author'], " testeuuuuuuu", $data[$i]['rid']);
                         } else if($data[$i]['isvalidate'] === "0") {
-                            get_validation_room($data[$i]['name'], $data[$i]['author'], $data[$i]['rid']);
+                            $this->get_validation_room($data[$i]['name'], $data[$i]['author'], $data[$i]['rid']);
                         } else {
-                            get_basic_room($data[$i]['name'], $data[$i]['author'], " testeuuuuuuu", $data[$i]['rid']);
+                            $this->get_basic_room($data[$i]['name'], $data[$i]['author'], " testeuuuuuuu", $data[$i]['rid']);
                         }
                         
                     }

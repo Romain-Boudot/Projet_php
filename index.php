@@ -18,7 +18,7 @@
     <title>Talk with me!</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" href="main.css">
-    <?php echo $bootstrap_css; ?>
+    <?php $printer->print_html('bs_css'); ?>
       
 </head>
 
@@ -40,7 +40,7 @@
     
     <div id="room_container" class="container">
 
-        <?php show_room($data); ?>
+        <?php $printer->show_room($data); ?>
 
     </div>
 

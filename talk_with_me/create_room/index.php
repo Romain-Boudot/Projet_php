@@ -4,17 +4,19 @@
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
 
     // test of the login of the user
-    login_test();
+    login_test('login');
 
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
+
     <title>Création de salle</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <link rel="stylesheet" href="../../main.css"/>
-    <?php echo $bootstrap_css; ?>    
+    <?php $printer->print_html('bs_css'); ?>
+
 </head>
 
 <body>

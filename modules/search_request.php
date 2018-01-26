@@ -5,36 +5,32 @@
 
 
     // check if session is up
-    if (!isset($_SESSION['login'])) {
-        echo "[[-2]]";
-        exit();
-    }
+
+    login_test('[[-2]]');
 
 
     // we return some json array
+
     header("Content-type: text/javascript");
 
-    if(isset($_GET) && isset($_GET['search'])) {
-        $search = $_GET['search'];
-    } else {
+    
+    if(!isset($_GET) || !isset($_GET['search'])) {
         echo 'Faut pas charcher les pages à la main !!! ';
         exit();
     }
 
-    $db = data_base_connexion();
 
-    // we are searching for users
-    $users = $db->query("SELECT id, login, last_name, first_name FROM users WHERE login like '%" . $search . "%'");
+    $users = $data_base->search($_GET['search']);
 
-    $users = $users->fetchAll(PDO::FETCH_ASSOC);
 
-    if(sizeof($users) > 25) {
-        echo "[[-1]]";
-        exit;
-    }
-    
+    if(sizeof($users) > 25) 
+        $size = 25;
+    else
+        $size = sizeof($users);
+
+
     echo "[";
-    for($i = 0; $i < sizeof($users); $i++) {
+    for($i = 0; $i < $size; $i++) {
         if($i > 0) echo ",";
         echo "[" . $users[$i]['id'] . ",\"" . $users[$i]['login'] . "\",\"" . $users[$i]['last_name'] . "\",\"" . $users[$i]['first_name'] . "\"]";
     }

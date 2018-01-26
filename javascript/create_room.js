@@ -63,6 +63,7 @@ function send_creation() {
 
 function creation_callback(answer) {
 
+
     // la page php renvoie l'état de la requete sous forme JSON
 
     answer = JSON.parse(answer)

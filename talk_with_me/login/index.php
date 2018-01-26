@@ -42,7 +42,7 @@
 
         <title>Identifiez-vous</title>
         <link rel="stylesheet" href="../../main.css">
-        <?php $printer->include_bootstrap_css(); ?> 
+        <?php $printer->include_bootstrap_css(); ?>
 
     </head>
 

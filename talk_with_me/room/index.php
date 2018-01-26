@@ -4,25 +4,24 @@
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
 
     // test of the login of the user
-    login_test();
+    login_test('login');
 
     if(isset($_GET) && isset($_GET['id'])) {
-
-        $db = data_base_connexion();
-
+        
+        
         $room_id = $_GET['id'];
         $id = $_SESSION['id'];
 
-        $answer = $db->query('SELECT isvalidate FROM assouser WHERE roomid = ' . $room_id . ' AND userid = ' . $id);
-        $answer = $answer->fetch();
-        $is_validate = $answer['isvalidate'];
+        if ($data_base->enter_access($_GET['id'], $_SESSION['id']) == false) {
 
-        if($is_validate != 1) {
             echo 'vous n\'avez rien a faire ici!';
             exit();
+
         }
 
     }
+
+    // ME SUIS ARRETER LA
 
     $db = data_base_connexion();
 
