@@ -7,14 +7,16 @@
     // Nom du fichier qui enregistre les logs (attention aux droits à l'écriture)
     ini_set('error_log', dirname(__file__) . '/log_error_php.txt');
 
-    $_SERVER['HTTP_HOST']; //adress of the loaded page
 
-    $bootstrap_css      =   '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">';
+    // include des objets
+
+    include $_SERVER['DOCUMENT_ROOT'] . '/object/data_base.php';
+    $data_base = new Data_base(); // initialisation de l'objet base de donnée
+
+    include $_SERVER['DOCUMENT_ROOT'] . '/object/printer.php';
+    $printer = new Printer(); //initialisation de l'objet printer ( affichage d'html )
+
     
-    $bootstrap_js       =   '<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>' .
-                            '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>' . 
-                            '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>';
-
     // url to :
     $location_login     =   'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/login';
     $location_create    =   'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/create_room';
@@ -36,96 +38,36 @@
     // - data_base_connexion() return dabase PDO objet
     
 
-    function login_test() {
+    function login_test($test) {
 
         if (!isset($_SESSION['login'])) {
-        
-            header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/login');
-            exit();
-        
+            
+            if ($test == 'login') {
+            
+                header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/login');
+                exit();
+
+            } else if ($test != 'home') {
+
+                echo $test;
+                exit();
+            
+            }
+
+        } else {
+            
+            if ($test == 'home') {
+                
+                header('location: http://' . $_SERVER['HTTP_HOST']);
+                exit();
+            }
+
         }
-    
+            
     }
 
-    function data_base_connexion() {
-
-        // pdo request
-        $request_db         =   'mysql:host=localhost;dbname=projet_php;charset=utf8';
-        $login_db           =   'webclient';
-        $password_db        =   'webpassword';
-        
-        try {
-        
-            return new PDO($request_db, $login_db, $password_db); 
-        
-        } catch(Exception $e) {
-        
-            die('Erreur : ' . $e->getMessage());
-        
-        }
-
-    }
-
-    function get_basic_room($name, $author, $last_message, $id) {
-    
-        echo '<div id="id' . $id . '" class="row jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room/index.php?id=' . $id . '\'">';        
-        echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-secondary p-2 text-center">';
-        echo $name;
-        echo '</div>';
-        echo '<div class="col p-2">';
-        echo $author;
-        echo '</div>';
-        echo '<div class="col"></div>';
-        echo '<div class="w-100 bg-secondary text-white p-4 text-truncate">';
-        echo $last_message;
-        echo '</div>';
-        echo '</div>';
-
-    }
-
-    function get_admin_room($name, $author, $last_message, $id) {
-
-        echo '<div id="id' . $id . '" class="row jumbotron jumbotron-fluid border border-primary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room/index.php?id=' . $id . '\'">';
-        echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-primary p-2 text-center">';
-        echo $name;
-        echo '</div>';
-        echo '<div class="col p-2">';
-        echo $author;
-        echo '</div>';
-        echo '<div class="col"></div>';
-        echo '<div class="w-100 bg-primary text-white p-4 text-truncate">';
-        echo $last_message;
-        echo '</div>';    
-        echo '</div>';
-    
-    }
-
-    function get_validation_room($name, $author, $id) {
-
-        echo '<div id="id' . $id . '" class="row jumbotron jumbotron-fluid border border-success rounded p-0">';
-        echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-success p-2 text-center">';
-        echo $name;
-        echo '</div>';
-        echo '<div class="col p-2">';
-        echo $author;
-        echo '</div>';
-        echo '<div class="col"></div>';
-        echo '<div class="w-100 bg-success text-white p-4 ">';
-        echo '<button type="button" class="btn w-25 minw-100px btn-light mr-3 p-1" onclick="accept(' . $id . ')" role="button">accepter</a>';
-        echo '<button type="button" class="btn w-25 minw-100px btn-danger p-1" onclick="refuse(' . $id . ')" role="button">refuser</a>';
-        echo '</div>';
-        echo '</div>';
-    
-    }
-
-    function show_message($author, $content, $message_date) {
-
-        echo '<div class="container-fluid bg-light p-3 rounded">';
-        echo '<span class="font-weight-light pr-2 text-little">' . $message_date . '</span>';
-        echo '<span class="text-danger border border-bottom-0 border-top-0 border-left-0 border-secondary pr-2 mr-2">' . $author . '</span>';
-        echo $content;
-        echo '</div>';
-
-    }
+    /* if ($test == 'login') header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/login');
+    else echo $test;
+    exit(); */
 
 ?>

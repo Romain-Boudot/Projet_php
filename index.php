@@ -3,31 +3,10 @@
     session_start();
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
 
-    // test of the login of the user
-    login_test();
+    // check si une session est en cours, si non redirige vers #login
+    login_test('login');
 
-    // connexion to the data_base
-    $db = data_base_connexion();
-    
-    // pull the list of the available list for the user
-    $data = $db->query(
-        "SELECT roomid as rid, isadmin, isvalidate, (
-            SELECT login
-            FROM users u
-            WHERE id = (
-                SELECT adminid
-                FROM room r
-                WHERE id = rid
-            )
-        ) as author, (
-            SELECT name
-            FROM room
-            WHERE id = rid
-        ) as name
-        FROM assouser a
-        WHERE userid = '" . $_SESSION['id'] . "'");
-
-    $data = $data->fetchAll(PDO::FETCH_ASSOC);
+    $data = $data_base->get_room($_SESSION['id']);
 
 ?>
 
@@ -61,35 +40,7 @@
     
     <div id="room_container" class="container">
 
-        <?php
-
-            if(sizeof($data) > 0) {
-
-                if(!is_null($data[0]['name'])) {
-                    
-                    for($i = 0; $i < sizeof($data); $i++) {
-                        
-                        if($data[$i]['isadmin'] === "1") {
-                            get_admin_room($data[$i]['name'], $data[$i]['author'], " testeuuuuuuu", $data[$i]['rid']);
-                        } else if($data[$i]['isvalidate'] === "0") {
-                            get_validation_room($data[$i]['name'], $data[$i]['author'], $data[$i]['rid']);
-                        } else {
-                            get_basic_room($data[$i]['name'], $data[$i]['author'], " testeuuuuuuu", $data[$i]['rid']);
-                        }
-                        
-                    }
-                    
-                }
-
-            } else {
-                    
-                echo "<div class='jumbotron jumbotron-fluid border border-secondary rounded p-4'>";
-                echo "<p class='d-inline'>Vous n'avez accès à aucune salle, mais vous pouvez en créer une !</p>";
-                echo "</div>";
-                
-            }
-
-        ?>
+        <?php show_room($data); ?>
 
     </div>
 

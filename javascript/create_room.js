@@ -3,6 +3,7 @@
 
 function send_creation() {
 
+    xhr = getXMLHTTP()
 
     // récuperation du nom de la salle à créer
     

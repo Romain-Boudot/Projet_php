@@ -2,7 +2,7 @@
 
 ## pages :
 
-- [x] [Login](talk_with_me/login/index.php) 
+- [x] [Login](talk_with_me/login/index.php) (clean)
 - [x] [Accueil](index.php)
 - [x] [Create room](talk_with_me/create_room/index.php)
 - [ ] [Modify room](talk_with_me/modify_room/index.php)

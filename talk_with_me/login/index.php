@@ -1,40 +1,34 @@
 <?php 
+
     // load or reload a session ! have to be the first line
     session_start();
+
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
 
-    // check if session is up
-    if (isset($_SESSION['login'])) {
-        header('location: http://' . $_SERVER['HTTP_HOST']);
-        exit();
-    }
 
-    if(isset($_POST) && !empty($_POST['login']) && !empty($_POST['password'])) {
+    // check si une session est en cours, si non redirige vers #accueil
 
-        $db = data_base_connexion();
-    
-        extract($_POST);
+    login_test('home');
+
+    if(isset($_POST) && isset($_POST['login']) && isset($_POST['password'])) {
+
+        $answer = $data_base->password_check($_POST['login'], $_POST['password']);
         
-        // on recupére le password de la table qui correspond au login du visiteur
-        $data = $db->query("SELECT id, password, last_name, first_name, active FROM users where login='" . $login . "'");
+        if($answer != false) {
 
-        $data = $data->fetch();
-
-        if ( $data['password'] != $password || $data['active'] == 0) {
-
-            // code mot de passe incorecte
-        
-        } else {
-            
-            setcookie('login', $login, time() + 24*3600*7, null, null, false, true);
-            $_SESSION['id'] = $data['id'];
-            $_SESSION['last_name'] = $data['last_name'];
-            $_SESSION['first_name'] = $data['first_name'];
-            $_SESSION['login'] = $login;
+            setcookie('login', $_POST['login'], time() + 24*3600*7, null, null, false, true);
+            $_SESSION['id'] = $answer['id'];
+            $_SESSION['last_name'] = $answer['last_name'];
+            $_SESSION['first_name'] = $answer['first_name'];
+            $_SESSION['login'] = $_POST['login'];
 
             header('Location: http://' . $_SERVER['HTTP_HOST']);
             exit();
-            
+
+        } else {
+
+            // mot de passe incorect ou erreur
+
         }
 
     }
@@ -48,7 +42,7 @@
 
         <title>Identifiez-vous</title>
         <link rel="stylesheet" href="../../main.css">
-        <?php echo $bootstrap_css ; ?> 
+        <?php $printer->include_bootstrap_css(); ?> 
 
     </head>
 
