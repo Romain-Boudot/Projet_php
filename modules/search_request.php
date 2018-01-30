@@ -15,7 +15,7 @@
 
     
     if(!isset($_GET) || !isset($_GET['search'])) {
-        echo 'Faut pas charcher les pages à la main !!! ';
+        echo '[[-1]]';
         exit();
     }
 

@@ -2,11 +2,11 @@
 
 ## pages :
 
-- [x] [Login](talk_with_me/login/index.php) (clean)
+- [x] [Login](talk_with_me/login.php) (clean)
 - [x] [Accueil](index.php)
-- [x] [Create room](talk_with_me/create_room/index.php)
-- [ ] [Modify room](talk_with_me/modify_room/index.php)
-- [ ] [Room](talk_with_me/room/index.php)
+- [x] [Create room](talk_with_me/create_room.php)
+- [ ] [Modify room](talk_with_me/modif.php)
+- [ ] [Room](talk_with_me/room.php)
 
 ## tasks :
 

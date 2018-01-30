@@ -11,7 +11,7 @@
 
         if ($_SESSION['user']->have_access($_GET['id']) == false) {
 
-            echo 'vous n\'avez rien a faire ici!';
+            header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/denied.php');
             exit();
 
         }
