@@ -1,5 +1,5 @@
 <?php
-    class Data_base {
+    class Data_base_old {
 
 
         const   request     = 'mysql:host=localhost;dbname=projet_php;charset=utf8';
@@ -48,31 +48,6 @@
             $statment->execute(array(":userid" => $userid));
 
             return $statment->fetchAll(PDO::FETCH_ASSOC);
-
-        }
-
-
-        public function password_check($login, $password) {
-
-
-            $db = $this->connexion();
-
-
-            $statment = $db->prepare("SELECT id, login, password, last_name, first_name, active FROM users where login = :userlogin");
-
-            $statment->execute(array(":userlogin" => $login));
-
-            $answer = $statment->fetch();
-
-            if ( $answer['password'] != $password || $answer['active'] == 0) {
-
-                return false;
-            
-            } else {
-                
-                return $answer;
-                
-            }
 
         }
 

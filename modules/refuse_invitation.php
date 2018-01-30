@@ -1,22 +1,23 @@
 <?php
     // load or reload a session ! have to be the first line
-    session_start();
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
+    session_start();
     
     header("Content-type: text/html");
 
     // check si il y a une session en cours, si non echo '2'
-    login_test('2');
+    login_test('login');
 
-    if(!isset($_POST) || !isset($_POST['id'])) {
+    if(!isset($_GET) || !isset($_GET['id'])) {
 
-        echo '1';
+        header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/unknown.php');
         exit();
 
     }
 
-    $db = data_base_connexion();
+    $answer = $_SESSION['user']->get_this_room($_GET['id'])->refuse($_GET['id']);
 
-    $db->exec("DELETE FROM assouser WHERE userid = " . $_SESSION['id'] . " AND roomid = " . $_POST['id'] );
+    header('location: http://' . $_SERVER['HTTP_HOST']);
+    exit();
 
 ?>

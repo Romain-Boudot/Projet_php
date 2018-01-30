@@ -8,19 +8,25 @@
 
     login_test('home');
 
+
+    $_SESSION['user'] = new User;
+
+
     if(isset($_POST) && isset($_POST['login']) && isset($_POST['password'])) {
 
-        $answer = $data_base->password_check($_POST['login'], $_POST['password']);
+        $answer = $_SESSION['user']->data_base->password_check($_POST['login'], $_POST['password']);
         
         if($answer != false) {
+
 
             setcookie('login', $_POST['login'], time() + 24*3600*7, null, null, false, true);
 
             
-            $_SESSION['user'] = new User($answer['id'], $answer['login'], $answer['last_name'], $answer['first_name']);
+            $_SESSION['user']->init($answer['id'], $answer['login'], $answer['last_name'], $answer['first_name']);
             
            
             $_SESSION['connected'] = true;
+
 
             header('Location: http://' . $_SERVER['HTTP_HOST']);
             exit();

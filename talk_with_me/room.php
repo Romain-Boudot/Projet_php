@@ -18,9 +18,6 @@
 
     }
 
-    // ME SUIS ARRETER LA
-
-    //$old_message = $data_base->get_old_message($_GET['id']);
 
 ?>
 
@@ -54,7 +51,7 @@
 
     <div id="message_container" class="mw-1200 mt-100px container-fluid">
         
-        <?php $_SESSION['user']->get_this_room($_GET['id'])->print_hello(); ?>
+        <?php $_SESSION['user']->get_this_room($_GET['id'])->print_messages(); ?>
 
     </div>
 

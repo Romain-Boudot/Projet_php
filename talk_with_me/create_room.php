@@ -60,7 +60,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon2" style="width: 180px;">Recherche d'utilisateur</span>
                     </div>
-                    <input id="search" type="text" class="form-control" placeholder="Pseudo, nom ou prénom" onkeyup="search_db(this.value)"/>
+                    <input id="search" type="text" class="form-control" placeholder="Pseudo" onkeyup="search_db(this.value)"/>
                 </div>
 
                 <div id="search_result" class="p-2 border text-left mb-1" style="display: none">

@@ -12,11 +12,11 @@
 
     include $_SERVER['DOCUMENT_ROOT'] . '/object/user.php';
 
-    include $_SERVER['DOCUMENT_ROOT'] . '/object/data_base.php';
-    $data_base = new Data_base(); // initialisation de l'objet base de donnée
+    /* include $_SERVER['DOCUMENT_ROOT'] . '/object/data_base.php';
+    $data_base = new Data_base_old(); // initialisation de l'objet base de donnée
 
     include $_SERVER['DOCUMENT_ROOT'] . '/object/printer.php';
-    $printer = new Printer(); //initialisation de l'objet printer ( affichage d'html )
+    $printer = new Printer(); //initialisation de l'objet printer ( affichage d'html ) */
 
     
     // url to :
