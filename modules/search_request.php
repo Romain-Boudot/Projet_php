@@ -1,7 +1,7 @@
 <?php
     // load or reload a session ! have to be the first line
-    session_start();
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
+    session_start();
 
 
     // check if session is up
@@ -31,6 +31,7 @@
 
     echo "[";
     for($i = 0; $i < $size; $i++) {
+        //if ($users[$i]['id'] == ($_SESSION['user']->get_var("id"))) continue;
         if($i > 0) echo ",";
         echo "[" . $users[$i]['id'] . ",\"" . $users[$i]['login'] . "\",\"" . $users[$i]['last_name'] . "\",\"" . $users[$i]['first_name'] . "\"]";
     }

@@ -1,10 +1,8 @@
 <?php 
 
     // load or reload a session ! have to be the first line
-    session_start();
-
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
-
+    session_start();
 
     // check si une session est en cours, si non redirige vers #accueil
 
@@ -17,10 +15,12 @@
         if($answer != false) {
 
             setcookie('login', $_POST['login'], time() + 24*3600*7, null, null, false, true);
-            $_SESSION['id'] = $answer['id'];
-            $_SESSION['last_name'] = $answer['last_name'];
-            $_SESSION['first_name'] = $answer['first_name'];
-            $_SESSION['login'] = $_POST['login'];
+
+            
+            $_SESSION['user'] = new User($answer['id'], $answer['login'], $answer['last_name'], $answer['first_name']);
+            
+           
+            $_SESSION['connected'] = true;
 
             header('Location: http://' . $_SERVER['HTTP_HOST']);
             exit();
@@ -42,7 +42,7 @@
 
         <title>Identifiez-vous</title>
         <link rel="stylesheet" href="../../main.css">
-        <?php $printer->include_bootstrap_css(); ?>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
     </head>
 
