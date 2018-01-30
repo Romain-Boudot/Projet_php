@@ -144,9 +144,9 @@
             $statment = $statment->fetchAll(PDO::FETCH_ASSOC);
 
 
-            for ($i = 0; $i < sizeof($statment); $i++) {
+            foreach ($statment as &$state) {
 
-                $this->room_list[$statment[$i]['rid']] = new Room($this, $statment[$i]['rid'], $statment[$i]['author'], $statment[$i]['name'], $statment[$i]['isadmin'], $statment[$i]['isvalidate']);
+                $this->room_list[$state['rid']] = new Room($this, $state['rid'], $state['author'], $state['name'], $state['isadmin'], $state['isvalidate']);
 
             }
 
@@ -200,6 +200,41 @@
 
             return false;
 
+        }
+
+
+        public function create_room($room_name, $invited_users) {
+        
+
+            $db = $this->data_base->db_connexion();
+
+
+            $statment = $db->prepare("INSERT INTO room (name, adminid) VALUES (:room_name, :sessionid)");
+            
+            $statment->execute(array(":room_name" => $room_name, ":sessionid" => $this->id));
+            
+
+            // we take the last id inserted
+            
+            $last_id = $db->lastInsertId();
+            
+            
+            // we add the admin to his room
+            
+            $statment = $db->prepare("INSERT INTO assouser (roomid, userid, isadmin, isvalidate) VALUES (:last_id, :sessionid, 1 , 1)");
+        
+            $statment->execute(array(":last_id" => $last_id, ":sessionid" => $this->id));
+        
+            
+            // creation de la room
+
+            $this->room_list[$last_id] = new Room($this, $last_id, $this->login, $room_name, 1, 1);
+
+
+            // on ajoute les utilisateur à la room
+
+            $this->room_list[$last_id]->add_user_room($invited_users);
+        
         }
 
     };
@@ -400,6 +435,27 @@
             echo '<a role="button" class="btn w-25 minw-100px btn-danger p-1" href="http://' . $_SERVER['HTTP_HOST'] . '/modules/refuse_invitation.php?id=' . $id . '" role="button">refuser</a>';
             echo '</div>';
             echo '</div>';
+        
+        }
+
+
+        public function add_user_room($invited_users) {
+        
+        
+            $db = $this->user->data_base->db_connexion();
+            
+        
+            foreach ($invited_users as &$user) {
+
+
+                $statment = $db->prepare("INSERT INTO assouser (roomid, userid, isadmin, isvalidate) VALUES (:room_id, :invited, 0 , 0)");
+
+                $statment->execute(array(":room_id" => $this->id, ":invited" => $user));
+
+
+                $this->invited_users[$user] = $user;
+            
+            }
         
         }
 

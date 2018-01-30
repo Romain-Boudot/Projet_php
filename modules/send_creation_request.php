@@ -32,7 +32,7 @@
             //check duplicates and potential hacker to prevente invitation of the current user in user_invited_list
             for($i = 0; $i < sizeof($user); $i++) {
 
-                if($user[$i] == $_SESSION['id']) continue;
+                if($user[$i] == $_SESSION['user']->get_var('id')) continue;
                 if(check_duplicate($user[$i], $invited_users) == true) continue;
 
                 $invited_users[sizeof($invited_users)] = $user[$i];
@@ -43,7 +43,7 @@
 
         // we add a new room in the database
 
-        $data_base->create_room($room_name, $invited_users);
+        $_SESSION['user']->create_room($room_name, $invited_users);
 
 
         echo "[0]"; // the room is created, we informe the user

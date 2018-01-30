@@ -22,7 +22,7 @@
 <body>
 
     <div id="current_id" hidden><?php echo $_SESSION['user']->get_var('id') ?></div>
-    <!-- <div id="room_id" hidden><?php //echo $_GET['id'] ?></div> -->
+    <div id="room_id" hidden>-1</div>
     
     <nav class="navbar fixed-top navbar-dark bg-dark">
         <a class="navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
