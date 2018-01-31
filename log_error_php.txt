@@ -1,0 +1,6 @@
+[27-Jan-2018 14:29:52 UTC] PHP Fatal error:  Call to undefined method Printer::include_bootstrap_css() in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\login\index.php on line 45
+[27-Jan-2018 14:29:52 UTC] PHP Stack trace:
+[27-Jan-2018 14:29:52 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\login\index.php:0
+[27-Jan-2018 14:30:04 UTC] PHP Fatal error:  Call to undefined method Printer::include_bootstrap_css() in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\login\index.php on line 45
+[27-Jan-2018 14:30:04 UTC] PHP Stack trace:
+[27-Jan-2018 14:30:04 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\login\index.php:0
