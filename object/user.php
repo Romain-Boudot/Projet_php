@@ -172,6 +172,7 @@
 
 
             $this->get_rooms();
+            
 
             $db = $this->data_base->db_connexion();
 

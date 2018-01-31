@@ -14,13 +14,13 @@
         flush();
 
     }
-    
+
 
     while(1) {
 
         $start += 1;
 
-        sendMsg(14, $start);
+        sendMsg(18, $start);
 
         sleep(1);
     }
