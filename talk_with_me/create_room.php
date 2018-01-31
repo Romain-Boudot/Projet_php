@@ -1,7 +1,7 @@
 <?php
     // load or reload a session ! have to be the first line
-    session_start();
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
+    session_start();
 
     // test of the login of the user
     login_test('login');
@@ -15,20 +15,20 @@
     <title>Création de salle</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <link rel="stylesheet" href="../../main.css"/>
-    <?php $printer->print_html('bs_css'); ?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
 </head>
 
 <body>
 
-    <div id="current_id" hidden><?php echo $_SESSION['id'] ?></div>
-    <div id="room_id" hidden><?php echo $_GET['id'] ?></div>
+    <div id="current_id" hidden><?php echo $_SESSION['user']->get_var('id') ?></div>
+    <div id="room_id" hidden>-1</div>
     
     <nav class="navbar fixed-top navbar-dark bg-dark">
         <a class="navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
 
         <div class="d-flex">
-            <span class="navbar-text text-warning"><?php echo $_SESSION['login']; ?></span>
+            <span class="navbar-text text-warning"><?php echo $_SESSION['user']->get_var("login"); ?></span>
             <a class='btn btn-outline-secondary ml-4' href="<?php echo $location_create; ?>" role="button">Créer une salle</a>
             <button type="button" class="btn btn-outline-secondary ml-2">
                 Notifications<span class="badge badge-light ml-1">4</span>
@@ -60,7 +60,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon2" style="width: 180px;">Recherche d'utilisateur</span>
                     </div>
-                    <input id="search" type="text" class="form-control" placeholder="Pseudo, nom ou prénom" onkeyup="search_db(this.value)"/>
+                    <input id="search" type="text" class="form-control" placeholder="Pseudo" onkeyup="search_db(this.value)"/>
                 </div>
 
                 <div id="search_result" class="p-2 border text-left mb-1" style="display: none">

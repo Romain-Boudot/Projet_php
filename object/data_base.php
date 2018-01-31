@@ -1,6 +1,5 @@
 <?php
-
-    class Data_base {
+    class Data_base_old {
 
 
         const   request     = 'mysql:host=localhost;dbname=projet_php;charset=utf8';
@@ -48,33 +47,7 @@
             
             $statment->execute(array(":userid" => $userid));
 
-
             return $statment->fetchAll(PDO::FETCH_ASSOC);
-
-        }
-
-
-        public function password_check($login, $password) {
-
-
-            $db = $this->connexion();
-
-
-            $statment = $db->prepare("SELECT id, password, last_name, first_name, active FROM users where login = :userlogin");
-
-            $statment->execute(array(":userlogin" => $login));
-
-            $answer = $statment->fetch();
-
-            if ( $answer['password'] != $password || $answer['active'] == 0) {
-
-                return false;
-            
-            } else {
-                
-                return $answer;
-                
-            }
 
         }
 
@@ -97,32 +70,34 @@
             return $statment->fetchAll(PDO::FETCH_ASSOC);
 
         }
-
         
+
         public function add_user_room($room_id, $invited_users) {
-
-
+        
+        
             $db = $this->connexion();
             
-
+        
             for($i = 0; $i < sizeof($invited_users); $i++) {
-
+        
                 $statment = $db->prepare("INSERT INTO assouser (roomid, userid, isadmin, isvalidate) VALUES (:room_id, :invited, 0 , 0)");
                 $statment->execute(array(":room_id" => $room_id, ":invited" => $invited_users[$i]));
             
             }
-
+        
         }
 
 
         public function create_room($room_name, $invited_users) {
+        
 
             $db = $this->connexion();
 
+
             $statment = $db->prepare("INSERT INTO room (name, adminid) VALUES (:room_name, :sessionid)");
+            
             $statment->execute(array(":room_name" => $room_name, ":sessionid" => $_SESSION['id']));
-
-
+            
             // we take the last id inserted
             
             $last_id = $db->lastInsertId();
@@ -131,10 +106,12 @@
             // we add the user to his room
             
             $statment = $db->prepare("INSERT INTO assouser (roomid, userid, isadmin, isvalidate) VALUES (:last_id, :sessionid, 1 , 1)");
+        
             $statment->execute(array(":last_id" => $last_id, ":sessionid" => $_SESSION['id']));
-
+        
+            
             $this->add_user_room($last_id, $invited_users);
-
+        
         }
 
 
@@ -142,13 +119,15 @@
 
 
             $db = $this->connexion();
-
-
+            
+            
             $statment = $db->prepare('SELECT isvalidate FROM assouser WHERE roomid = :roomid AND userid = :userid');
+            
             $statment->execute(array(":roomid" => $room_id, ":userid" => $user_id));
+            
             $statment = $statment->fetch();
             
-            
+
             if ($statment['isvalidate'] == 1) 
             
                 return true;
@@ -156,7 +135,6 @@
             else 
             
                 return false;
-
 
         }
 

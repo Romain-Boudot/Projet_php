@@ -1,4 +1,9 @@
 <?php
+
+
+    // c moche sa encore !
+
+
     // load or reload a session ! have to be the first line
     session_start();
 
@@ -34,7 +39,7 @@
     $owner = $owner['adminid'];
 
     if($owner != $_SESSION['id']) {
-        echo 'CE N\'EST PAS VOTRE SALLE VOUS N\'AVEZ RIEN A FAIRE ICI';
+        header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/denied.php');
         exit();
     }
     

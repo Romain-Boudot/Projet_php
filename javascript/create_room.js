@@ -63,7 +63,7 @@ function send_creation() {
 
 function creation_callback(answer) {
 
-
+    alert(answer)
     // la page php renvoie l'état de la requete sous forme JSON
 
     answer = JSON.parse(answer)
@@ -77,12 +77,12 @@ function creation_callback(answer) {
     if(answer[0] == 0) {
 
         alert("Votre salle a bien été créée")
-        location.href = "../../index.php" // redirection vers l'accueil 
+        location.href = "../index.php" // redirection vers l'accueil 
 
     } else if(answer[0] == 2 ) {
 
         alert("Votre session a expirée")
-        location.href = "../../index.php" // redirection vers l'accueil 
+        location.href = "../index.php" // redirection vers l'accueil 
 
     } else {
 

@@ -1,37 +1,23 @@
 <?php
     // load or reload a session ! have to be the first line
-    session_start();
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
+    session_start();
 
     // test of the login of the user
     login_test('login');
 
     if(isset($_GET) && isset($_GET['id'])) {
-        
-        
-        $room_id = $_GET['id'];
-        $id = $_SESSION['id'];
 
-        if ($data_base->enter_access($_GET['id'], $_SESSION['id']) == false) {
 
-            echo 'vous n\'avez rien a faire ici!';
+        if ($_SESSION['user']->have_access($_GET['id']) == false) {
+
+            header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/denied.php');
             exit();
 
         }
 
     }
 
-    // ME SUIS ARRETER LA
-
-    $db = data_base_connexion();
-
-    $old_message = $db->query(
-        'SELECT content, date, login
-        FROM message m
-        JOIN users u on u . id = m . authorid
-        WHERE roomid = ' . $room_id);
-    
-    $old_message = $old_message->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -43,17 +29,19 @@
     <title>Talk with me!</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" href="../../main.css">
-    <?php echo $bootstrap_css; ?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
 </head>
 
 <body>
 
+    <div id="current_room" hidden><?php echo $_GET['id']; ?></div>
+
     <nav class="navbar fixed-top navbar-dark bg-dark">
         <a class="navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
 
         <div class="d-flex">
-            <span class="navbar-text text-warning"><?php echo $_SESSION['login']; ?></span>
+            <span class="navbar-text text-warning"><?php echo $_SESSION['user']->get_var("login"); ?></span>
             <a class='btn btn-outline-secondary ml-4' href="<?php echo $location_create; ?>" role="button">Créer une salle</a>
             <button type="button" class="btn btn-outline-secondary ml-2">
                 Notifications<span class="badge badge-light ml-1">4</span>
@@ -63,17 +51,9 @@
 
     </nav>
 
-    <div id="message_container" class="mw-1200 mt-100px container-fluid">
+    <div id="messages_container" class="mw-1200 mt-100px container-fluid">
         
-        <?php
-
-            for ($i = 0; $i < sizeof($old_message); $i++) {
-
-                show_message($old_message[$i]['login'], $old_message[$i]['content'], $old_message[$i]['date']);
-
-            }
-
-        ?>
+        <?php $_SESSION['user']->get_this_room($_GET['id'])->print_messages(); ?>
 
     </div>
 

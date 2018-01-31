@@ -1,12 +1,12 @@
 <?php
     // load or reload a session ! have to be the first line
-    session_start();
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
+    session_start();
 
     // check si une session est en cours, si non redirige vers #login
     login_test('login');
 
-    $data = $data_base->get_room($_SESSION['id']);
+    //$data = $_SESSION['user']->get_room();
 
 ?>
 
@@ -18,7 +18,7 @@
     <title>Talk with me!</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" href="main.css">
-    <?php $printer->print_html('bs_css'); ?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
       
 </head>
 
@@ -28,7 +28,7 @@
         <a class="navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
 
         <div class="d-flex">
-            <span class="navbar-text text-warning"><?php echo $_SESSION['login']; ?></span>
+            <span class="navbar-text text-warning"><?php echo $_SESSION['user']->get_var("login"); ?></span>
             <a class='btn btn-outline-secondary ml-4' href="<?php echo $location_create; ?>" role="button">Créer une salle</a>
             <button type="button" class="btn btn-outline-secondary ml-2">
                 Notifications<span class="badge badge-light ml-1">4</span>
@@ -40,7 +40,7 @@
     
     <div id="room_container" class="container">
 
-        <?php $printer->show_room($data); ?>
+        <?php $_SESSION['user']->print_users_rooms(); ?>
 
     </div>
 
