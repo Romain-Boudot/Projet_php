@@ -400,7 +400,11 @@
             echo '<div class="col p-2">';
             echo $author;
             echo '</div>';
-            echo '<div class="col"></div>';
+            echo '<div class="col">';
+            echo '<a href="../modules/delete_room.php" role="button" class="close" aria-label="Close">';
+            echo '<span aria-hidden="true">&times;</span>';
+            echo '</a>';
+            echo '</div>';
             echo '<div class="w-100 bg-secondary text-white p-4 text-truncate">';
             echo $last_message;
             echo '</div>';
