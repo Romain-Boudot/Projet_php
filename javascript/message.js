@@ -5,7 +5,7 @@ innermessage = new EventSource("../modules/message.php")
 innermessage.onmessage = function(data) {
 
     var div = document.createElement("div")
-    div.innerHTML = data.data
+    div.innerHTML = "erreur"
 
     document.getElementById("messages_container").appendChild(div)
 

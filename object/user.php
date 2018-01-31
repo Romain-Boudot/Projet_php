@@ -356,7 +356,7 @@
 
             $statment = $db->prepare("SELECT id, roomid, (
                 SELECT login FROM users WHERE id = m . authorid
-            ) as author, content, date FROM message m WHERE roomid = :roomid");
+            ) as author, content, date FROM message m WHERE roomid = :roomid ORDER BY date asc");
 
             $statment->execute(array(":roomid" => $this->id));
 

@@ -48,11 +48,7 @@
 
         <title>Identifiez-vous</title>
         <link rel="stylesheet" href="../../main.css">
-<<<<<<< HEAD:talk_with_me/login/index.php
-        <?php /*$printer->include_bootstrap_css(); */?>
-=======
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
->>>>>>> 9b2de227cc1478d760c5e1c068d555218ae49ca5:talk_with_me/login.php
 
     </head>
 
