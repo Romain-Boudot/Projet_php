@@ -35,6 +35,8 @@
 
 <body>
 
+    <div id="current_room" hidden><?php echo $_GET['id']; ?></div>
+
     <nav class="navbar fixed-top navbar-dark bg-dark">
         <a class="navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
 
@@ -49,7 +51,7 @@
 
     </nav>
 
-    <div id="message_container" class="mw-1200 mt-100px container-fluid">
+    <div id="messages_container" class="mw-1200 mt-100px container-fluid">
         
         <?php $_SESSION['user']->get_this_room($_GET['id'])->print_messages(); ?>
 

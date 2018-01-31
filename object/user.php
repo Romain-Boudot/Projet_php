@@ -140,8 +140,14 @@
             
             $statment->execute(array(":userid" => $this->id));
 
-
             $statment = $statment->fetchAll(PDO::FETCH_ASSOC);
+
+
+            foreach ($this->room_list as &$state) {
+
+
+
+            }
 
 
             foreach ($statment as &$state) {
