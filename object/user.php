@@ -526,8 +526,8 @@
             echo '</div>';
             echo '<div class="col"></div>';
             echo '<div class="w-100 bg-success text-white p-4 ">';
-            echo '<a role="button" class="btn w-25 minw-100px btn-light mr-3 p-1" href="http://' . $_SERVER['HTTP_HOST'] . '/modules/accept_invitation.php?id=' . $id . '" role="button">accepter</a>';
-            echo '<a role="button" class="btn w-25 minw-100px btn-danger p-1" href="http://' . $_SERVER['HTTP_HOST'] . '/modules/refuse_invitation.php?id=' . $id . '" role="button">refuser</a>';
+            echo '<a role="button" class="btn w-25 minw-100px btn-light mr-3 p-1" href="http://' . $_SERVER['HTTP_HOST'] . '/modules/room_action.php?action=accept&id=' . $id . '" role="button">accepter</a>';
+            echo '<a role="button" class="btn w-25 minw-100px btn-danger p-1" href="http://' . $_SERVER['HTTP_HOST'] . '/modules/room_action.php?action=refuse&id=' . $id . '" role="button">refuser</a>';
             echo '</div>';
             echo '</div>';
         
