@@ -27,7 +27,7 @@
 
     } else if ($_GET['action'] == 'delete') {
 
-    // delete the room
+        $answer = $_SESSION['user']->get_this_room($_GET['id'])->delete_room();
 
     } else {
 

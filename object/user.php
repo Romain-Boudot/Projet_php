@@ -318,21 +318,21 @@
         }
 
 
-        public function delete_rooms() {
+        public function delete_room() {
 
-              $db = $this->user->data_base->db_connexion();
+            $db = $this->user->data_base->db_connexion();
 
-              $statment = $db->prepare("DELETE FROM message WHERE roomid = :roomid");
+            $statment = $db->prepare("DELETE FROM message WHERE roomid = :roomid");
 
-              $statment->execute(array(":roomid" => $this->id));
+            $statment->execute(array(":roomid" => $this->id));
 
-              $statment = $db->prepare("DELETE FROM assoueur WHERE roomid = :roomid");
+            $statment = $db->prepare("DELETE FROM assouser WHERE roomid = :roomid");
 
-              $statment->execute(array(":roomid"=> $this->id));
+            $statment->execute(array(":roomid"=> $this->id));
 
-              $statment = $db->prepare("DELETE FROM room WHERE id = :id");
+            $statment = $db->prepare("DELETE FROM room WHERE id = :id");
 
-              $statment->execute(array(":id"=> $this->id));
+            $statment->execute(array(":id"=> $this->id));
 
         }
         
