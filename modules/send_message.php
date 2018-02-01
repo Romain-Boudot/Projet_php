@@ -7,17 +7,21 @@
 
 
     // check if session is up
-    login_test('[2]');
+    login_test('2');
 
 
-    if(isset($_POST) && isset($_POST['room_id']) && isset($_POST['content'])) {
+    if(isset($_POST) && isset($_POST['roomid']) && isset($_POST['content'])) {
 
 
-        $_SESSION['user']->get_room($_POST['room_id'])->send_message($_POST['content']);
+        $_SESSION['user']->get_this_room($_POST['roomid'])->send_message($_POST['content']);
 
 
-        echo "[0]"; // the message is sent
+        echo "0"; // the message is sent
         exit(); // stop the script
+
     }
+
+
+    echo '1';
 
 ?>

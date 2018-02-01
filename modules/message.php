@@ -1,30 +1,23 @@
 <?php
 
+    // load or reload a session ! have to be the first line
+    include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
+    session_start();
 
-
-    header("Content-Type: text/event-stream");
-    header("Cache-Control: no-cache");
+    header("Content-Type: text/html");
+      
+    $answer = $_SESSION['user']->get_this_room($_GET['id'])->get_new_messages();
     
-    function sendMsg($roomid, $msg) {
+    if ($answer != false) {
 
-        echo "event: room_target:" . $roomid . PHP_EOL;
-        echo "data: $msg" . PHP_EOL;
-        echo PHP_EOL;
-        ob_flush();
-        flush();
+        
+        foreach($answer as &$msg) {
+            
+
+            $_SESSION['user']->get_this_room($_GET['id'])->get_this_message($msg['id'])->print_this_message();
+            
+        }
 
     }
-
-
-    while(1) {
-
-        $start += 1;
-
-        sendMsg(18, $start);
-
-        sleep(1);
-    }
-
-
 
 ?>

@@ -60,7 +60,7 @@
     <div id="send_bar" class="p-2 w-100 bg-grey fixed-bottom">
 
         <div class="input-group mw-1200 container-fluid">
-            <input id="message" type="text" class="form-control" placeholder="Message" maxlength="500">
+            <input id="message" type="text" class="form-control" placeholder="Message" maxlength="1000">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="button" onclick="send_message()">Envoyer</button>
             </div>
