@@ -21,18 +21,13 @@
         
         $answer = $_SESSION['user']->get_this_room($_GET['id'])->accept($_GET['id']);
 
-    } else if ($_GET['action'] == 'refuse') {
+    } else if ($_GET['action'] == 'refuse' || $_GET['action'] == 'leave') {
 
-        $answer = $_SESSION['user']->get_this_room($_GET['id'])->refuse($_GET['id']);
-
-    } else if ($_GET['action'] == 'leave') {
-    
-        echo 'Vous avez leave la room'; // leave the room
-        exit();
+        $answer = $_SESSION['user']->get_this_room($_GET['id'])->leave($_GET['id']);
 
     } else if ($_GET['action'] == 'delete') {
 
-        // delete the room
+        $answer = $_SESSION['user']->get_this_room($_GET['id'])->delete_room();
 
     } else {
 
