@@ -25,6 +25,15 @@
 
         $answer = $_SESSION['user']->get_this_room($_GET['id'])->refuse($_GET['id']);
 
+    } else if ($_GET['action'] == 'leave') {
+    
+        echo 'Vous avez leave la room'; // leave the room
+        exit();
+
+    } else if ($_GET['action'] == 'delete') {
+
+        // delete the room
+
     } else {
 
         header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/unknown.php');

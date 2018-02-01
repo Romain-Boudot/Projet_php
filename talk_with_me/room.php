@@ -51,11 +51,21 @@
 
     </nav>
 
-    <div id="messages_container" class="mw-1200 mt-100px container-fluid">
+    <div id="messages_container" style="scroll-behavior: smooth;" class="mw-1200 mt-100px container-fluid">
         
-        <?php $_SESSION['user']->get_this_room($_GET['id'])->print_messages(); ?>
+        <?php //$_SESSION['user']->get_this_room($_GET['id'])->print_messages(); ?>
+        <script src="/socket.io/socket.io.js"></script>
+
+        <script>
+
+            var socket = io.connect('http://localhost:8080');
+
+        </script>
 
     </div>
+
+
+    <div id="scroll_bot" hidden>bla bla </div>
 
     <div id="send_bar" class="p-2 w-100 bg-grey fixed-bottom">
 
@@ -68,8 +78,9 @@
 
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../../javascript/message.js"></script>
-
+    
 </body>
 
 </html>

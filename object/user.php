@@ -475,22 +475,22 @@
         }
 
 
-        private function print_basic_room($name, $author, $last_message, $id) {
+        private function print_basic_room() {
     
-            echo '<div id="id' . $id . '" class="row jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room.php?id=' . $id . '\'">';        
+            echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room.php?id=' . $this->id . '\'">';        
             echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-secondary p-2 text-center">';
-            echo $name;
+            echo $this->name;
             echo '</div>';
             echo '<div class="col p-2">';
-            echo $author;
+            echo $this->author;
             echo '</div>';
             echo '<div class="col">';
-            echo '<a href="../modules/delete_room.php" role="button" class="close" aria-label="Close">';
+            echo '<a href="../modules/room_action.php?id=' . $this->id . '&action=leave" role="button" class="close" aria-label="Close">';
             echo '<span aria-hidden="true">&times;</span>';
             echo '</a>';
             echo '</div>';
             echo '<div class="w-100 bg-secondary text-white p-4 text-truncate">';
-            echo $last_message;
+            echo 'L\'historique des messages est desactiver'; // last message
             echo '</div>';
             echo '</div>';
     
@@ -499,16 +499,16 @@
 
         private function print_admin_room($name, $author, $last_message, $id) {
     
-            echo '<div id="id' . $id . '" class="row jumbotron jumbotron-fluid border border-primary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room.php?id=' . $id . '\'">';
+            echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-primary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room.php?id=' . $this->id . '\'">';
             echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-primary p-2 text-center">';
-            echo $name;
+            echo $this->name;
             echo '</div>';
             echo '<div class="col p-2">';
-            echo $author;
+            echo $this->author;
             echo '</div>';
             echo '<div class="col"></div>';
             echo '<div class="w-100 bg-primary text-white p-4 text-truncate">';
-            echo $last_message;
+            echo 'L\'historique des messages est desactiver'; // last message
             echo '</div>';    
             echo '</div>';
         
@@ -517,17 +517,17 @@
 
         private function print_validation_room($name, $author, $id) {
     
-            echo '<div id="id' . $id . '" class="row jumbotron jumbotron-fluid border border-success rounded p-0">';
+            echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-success rounded p-0">';
             echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-success p-2 text-center">';
-            echo $name;
+            echo $this->name;
             echo '</div>';
             echo '<div class="col p-2">';
-            echo $author;
+            echo $this->author;
             echo '</div>';
             echo '<div class="col"></div>';
             echo '<div class="w-100 bg-success text-white p-4 ">';
-            echo '<a role="button" class="btn w-25 minw-100px btn-light mr-3 p-1" href="http://' . $_SERVER['HTTP_HOST'] . '/modules/room_action.php?action=accept&id=' . $id . '" role="button">accepter</a>';
-            echo '<a role="button" class="btn w-25 minw-100px btn-danger p-1" href="http://' . $_SERVER['HTTP_HOST'] . '/modules/room_action.php?action=refuse&id=' . $id . '" role="button">refuser</a>';
+            echo '<a role="button" class="btn w-25 minw-100px btn-light mr-3 p-1" href="http://' . $_SERVER['HTTP_HOST'] . '/modules/room_action.php?action=accept&id=' . $this->id . '" role="button">accepter</a>';
+            echo '<a role="button" class="btn w-25 minw-100px btn-danger p-1" href="http://' . $_SERVER['HTTP_HOST'] . '/modules/room_action.php?action=refuse&id=' . $this->id . '" role="button">refuser</a>';
             echo '</div>';
             echo '</div>';
         
