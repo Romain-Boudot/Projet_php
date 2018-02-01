@@ -32,8 +32,11 @@
             exit();
 
         } else {
-
-            // mot de passe incorect ou erreur
+                 // mot de passe incorect ou erreur
+            
+                
+            
+            
 
         }
 
@@ -65,16 +68,19 @@
                 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1" style="width: 150px;">Nom d'utilisateur</span>
+                        <span class="input-group-text" id="basic-addon1" style="width: 150px;">Nom d'Utilisateur</span>
                     </div>
-                    <input type="text" name="login" class="form-control" value="<?php if(isset($_COOKIE['login'])) echo $_COOKIE['login'];?>" >
+                    <input type="text" name="login" class="form-control is-invalid" id="basic-addon1" value="<?php if(isset($_COOKIE['login'])) echo $_COOKIE['login'];?>" >
+                    <div class="invalid-feedback">Merci d'entre un Nom d'Utilisateur Valide</div>
                 </div>
+
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1" style="width: 150px;">Mot de passe</span>
+                        <span class="input-group-text" id="basic-addon1" style="width: 150px;">Mot De Passe</span>
                     </div>
-                    <input type="password" name="password" class="form-control" value="<?php if(isset($_COOKIE['login'])) echo $_COOKIE['login'];?>" >
+                    <input type="password" name="password" class="form-control is-invalid" id="basic-addon1"value="<?php if(isset($_COOKIE['login'])) echo $_COOKIE['login'];?>" >
+                <div class="invalid-feedback"> Merci d'entre un Mot De Passe valide</div>
                 </div>
 
                 <button class="btn btn-outline-primary" type="submit">connexion</button>
