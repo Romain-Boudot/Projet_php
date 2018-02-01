@@ -301,33 +301,42 @@
         }
 
 
-        public function refuse() {
+        public function leave() {
 
-            if ($this->isvalidate == 0) {
-
-
-                $db = $this->user->data_base->db_connexion();
+            
 
 
-                $statment = $db->prepare("DELETE FROM assouser WHERE userid = :userid AND roomid = :roomid ");
+            $db = $this->user->data_base->db_connexion();
 
 
-                $statment->execute(array(":userid" => $this->user->get_var('id'), ":roomid" => $this->id));
+            $statment = $db->prepare("DELETE FROM assouser WHERE userid = :userid AND roomid = :roomid ");
 
 
-                // $this->user->delete_room($this->id);
+            $statment->execute(array(":userid" => $this->user->get_var('id'), ":roomid" => $this->id));
 
-
-            } else {
-
-                header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/unknown.php');
-                exit();
-
-            }
 
         }
 
 
+        public function delete_rooms() {
+
+              $db = $this->user->data_base->db_connexion();
+
+              $statment = $db->prepare("DELETE FROM message WHERE roomid = :roomid");
+
+              $statment->execute(array(":roomid" => $this->id));
+
+              $statment = $db->prepare("DELETE FROM assoueur WHERE roomid = :roomid");
+
+              $statment->execute(array(":roomid"=> $this->id));
+
+              $statment = $db->prepare("DELETE FROM room WHERE id = :id");
+
+              $statment->execute(array(":id"=> $this->id));
+
+        }
+        
+        
         public function add_user_room($invited_users) {
         
         
