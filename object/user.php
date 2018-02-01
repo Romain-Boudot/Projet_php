@@ -515,7 +515,11 @@
             echo '<div class="col p-2">';
             echo $this->author;
             echo '</div>';
-            echo '<div class="col"></div>';
+            echo '<div class="col">';
+            echo '<a href="../modules/room_action.php?id=' . $this->id . '&action=delete" role="button" class="close" aria-label="Close">';
+            echo '<span aria-hidden="true">&times;</span>';
+            echo '</a>';
+            echo '</div>';
             echo '<div class="w-100 bg-primary text-white p-4 text-truncate">';
             echo 'L\'historique des messages est desactiver'; // last message
             echo '</div>';    
