@@ -11,13 +11,12 @@
 
     $_SESSION['user'] = new User;
 
+    $erreur = false;
 
     if(isset($_POST) && isset($_POST['login']) && isset($_POST['password'])) {
 
         $answer = $_SESSION['user']->data_base->password_check($_POST['login'], $_POST['password']);
         
-        $erreur = false;
-
         if($answer != false) {
 
 
@@ -71,7 +70,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1" style="width: 150px;">Nom d'Utilisateur</span>
                     </div>
-                    <input type="text" name="login" class="form-control<?php if ($erreur == true ) echo " is-invalid"; ?>" id="basic-addon1" value="<?php if (isset($_COOKIE['login'])) echo $_COOKIE['login'];?>" >
+                    <input type="text" name="login" class="form-control<?php if ($erreur == true) echo " is-invalid"; ?>" id="basic-addon1" value="<?php if (isset($_COOKIE['login'])) echo $_COOKIE['login'];?>" >
                 </div>
 
 
@@ -79,8 +78,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1" style="width: 150px;">Mot De Passe</span>
                     </div>
-                    <input type="password" name="password" class="form-control<?php if ($erreur == true ) echo " is-invalid"; ?>" id="basic-addon1"value="<?php if (isset($_COOKIE['login'])) echo $_COOKIE['login'];?>" >
-                <?php if ($erreur == true ) echo "<div class='invalid-feedback'> Nom d'utilisateur ou mot de passe erroné </div>"; ?>
+                    <input type="password" name="password" class="form-control<?php if ($erreur == true) echo " is-invalid"; ?>" id="basic-addon1"value="<?php if (isset($_COOKIE['login'])) echo $_COOKIE['login'];?>" >
+                <?php if ($erreur == true) echo "<div class='invalid-feedback'> Nom d'utilisateur ou mot de passe erroné </div>"; ?>
                 </div>
 
                 <button class="btn btn-outline-primary" type="submit">connexion</button>
