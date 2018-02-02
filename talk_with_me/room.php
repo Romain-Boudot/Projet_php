@@ -53,14 +53,14 @@
 
     <div id="messages_container" style="scroll-behavior: smooth;" class="mw-1200 mt-100px container-fluid">
         
-        <?php //$_SESSION['user']->get_this_room($_GET['id'])->print_messages(); ?>
-        <script src="/socket.io/socket.io.js"></script>
+        <?php $_SESSION['user']->get_this_room($_GET['id'])->print_messages(); ?>
+        <!-- <script src="/socket.io/socket.io.js"></script>
 
         <script>
 
             var socket = io.connect('http://localhost:8080');
 
-        </script>
+        </script> -->
 
     </div>
 

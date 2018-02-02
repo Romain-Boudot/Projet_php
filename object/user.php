@@ -74,7 +74,7 @@
         public  $data_base;
 
         private $id;
-        private $login = 'lel';
+        private $login;
         private $last_name;
         private $first_name;
         private $room_list = array();
@@ -365,7 +365,7 @@
 
             $db = $this->user->data_base->db_connexion();
 
-            $statment = $db->prepare("SELECT id, roomid, (
+            $statment = $db->prepare("SELECT id, roomid, authorid, (
                 SELECT login FROM users WHERE id = m . authorid
             ) as author, content, date FROM message m WHERE roomid = :roomid AND id > :lastMsgId ORDER BY date asc");
 
@@ -378,7 +378,7 @@
 
                 foreach($statment as &$message) {
                     
-                    $this->messages[$message['id']] = new Message($this, $message['id'], $message['author'], $message['content'], $message['date']);
+                    $this->messages[$message['id']] = new Message($this, $message['id'], $message['author'], $message['content'], $message['date'], $message['authorid']);
                     if ($message['id'] > $this->last_message_id) $this->last_message_id = $message['id'];
                     
                 }
@@ -400,7 +400,7 @@
             $db = $this->user->data_base->db_connexion();
 
 
-            $statment = $db->prepare("SELECT id, roomid, (
+            $statment = $db->prepare("SELECT id, roomid, authorid, (
                 SELECT login FROM users WHERE id = m . authorid
             ) as author, content, date FROM message m WHERE roomid = :roomid ORDER BY date asc");
 
@@ -413,7 +413,7 @@
 
             foreach($statment as &$message) {
 
-                $this->messages[$message['id']] = new Message($this, $message['id'], $message['author'], $message['content'], $message['date']);
+                $this->messages[$message['id']] = new Message($this, $message['id'], $message['author'], $message['content'], $message['date'], $message['authorid']);
                 if ($message['id'] > $this->last_message_id) $this->last_message_id = $message['id'];
 
             }
@@ -435,10 +435,6 @@
                 ":authorid" => $this->user->get_var('id'),
                 ":content" => $content,
                 ":date" => $date));
-
-            $last_id = $db->lastInsertId();
-
-            $this->messages[$last_id] = new Message($this, $last_id, $this->user->get_var('id'), $content, $date);
 
         }
 
@@ -553,19 +549,21 @@
     class Message {
 
         private $id;
-        private $room_id;
+        private $room;
         private $author;
+        private $author_id;
         private $content;
         private $date;
 
 
-        public function __construct($t_room, $t_id, $t_author, $t_content, $t_date) {
+        public function __construct($t_room, $t_id, $t_author, $t_content, $t_date, $t_a_id) {
 
             $this->id       = $t_id;
-            $this->room_id  = $t_room;
+            $this->room     = $t_room;
             $this->author   = $t_author;
             $this->content  = $t_content;
             $this->date     = $t_date;
+            $this->author_id = $t_a_id;
 
         }
 
@@ -576,8 +574,32 @@
             echo '<span class="font-weight-light pr-2 text-little">' . $this->date . '</span>';
             echo '<span class="text-danger border border-bottom-0 border-top-0 border-left-0 border-secondary pr-2 mr-2">' . $this->author . '</span>';
             echo $this->content;
+
+            if ($this->author_id == $this->room->get_var('user')->get_var('id') || $this->room->get_var('isadmin') == 1) {
+
+                echo '<a href="../modules/room_action.php?id=' . $this->id . '&action=leave" role="button" class="close" aria-label="Close">';
+                echo '<span aria-hidden="true">&times;</span>';
+                echo '</a>';  
+
+            }
+
             echo '</div>';
             echo '<br>';
+
+        }
+
+
+        public function delete() {
+
+            if ($this->author_id == $this->room->get_var('user')->get_var('id') || $this->room->get_var('isadmin') == 1) {
+
+                $db = $this->room->get_var('user')->data_base->db_connexion();
+
+                $statment = $db->prepare("DELETE FROM message WHERE id = :msgid");
+
+                $statment->execute(array(":msgid" => $this->id));
+
+            }
 
         }
 
