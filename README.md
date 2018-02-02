@@ -6,7 +6,7 @@
 - [x] [Accueil](index.php) (clean)
 - [x] [Create room](talk_with_me/create_room.php)
 - [ ] [Modify room](talk_with_me/modif.php)
-- [ ] [Room](talk_with_me/room.php)
+- [x] [Room](talk_with_me/room.php)
 
 ## tasks :
 
