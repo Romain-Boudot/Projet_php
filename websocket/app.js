@@ -1,9 +1,9 @@
 
-var http = require('http');
-var fs = require('fs');
-var mysql = require('mysql');
+const http = require('http');
+const fs = require('fs');
+const mysql = require('mysql');
 
-var bdd = mysql.createConnection({
+const bdd = mysql.createConnection({
 
     host     : 'localhost',
     user     : 'webclient',
@@ -14,9 +14,9 @@ var bdd = mysql.createConnection({
 
 // load du index pour le client qui se connect
 
-var server = http.createServer(function(req, res) {
+const server = http.createServer(function(req, res) {
 
-    fs.readFile('./index.php', 'utf-8', function(error, content) {
+    fs.readFile('./index.html', 'utf-8', function(error, content) {
 
         res.writeHead(200, {"Content-Type": "text/html"});
 
@@ -29,17 +29,18 @@ var server = http.createServer(function(req, res) {
 
 // Chargement de socket.io
 
-var io = require('socket.io').listen(server);
+const io = require('socket.io').listen(server);
 
-io.sockets.on('connection', function (socket) {
+io.sockets.on('connection', function (client) {
 
-
+    var header = JSON.stringify(client.handshake.headers.referer).split('/')
+    header = header[header.length - 1].slice(0, -1)
     // message lors d'une nouvelle connection
-    console.log('new log');
-    socket.emit('connected', null);
+    console.log('new log in room ' + header);
+    client.emit('connected', header);
 
 
-    socket.on('new_msg', function(data) {
+    client.on('new_msg', function(data) {
 
         new_message(data);
     

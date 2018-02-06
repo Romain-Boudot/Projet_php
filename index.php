@@ -6,8 +6,6 @@
     // check si une session est en cours, si non redirige vers #login
     login_test('login');
 
-    //$data = $_SESSION['user']->get_room();
-
 ?>
 
 <!DOCTYPE html>
@@ -43,8 +41,6 @@
         <?php $_SESSION['user']->print_users_rooms(); ?>
 
     </div>
-
-    <script src="javascript/validation_room.js"></script>
 
 </body>
 
