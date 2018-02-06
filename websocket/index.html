@@ -36,13 +36,13 @@
 <body>
 
     <nav class="navbar fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand" href='http://localhost>'>
+        <a class="navbar-brand" href='http://localhost'>
             MARCASSIN
             <span id="room_id" class="navbar-text ml-2"></span>
         </a>
 
         <div class="d-flex">
-            <span class="navbar-text text-warning">Le login</span>
+            <span id="login" class="navbar-text text-warning"></span>
             <button type="button" class="btn btn-outline-secondary ml-2">
                 Notifications<span class="badge badge-light ml-1">4</span>
             </button>
@@ -53,35 +53,63 @@
 
     <div id="messages_container" style="scroll-behavior: smooth;" class="mw-1200 mt-100px container-fluid">
         
-        <script src="/socket.io/socket.io.js"></script>
-
-        <script>
-
-            var socket = io.connect('http://localhost:8080');
-
-            socket.on('connected', function(message) {
-
-                document.getElementById('room_id').innerHTML = message
-
-            })
-
-        </script>
-
     </div>
 
 
-    <div id="scroll_bot" hidden>bla bla </div>
-
-    <div id="send_bar" class="p-2 w-100 bg-grey fixed-bottom">
-
-        <div class="input-group mw-1200 container-fluid">
-            <input id="message" type="text" class="form-control" placeholder="Message" maxlength="1000">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button" onclick="send_message()">Envoyer</button>
+        <div id="scroll_bot" hidden>bla bla </div>
+    
+        <div id="send_bar" class="p-2 w-100 bg-grey fixed-bottom">
+    
+            <div class="input-group mw-1200 container-fluid">
+                <input id="message" type="text" class="form-control" placeholder="Message" maxlength="1000">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" onclick="send_message()">Envoyer</button>
+                </div>
             </div>
-        </div>
-
+    
     </div>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+
+        document.getElementById('message').onkeypress = function(key) {
+
+            if (key.keyCode == 13) send_message();
+
+        }
+
+        var socket = io.connect('http://yuumii.ovh:8080');
+
+        socket.on('connected', function(data) {
+
+            document.getElementById('room_id').innerHTML = "connecté";
+            document.getElementById('login').innerHTML = data.login;
+            document.getElementById('messages_container').innerHTML = '';
+
+        })
+
+        socket.on('message', function(data){
+
+            document.getElementById('messages_container').innerHTML += data;
+
+        })
+
+        function send_message() {
+
+            var msg = document.getElementById('message').value;
+
+            if (msg != '') {
+
+                socket.emit('message', msg);
+                document.getElementById('message').value = '';
+
+            }
+
+        }
+
+    </script>
     
 </body>
 

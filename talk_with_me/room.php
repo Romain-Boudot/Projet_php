@@ -36,6 +36,7 @@
 <body>
 
     <div id="current_room" hidden><?php echo $_GET['id']; ?></div>
+    <div id="current_id" hidden><?php echo $_SESSION['user']->get_var('id') ?></div>
 
     <nav class="navbar fixed-top navbar-dark bg-dark">
         <a class="navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
@@ -53,15 +54,8 @@
 
     <div id="messages_container" style="scroll-behavior: smooth;" class="mw-1200 mt-100px container-fluid">
         
-        <?php //$_SESSION['user']->get_this_room($_GET['id'])->print_messages(); ?>
-        <script src="/socket.io/socket.io.js"></script>
-
-        <script>
-
-            var socket = io.connect('http://localhost:8080');
-
-        </script>
-
+        <?php $_SESSION['user']->get_this_room($_GET['id'])->print_messages(); ?>
+        
     </div>
 
 
