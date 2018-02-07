@@ -97,6 +97,15 @@
         }
 
 
+        public function token_gen($room_id) {
+
+            if ($room_id == null) $rnd = dechex(bindec(random_bytes(5))); else $rnd = $room_id;
+            $login = $this
+
+
+        }
+
+
         public function get_var($var) {
 
 
@@ -465,15 +474,15 @@
 
             if($this->isadmin == 1) {
 
-                $this->print_admin_room($this->name, $this->author, "L'historique de messages n'est pas activer", $this->id);
+                $this->print_admin_room();
             
             } else if($this->isvalidate == 0) {
             
-                $this->print_validation_room($this->name, $this->author, $this->id);
+                $this->print_validation_room();
             
             } else {
             
-                $this->print_basic_room($this->name, $this->author, "L'historique de messages n'est pas activer", $this->id);
+                $this->print_basic_room();
             
             }
 
@@ -483,7 +492,7 @@
         private function print_basic_room() {
     
             echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable" onclick="';
-            echo 'location.href=\'http://yuumii.ovh:8080/' . $this->id . '/' . $this->user->get_var('login') . '/' . $this->user->get_var('id') . '/-1\'">';
+            echo 'location.href=\'http://localhost:8080/' . $this->id . '/' . $this->user->get_var('login') . '/' . $this->user->get_var('id') . '/-1\'">';
             echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-secondary p-2 text-center">';
             echo $this->name;
             echo '</div>';
@@ -503,10 +512,10 @@
         }
     
 
-        private function print_admin_room($name, $author, $last_message, $id) {
+        private function print_admin_room() {
     
             echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-primary rounded p-0 clickable" onclick="';
-            echo 'location.href=\'http://yuumii.ovh:8080/' . $this->id . '/' . $this->user->get_var('login') . '/' . $this->user->get_var('id') . '/-1\'">';
+            echo 'location.href=\'http://localhost:8080/' . $this->id . '/' . $this->user->get_var('login') . '/' . $this->user->get_var('id') . '/-1\'">';
             echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-primary p-2 text-center">';
             echo $this->name;
             echo '</div>';
@@ -526,7 +535,7 @@
         }
     
 
-        private function print_validation_room($name, $author, $id) {
+        private function print_validation_room() {
     
             echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-success rounded p-0">';
             echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-success p-2 text-center">';
