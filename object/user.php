@@ -74,7 +74,7 @@
         public  $data_base;
 
         private $id;
-        private $login = 'lel';
+        private $login;
         private $last_name;
         private $first_name;
         private $room_list = array();
