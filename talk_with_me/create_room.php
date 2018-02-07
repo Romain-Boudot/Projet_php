@@ -81,9 +81,7 @@
 
     </div>
 
-    <script src="../../javascript/XMLHTTPrequest.js"></script>
     <script src="../../javascript/search.js"></script>
-    <script src="../../javascript/user_manipulation.js"></script>
     <script src="../../javascript/create_room.js"></script>
 
 </body>

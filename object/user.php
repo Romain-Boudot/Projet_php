@@ -482,7 +482,8 @@
 
         private function print_basic_room() {
     
-            echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room.php?id=' . $this->id . '\'">';        
+            echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable" onclick="';
+            echo 'location.href=\'http://yuumii.ovh:8080/' . $this->id . '/' . $this->user->get_var('login') . '/' . $this->user->get_var('id') . '/-1\'">';
             echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-secondary p-2 text-center">';
             echo $this->name;
             echo '</div>';
@@ -504,7 +505,8 @@
 
         private function print_admin_room($name, $author, $last_message, $id) {
     
-            echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-primary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room.php?id=' . $this->id . '\'">';
+            echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-primary rounded p-0 clickable" onclick="';
+            echo 'location.href=\'http://yuumii.ovh:8080/' . $this->id . '/' . $this->user->get_var('login') . '/' . $this->user->get_var('id') . '/-1\'">';
             echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-primary p-2 text-center">';
             echo $this->name;
             echo '</div>';

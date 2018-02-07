@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Talk with me!</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <style>
+        #wrapper{
+            width: 500px;
+            margin-top: 20vh;
+            padding: 20px;
+        }
+
+        .mw-1200{ max-width: 1200px; }
+
+        .mw-900{ max-width: 900px; }
+
+        .clickable{ cursor: pointer; }
+
+        .bg-grey{ background-color: rgb(196, 196, 196); }
+
+        .minw-100px{ min-width: 100px; }
+
+        .text-little{ font-size: 75%; }
+
+        body {
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href='http://localhost'>
+            MARCASSIN
+            <span id="room_id" class="navbar-text ml-2"></span>
+        </a>
+
+        <div class="d-flex">
+            <span id="login" class="navbar-text text-warning"></span>
+            <button type="button" class="btn btn-outline-secondary ml-2">
+                Notifications<span class="badge badge-light ml-1">4</span>
+            </button>
+            <a class="btn btn-outline-secondary ml-2" href="http://localhost/modules/disconnect.php" role="button">Déconnexion</a>
+        </div>
+
+    </nav>
+
+    <div id="messages_container" style="scroll-behavior: smooth;" class="mw-1200 mt-100px container-fluid">
+        
+    </div>
+
+
+        <div id="scroll_bot" hidden>bla bla </div>
+    
+        <div id="send_bar" class="p-2 w-100 bg-grey fixed-bottom">
+    
+            <div class="input-group mw-1200 container-fluid">
+                <input id="message" type="text" class="form-control" placeholder="Message" maxlength="1000">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" onclick="send_message()">Envoyer</button>
+                </div>
+            </div>
+    
+    </div>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+
+        document.getElementById('message').onkeypress = function(key) {
+
+            if (key.keyCode == 13) send_message();
+
+        }
+
+        var socket = io.connect('http://yuumii.ovh:8080');
+
+        socket.on('connected', function(data) {
+
+            document.getElementById('room_id').innerHTML = "connecté";
+            document.getElementById('login').innerHTML = data.login;
+            document.getElementById('messages_container').innerHTML = '';
+
+        })
+
+        socket.on('message', function(data){
+
+            document.getElementById('messages_container').innerHTML += data;
+
+        })
+
+        function send_message() {
+
+            var msg = document.getElementById('message').value;
+
+            if (msg != '') {
+
+                socket.emit('message', msg);
+                document.getElementById('message').value = '';
+
+            }
+
+        }
+
+    </script>
+    
+</body>
+
+</html>

@@ -6,7 +6,7 @@
 - [x] [Accueil](index.php) (clean)
 - [x] [Create room](talk_with_me/create_room.php)
 - [ ] [Modify room](talk_with_me/modif.php)
-- [x] [Room](talk_with_me/room.php)
+- [x] [Room](talk_with_me/room.php) (ajax)
 
 ## tasks :
 
@@ -19,12 +19,12 @@
 - [x] As user I can view the list of my available room
 - [x] As user I can difference my room, rooms I can visit, rooms I didn't accept yet
 - [ ] As user I can ban people of my room
-- [ ] As user I can leave a room
-- [ ] As user I can delete my rooms
-- [ ] As user I can send messages in rooms available for me
+- [x] As user I can leave a room
+- [x] As user I can delete my rooms
+- [x] As user I can send messages in rooms available for me
 - [ ] As user I can delete MY message
 - [ ] As user I can delete all messages in MY rooms
-- [ ] As user I can see the old message of a room
+- [x] As user I can see the old message of a room
 
 ## [Accueil](index.php)
 
