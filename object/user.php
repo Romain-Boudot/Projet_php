@@ -78,6 +78,7 @@
         private $last_name;
         private $first_name;
         private $room_list = array();
+        private $last_token;
 
 
         public function __construct() {
@@ -99,9 +100,28 @@
 
         public function token_gen($room_id) {
 
-            if ($room_id == null) $rnd = dechex(bindec(random_bytes(5))); else $rnd = $room_id;
-            $login = $this
+            if ($room_id == null) $rnd = bin2hex(random_bytes(1)); else $rnd = $room_id;
+            $login  = $this->login;
+            $id     = $this->id;
+            $token  = bin2hex(random_bytes(10));
+            
+            $full_token = $rnd.'/'.$login.'/'.$id.'/';
+            $full_token_converted = '';
+            echo $full_token . $token . "\n";
 
+            for ($i = 0; $i < strlen($full_token); $i++) {
+            
+                $temp = ord($full_token[$i]);
+                if ($temp < 100) if ($temp < 10) $temp = '00' . $temp; else $temp = '0' . $temp;
+                $full_token_converted = $full_token_converted . $temp;
+            
+            }
+
+            echo $full_token_converted.$token;
+            exit();
+
+            $this->last_token = $full_token_converted;
+            return $full_token_converted;
 
         }
 
