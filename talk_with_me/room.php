@@ -55,7 +55,7 @@
     <div id="messages_container" style="scroll-behavior: smooth;" class="mw-1200 mt-100px container-fluid">
         
         <?php $_SESSION['user']->get_this_room($_GET['id'])->print_messages(); ?>
-        
+
     </div>
 
 
