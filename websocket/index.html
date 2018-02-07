@@ -38,7 +38,7 @@
     <nav class="navbar fixed-top navbar-dark bg-dark">
         <a class="navbar-brand" href='http://localhost'>
             MARCASSIN
-            <span id="room_id" class="navbar-text ml-2"></span>
+            <span id="room_id" class="navbar-text ml-2 p-0"></span>
         </a>
 
         <div class="d-flex">
@@ -80,7 +80,7 @@
 
         }
 
-        var socket = io.connect('http://yuumii.ovh:8080');
+        var socket = io.connect('http://localhost:8080');
 
         socket.on('connected', function(data) {
 

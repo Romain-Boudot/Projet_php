@@ -1,4 +1,3 @@
-
 const http = require('http');
 const fs = require('fs');
 const mysql = require('mysql');
@@ -16,7 +15,7 @@ bdd.connect();
 
 // load du index pour le client qui se connect
 
-const server = http.createServer(function(req, res) {
+var server = http.createServer(function(req, res) {
 
     fs.readFile('./index.html', 'utf-8', function(error, content) {
 
@@ -31,7 +30,7 @@ const server = http.createServer(function(req, res) {
 
 // Chargement de socket.io
 
-const io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function (client) {
 
@@ -78,7 +77,7 @@ function send_msg(data, client, user) {
     var mon  = now.getMonth();      if (mon < 10) mon = '0' + mon;
     var day  = now.getDay();        if (day < 10) day = '0' + day;
 
-    var hour = now.getUTCHours();   if (hour < 10) hour = '0' + hour;
+    var hour = now.getHours();   if (hour < 10) hour = '0' + hour;
     var min  = now.getMinutes();    if (min < 10) min = '0' + min;
     var sec  = now.getSeconds();    if (sec < 10) sec = '0' + sec;
 
@@ -88,7 +87,7 @@ function send_msg(data, client, user) {
         'roomid'    : user.room,
         'authorid'  : user.serverid,
         'content'   : data,
-        'date'      : date
+        'date'      : now
     }, false);
 
     var html = message_html(date, user.login, user.serverid, data);
@@ -112,14 +111,26 @@ function insert_into(sql, value) {
 
 function send_old_message(user, client) {
 
-    var sql = "SELECT m.id as id, roomid, u.login as author, u.id as userid, content, date as message_date FROM message m JOIN users u on m.authorid = u.id WHERE roomid = ? ORDER BY date asc LIMIT 0 , 50"
+    var sql = "SELECT m.id as id, roomid, u.login as author, u.id as userid, content, date FROM message m JOIN users u on m.authorid = u.id WHERE roomid = ? ORDER BY date asc LIMIT 0 , 50"
 
     bdd.query(sql, user.room, function (err, result, fields) {
 
         if (err) throw err;
         result.forEach(element => {
 
-            client.emit('message', message_html(element.message_date, element.author, element.id, element.content));
+            var now = new Date(element.date);
+
+            var year = now.getFullYear();
+            var mon  = now.getMonth();      if (mon < 10) mon = '0' + mon;
+            var day  = now.getDay();        if (day < 10) day = '0' + day;
+
+            var hour = now.getHours();   if (hour < 10) hour = '0' + hour;
+            var min  = now.getMinutes();    if (min < 10) min = '0' + min;
+            var sec  = now.getSeconds();    if (sec < 10) sec = '0' + sec;
+
+            var date = year + '-' + mon + '-' + day + ' ' + hour + ':' + min + ':' + sec;
+
+            client.emit('message', message_html(date, element.author, element.userid, element.content));
         
         });
 
