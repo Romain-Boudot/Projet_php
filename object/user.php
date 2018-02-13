@@ -190,18 +190,44 @@
 
 
             $this->get_rooms();
-            
-
-            $db = $this->data_base->db_connexion();
 
 
             if(sizeof($this->room_list) > 0) {
     
-                foreach($this->room_list as &$room) {
-                
-                    $room->print_this_room();
+                echo '<div id="waiting_rooms" class="row text-center p-0">';
+
+                foreach ($this->room_list as &$room) {
+
+                    if($room->get_var('isvalidate') == 0) {
+
+                        $room->print_validation_room();
+                    }
+                    
+                }
+
+                echo '</div><div id="admin_rooms" class="row text-center p-0">';
+
+                foreach ($this->room_list as &$room) {
+
+                    if($room->get_var('isadmin') == 1) {
+
+                        $room->print_admin_room();
+                    }
 
                 }
+
+                echo '</div><div id="basic_rooms" class="row text-center p-0">';
+
+                foreach ($this->room_list as &$room) {
+
+                    if($room->get_var('isadmin') == 0 && $room->get_var('isvalidate') == 1) {
+
+                        $room->print_basic_room();
+                    }
+
+                }
+
+                echo '</div>';
                     
             } else {
                     
@@ -455,6 +481,7 @@
 
             $date = date("o-m-d H:i:s", time());
 
+            
             $db = $this->user->data_base->db_connexion();
 
             $statment = $db->prepare("INSERT INTO message (roomid, authorid, content, date) VALUES (:roomid, :authorid, :content, :date)");
@@ -490,7 +517,7 @@
 
         // affichage de la room
 
-        public function print_this_room() {
+        /* public function print_this_room() {
 
             if($this->isadmin == 1) {
 
@@ -506,12 +533,12 @@
             
             }
 
-        }
+        } */
 
 
-        private function print_basic_room() {
+        public function print_basic_room() {
     
-            echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable" onclick="';
+            echo '<div id="id' . $this->id . '" class="col row jumbotron jumbotron-fluid border border-secondary rounded m-1 p-0 clickable flex-div" onclick="';
             echo 'location.href=\'http://localhost:8080/' . $this->id . '/' . $this->user->get_var('login') . '/' . $this->user->get_var('id') . '/-1\'">';
             echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-secondary p-2 text-center">';
             echo $this->name;
@@ -520,7 +547,7 @@
             echo $this->author;
             echo '</div>';
             echo '<div class="col">';
-            echo '<a href="../modules/room_action.php?id=' . $this->id . '&action=leave" role="button" class="close" aria-label="Close">';
+            echo '<a href="../modules/room_action.php?id=' . $this->id . '&action=leave" role="button" class="close mt-8px" aria-label="Close">';
             echo '<span aria-hidden="true">&times;</span>';
             echo '</a>';
             echo '</div>';
@@ -532,9 +559,9 @@
         }
     
 
-        private function print_admin_room() {
+        public function print_admin_room() {
     
-            echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-primary rounded p-0 clickable" onclick="';
+            echo '<div id="id' . $this->id . '" class="col row jumbotron jumbotron-fluid border border-primary rounded p-0 m-1 clickable flex-div" onclick="';
             echo 'location.href=\'http://localhost:8080/' . $this->id . '/' . $this->user->get_var('login') . '/' . $this->user->get_var('id') . '/-1\'">';
             echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-primary p-2 text-center">';
             echo $this->name;
@@ -543,7 +570,7 @@
             echo $this->author;
             echo '</div>';
             echo '<div class="col">';
-            echo '<a href="../modules/room_action.php?id=' . $this->id . '&action=delete" role="button" class="close" aria-label="Close">';
+            echo '<a href="../modules/room_action.php?id=' . $this->id . '&action=delete" role="button" class="close mt-8px" aria-label="Close">';
             echo '<span aria-hidden="true">&times;</span>';
             echo '</a>';
             echo '</div>';
@@ -555,9 +582,9 @@
         }
     
 
-        private function print_validation_room() {
+        public function print_validation_room() {
     
-            echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-success rounded p-0">';
+            echo '<div id="id' . $this->id . '" class="col row jumbotron jumbotron-fluid border border-success rounded p-0 m-1 flex-div">';
             echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-success p-2 text-center">';
             echo $this->name;
             echo '</div>';
@@ -608,7 +635,7 @@
 
             if ($this->author_id == $this->room->get_var('user')->get_var('id') || $this->room->get_var('isadmin') == 1) {
 
-                echo '<a href="../modules/room_action.php?id=' . $this->id . '&action=leave" role="button" class="close" aria-label="Close">';
+                echo '<a href="#" role="button" class="close" aria-label="Close">';
                 echo '<span aria-hidden="true">&times;</span>';
                 echo '</a>';  
 

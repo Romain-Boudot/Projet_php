@@ -32,3 +32,6 @@ body {
     padding-top: 100px;
     padding-bottom: 100px;
 }
+
+.flex-div{min-width: 300px;}
+.mt-8px{margin-top: 8px;}

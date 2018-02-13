@@ -36,10 +36,12 @@
 
     </nav>
     
-    <div id="room_container" class="container">
+    <div class="container">
 
+            
         <?php $_SESSION['user']->print_users_rooms(); ?>
-
+            
+        
     </div>
 
 </body>
