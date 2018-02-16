@@ -33,29 +33,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <!--link rel="stylesheet" href="../css/404.css"-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="auth_check.css">
     </head>
 
     <body>
     
         <div class="jumbotron" style="text-align: center">
-
-            <div id="container">
+            
+            <div class="container">
                 <h1 class="display-3">Authentification</h1>
-                <form>
-		  <div class="captcha">
-			<div class="handle">
-			  Je ne suis pas un robot ! 
-			</div>
-                Glisser pour vous autentifier
-		  </div>
-		  <!--p>
-			<button id="reset">Reset Me</button>
-		  </p-->
-		</form>
-                <a class="btn btn-primary btn-lg" href=<?php echo $url; ?> role="button">Accepter</a>
             </div>
-    
+            
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" class="slider" id="myRange">
+                <a class="btn btn-primary btn-lg" href=<?php echo $url; ?> role="button">Accepter</a>
+            </div>    
+        
         </div>
 
     </body>
