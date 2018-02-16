@@ -98,7 +98,7 @@
         }
 
 
-        public function token_gen($room_id) {
+        public function token_gen_old($room_id) {
 
             if ($room_id == null) $rnd = bin2hex(random_bytes(1)); else $rnd = $room_id;
             $login  = $this->login;
@@ -358,7 +358,7 @@
 
         public function leave() {
 
-            
+            // manque une verif admin
 
 
             $db = $this->user->data_base->db_connexion();
@@ -374,6 +374,8 @@
 
 
         public function delete_room() {
+
+            // manque une verif admin
 
             $db = $this->user->data_base->db_connexion();
 

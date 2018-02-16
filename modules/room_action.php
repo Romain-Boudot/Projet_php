@@ -19,11 +19,11 @@
 
     if ($_GET['action'] == 'accept') {
         
-        $answer = $_SESSION['user']->get_this_room($_GET['id'])->accept($_GET['id']);
+        $answer = $_SESSION['user']->get_this_room($_GET['id'])->accept();
 
     } else if ($_GET['action'] == 'refuse' || $_GET['action'] == 'leave') {
 
-        $answer = $_SESSION['user']->get_this_room($_GET['id'])->leave($_GET['id']);
+        $answer = $_SESSION['user']->get_this_room($_GET['id'])->leave();
 
     } else if ($_GET['action'] == 'delete') {
 
