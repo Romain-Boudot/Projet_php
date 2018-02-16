@@ -1,0 +1,9 @@
+[16-Feb-2018 14:17:41 UTC] PHP Fatal error:  Call to undefined function gen_token() in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 13
+[16-Feb-2018 14:17:41 UTC] PHP Stack trace:
+[16-Feb-2018 14:17:41 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 14:17:52 UTC] PHP Notice:  Undefined variable: URL in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 15
+[16-Feb-2018 14:17:52 UTC] PHP Stack trace:
+[16-Feb-2018 14:17:52 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 14:17:52 UTC] PHP Notice:  Undefined variable: token in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 15
+[16-Feb-2018 14:17:52 UTC] PHP Stack trace:
+[16-Feb-2018 14:17:52 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
