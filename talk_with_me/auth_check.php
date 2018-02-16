@@ -14,7 +14,7 @@
 
     //$url = "\"" . $URL . "&token=" . $token . "\"";
 
-    $url = "\"http://localhost/modules/room_action.php?action=delete&id=56&token=qZDQZdqzdqzdqzdqDQZdqz\""
+    $url = "\"http://localhost/modules/room_action.php?action=delete&id=56&token=qZDQZdqzdqzdqzdqDQZdqz\"";
  
     //"http://localhost/talk_with_me/auth_check.php?url=http://localhost/modules/room_action.php?action=delete%26id=56"
 
@@ -34,6 +34,14 @@
         <!--link rel="stylesheet" href="../css/404.css"-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <link rel="stylesheet" href="auth_check.css">
+        <script>
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("demo");
+        output.innerHTML = slider.value;
+        slider.oninput = function() {
+        output.innerHTML = this.value;
+        }
+</script>
     </head>
 
     <body>
@@ -44,13 +52,40 @@
                 <h1 class="display-3">Authentification</h1>
             </div>
             
-            <div class="slidecontainer">
-                <input type="range" min="1" max="100" class="slider" id="myRange">
-                <a class="btn btn-primary btn-lg" href=<?php echo $url; ?> role="button">Accepter</a>
+            <div class="container">
+
+                <div class="slidecontainer" method="post">
+                    <input type="range" min="1" max="100" class="slider" id="myRange" value="1">
+                    <p>Value: <span id="demo"></span></p>
+                    <a class="btn btn-primary btn-lg" href=<?php echo $url; ?> role="button">Accepter</a>
+                </div>
+                
+                <?php
+
+                $value = $_POST['1'];
+
+                    echo $value;
+
+                if ($value = 100) {
+
+                    echo "Bravo !";
+
+                } 
+
+                else {
+   
+                    echo "désolé";
+
+                }
+
+                ?>
+            
             </div>    
-        
+
         </div>
 
     </body>
 
 </html>
+
+
