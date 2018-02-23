@@ -10,7 +10,7 @@
         private $last_name;
         private $first_name;
         private $room_list = array();
-        private $last_token;
+        private $token_list = array();
 
 
         public function __construct() {
@@ -19,7 +19,14 @@
 
         }
 
+      
+        public function token_gen($action, $id) {
 
+            
+
+        }
+
+      
         public function init($t_id, $t_login, $t_first_name, $t_last_name) {
 
             $this->id = $t_id;
@@ -29,7 +36,7 @@
 
         }
 
-
+     
         public function token_gen_old($room_id) {
 
             if ($room_id == null) $rnd = bin2hex(random_bytes(1)); else $rnd = $room_id;
@@ -122,7 +129,6 @@
 
 
             $this->get_rooms();
-
 
             if(sizeof($this->room_list) > 0) {
     

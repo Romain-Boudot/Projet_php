@@ -2,19 +2,14 @@
 
     // Afficher les erreurs à l'écran
     ini_set('display_errors', 1);
-    // Enregistrer les erreurs dans un fichier de log
-    ini_set('log_errors', 1);
-    // Nom du fichier qui enregistre les logs (attention aux droits à l'écriture)
-    ini_set('error_log', dirname(__file__) . '/log_error_php.txt');
-
 
     // include des objets
-
-    include $_SERVER['DOCUMENT_ROOT'] . '/objects/Message.php';
-    include $_SERVER['DOCUMENT_ROOT'] . '/objects/Room.php';
-    include $_SERVER['DOCUMENT_ROOT'] . '/objects/Data_base.php';
-    include $_SERVER['DOCUMENT_ROOT'] . '/objects/User.php';
-    
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/objects/User.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/objects/Data_base.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/objects/Room.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/objects/Message.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/objects/Token.php';
+ 
     // url to :
     $location_login     =   'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/login.php';
     $location_create    =   'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/create_room.php';

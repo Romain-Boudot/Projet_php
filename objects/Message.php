@@ -9,7 +9,6 @@ class Message {
     private $content;
     private $date;
 
-
     public function __construct($t_room, $t_id, $t_author, $t_content, $t_date, $t_a_id) {
 
         $this->id       = $t_id;
@@ -42,7 +41,6 @@ class Message {
 
     }
 
-
     public function delete() {
 
         if ($this->author_id == $this->room->get_var('user')->get_var('id') || $this->room->get_var('isadmin') == 1) {
@@ -56,7 +54,7 @@ class Message {
         }
 
     }
-
+  
 };
 
 ?>

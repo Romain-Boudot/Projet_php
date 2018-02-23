@@ -70,7 +70,6 @@ class Room {
 
         // manque une verif admin
 
-
         $db = $this->user->data_base->db_connexion();
 
 
@@ -146,6 +145,7 @@ class Room {
             foreach($statment as &$message) {
                 
                 $this->messages[$message['id']] = new Message($this, $message['id'], $message['author'], $message['content'], $message['date'], $message['authorid']);
+
                 if ($message['id'] > $this->last_message_id) $this->last_message_id = $message['id'];
                 
             }
@@ -165,6 +165,7 @@ class Room {
 
         
         $db = $this->user->data_base->db_connexion();
+
 
 
         $statment = $db->prepare("SELECT id, roomid, authorid, (
@@ -193,7 +194,6 @@ class Room {
 
         $date = date("o-m-d H:i:s", time());
 
-        
         $db = $this->user->data_base->db_connexion();
 
         $statment = $db->prepare("INSERT INTO message (roomid, authorid, content, date) VALUES (:roomid, :authorid, :content, :date)");
@@ -269,7 +269,6 @@ class Room {
         echo '</div>';
 
     }
-
 
     public function print_admin_room() {
 
