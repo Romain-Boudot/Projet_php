@@ -30,6 +30,15 @@
  *  menu / navbar
  */
 
+.ft-sz-btn {
+    overflow: hidden; 
+    max-height: 38px;
+}
+.ft-sz-btn span {
+    line-height: 38px;
+    font-size: 30px;
+}
+
 #slide_menu {
     display: none;
     position: absolute;
@@ -39,11 +48,14 @@
     left: -210px;
     z-index: 1000;
     transition-duration: 0.2s;
-    color: white;
+    color: rgb(170, 170, 170);
 }
 
-#slide_menu ul { list-style: none; margin: 0; padding: 0;}
-#slide_menu li { text-decoration: none; margin: 0; }
+#slide_menu ul  { list-style: none; margin: 0; padding: 0;}
+#slide_menu li  { margin: 10px 0; }
+#slide_menu a,
+#slide_menu a:hover { text-decoration: none; color: inherit;}
+#slide_menu .active { color: white; border-bottom: .25rem solid white;}
 
 .resp-640-sh { display: none; }
 

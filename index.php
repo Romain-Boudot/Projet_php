@@ -25,8 +25,10 @@
     
     <nav class="navbar fixed-top navbar-dark bg-dark blue-shadow">
         <div class="d-flex">
-            <button id="btn_slide_menu_trigger" type="button" class="btn btn-outline-secondary mr-2 resp-640-sh"></button>
-            <a class="navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
+            <button id="btn_slide_menu_trigger" type="button" class="btn btn-dark resp-640-sh ft-sz-btn">
+                <span>&equiv;</span>
+            </button>
+            <a class="resp-640-hd navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
         </div>
 
         <div class="d-flex">
@@ -42,9 +44,9 @@
 
     <div id="slide_menu" class="container bg-dark pt-2 text-center">
         <ul>
-            <li>menu 1</li>
-            <li>menu 2</li>
-            <li>menu 3</li>
+            <li class="active"><a href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>Accueil</a></li>
+            <li><a href="<?php echo $location_create; ?>">Créer une salle</a></li>
+            <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php">Déconnexion</a></li>
         </ul>
     </div>
     
