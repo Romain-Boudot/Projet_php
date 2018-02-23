@@ -10,14 +10,10 @@
 
     // include des objets
 
-    include $_SERVER['DOCUMENT_ROOT'] . '/object/user.php';
-
-    /* include $_SERVER['DOCUMENT_ROOT'] . '/object/data_base.php';
-    $data_base = new Data_base_old(); // initialisation de l'objet base de donnée
-
-    include $_SERVER['DOCUMENT_ROOT'] . '/object/printer.php';
-    $printer = new Printer(); //initialisation de l'objet printer ( affichage d'html ) */
-
+    include $_SERVER['DOCUMENT_ROOT'] . '/objects/Message.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/objects/Room.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/objects/Data_base.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/objects/User.php';
     
     // url to :
     $location_login     =   'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/login.php';
