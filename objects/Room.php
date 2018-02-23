@@ -68,8 +68,7 @@ class Room {
 
     public function leave() {
 
-        
-
+        // manque une verif admin
 
         $db = $this->user->data_base->db_connexion();
 
@@ -85,7 +84,7 @@ class Room {
 
     public function delete_room() {
 
-        
+        // manque une verif admin
 
         $db = $this->user->data_base->db_connexion();
 
@@ -132,7 +131,7 @@ class Room {
 
         $db = $this->user->data_base->db_connexion();
 
-        $statment = $db->prepare("SELECT id, roomid, (
+        $statment = $db->prepare("SELECT id, roomid, authorid, (
             SELECT login FROM users WHERE id = m . authorid
         ) as author, content, date FROM message m WHERE roomid = :roomid AND id > :lastMsgId ORDER BY date asc");
 
@@ -145,7 +144,8 @@ class Room {
 
             foreach($statment as &$message) {
                 
-                $this->messages[$message['id']] = new Message($this, $message['id'], $message['author'], $message['content'], $message['date']);
+                $this->messages[$message['id']] = new Message($this, $message['id'], $message['author'], $message['content'], $message['date'], $message['authorid']);
+
                 if ($message['id'] > $this->last_message_id) $this->last_message_id = $message['id'];
                 
             }
@@ -167,7 +167,8 @@ class Room {
         $db = $this->user->data_base->db_connexion();
 
 
-        $statment = $db->prepare("SELECT id, roomid, (
+
+        $statment = $db->prepare("SELECT id, roomid, authorid, (
             SELECT login FROM users WHERE id = m . authorid
         ) as author, content, date FROM message m WHERE roomid = :roomid ORDER BY date asc");
 
@@ -180,7 +181,7 @@ class Room {
 
         foreach($statment as &$message) {
 
-            $this->messages[$message['id']] = new Message($this, $message['id'], $message['author'], $message['content'], $message['date']);
+            $this->messages[$message['id']] = new Message($this, $message['id'], $message['author'], $message['content'], $message['date'], $message['authorid']);
             if ($message['id'] > $this->last_message_id) $this->last_message_id = $message['id'];
 
         }
@@ -202,10 +203,6 @@ class Room {
             ":authorid" => $this->user->get_var('id'),
             ":content" => $content,
             ":date" => $date));
-
-        $last_id = $db->lastInsertId();
-
-        $this->messages[$last_id] = new Message($this, $last_id, $this->user->get_var('id'), $content, $date);
 
     }
 
@@ -232,28 +229,29 @@ class Room {
 
     // affichage de la room
 
-    public function print_this_room() {
+    /* public function print_this_room() {
 
         if($this->isadmin == 1) {
 
-            $this->print_admin_room($this->name, $this->author, "L'historique de messages n'est pas activer", $this->id);
+            $this->print_admin_room();
         
         } else if($this->isvalidate == 0) {
         
-            $this->print_validation_room($this->name, $this->author, $this->id);
+            $this->print_validation_room();
         
         } else {
         
-            $this->print_basic_room($this->name, $this->author, "L'historique de messages n'est pas activer", $this->id);
+            $this->print_basic_room();
         
         }
 
-    }
+    } */
 
 
-    private function print_basic_room() {
+    public function print_basic_room() {
 
-        echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-secondary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room.php?id=' . $this->id . '\'">';        
+        echo '<div id="id' . $this->id . '" class="col row jumbotron jumbotron-fluid border border-secondary rounded m-1 p-0 clickable flex-div" onclick="';
+        echo 'location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room.php?id=' . $this->id . '\'">';
         echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-secondary p-2 text-center">';
         echo $this->name;
         echo '</div>';
@@ -261,7 +259,7 @@ class Room {
         echo $this->author;
         echo '</div>';
         echo '<div class="col">';
-        echo '<a href="../modules/room_action.php?id=' . $this->id . '&action=leave" role="button" class="close" aria-label="Close">';
+        echo '<a href="../modules/room_action.php?id=' . $this->id . '&action=leave" role="button" class="close mt-8px" aria-label="Close">';
         echo '<span aria-hidden="true">&times;</span>';
         echo '</a>';
         echo '</div>';
@@ -272,10 +270,10 @@ class Room {
 
     }
 
+    public function print_admin_room() {
 
-    private function print_admin_room($name, $author, $last_message, $id) {
-
-        echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-primary rounded p-0 clickable" onclick="location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room.php?id=' . $this->id . '\'">';
+        echo '<div id="id' . $this->id . '" class="col row jumbotron jumbotron-fluid border border-primary rounded p-0 m-1 clickable flex-div" onclick="';
+        echo 'location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room.php?id=' . $this->id . '\'">';
         echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-primary p-2 text-center">';
         echo $this->name;
         echo '</div>';
@@ -283,7 +281,7 @@ class Room {
         echo $this->author;
         echo '</div>';
         echo '<div class="col">';
-        echo '<a href="../modules/room_action.php?id=' . $this->id . '&action=delete" role="button" class="close" aria-label="Close">';
+        echo '<a href="../modules/room_action.php?id=' . $this->id . '&action=delete" role="button" class="close mt-8px" aria-label="Close">';
         echo '<span aria-hidden="true">&times;</span>';
         echo '</a>';
         echo '</div>';
@@ -295,9 +293,9 @@ class Room {
     }
 
 
-    private function print_validation_room($name, $author, $id) {
+    public function print_validation_room() {
 
-        echo '<div id="id' . $this->id . '" class="row jumbotron jumbotron-fluid border border-success rounded p-0">';
+        echo '<div id="id' . $this->id . '" class="col row jumbotron jumbotron-fluid border border-success rounded p-0 m-1 flex-div">';
         echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-success p-2 text-center">';
         echo $this->name;
         echo '</div>';

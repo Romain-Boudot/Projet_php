@@ -19,20 +19,48 @@
 
         }
 
-
+      
         public function token_gen($action, $id) {
 
             
 
         }
 
-
+      
         public function init($t_id, $t_login, $t_first_name, $t_last_name) {
 
             $this->id = $t_id;
             $this->last_name = $t_last_name;
             $this->first_name = $t_first_name;
             $this->login = $t_login;
+
+        }
+
+     
+        public function token_gen_old($room_id) {
+
+            if ($room_id == null) $rnd = bin2hex(random_bytes(1)); else $rnd = $room_id;
+            $login  = $this->login;
+            $id     = $this->id;
+            $token  = bin2hex(random_bytes(10));
+            
+            $full_token = $rnd.'/'.$login.'/'.$id.'/';
+            $full_token_converted = '';
+            echo $full_token . $token . "\n";
+
+            for ($i = 0; $i < strlen($full_token); $i++) {
+            
+                $temp = ord($full_token[$i]);
+                if ($temp < 100) if ($temp < 10) $temp = '00' . $temp; else $temp = '0' . $temp;
+                $full_token_converted = $full_token_converted . $temp;
+            
+            }
+
+            echo $full_token_converted.$token;
+            exit();
+
+            $this->last_token = $full_token_converted;
+            return $full_token_converted;
 
         }
 
@@ -101,18 +129,43 @@
 
 
             $this->get_rooms();
-            
-
-            $db = $this->data_base->db_connexion();
-
 
             if(sizeof($this->room_list) > 0) {
     
-                foreach($this->room_list as &$room) {
-                
-                    $room->print_this_room();
+                echo '<div id="waiting_rooms" class="row text-center p-0">';
+
+                foreach ($this->room_list as &$room) {
+
+                    if($room->get_var('isvalidate') == 0) {
+
+                        $room->print_validation_room();
+                    }
+                    
+                }
+
+                echo '</div><div id="admin_rooms" class="row text-center p-0">';
+
+                foreach ($this->room_list as &$room) {
+
+                    if($room->get_var('isadmin') == 1) {
+
+                        $room->print_admin_room();
+                    }
 
                 }
+
+                echo '</div><div id="basic_rooms" class="row text-center p-0">';
+
+                foreach ($this->room_list as &$room) {
+
+                    if($room->get_var('isadmin') == 0 && $room->get_var('isvalidate') == 1) {
+
+                        $room->print_basic_room();
+                    }
+
+                }
+
+                echo '</div>';
                     
             } else {
                     
