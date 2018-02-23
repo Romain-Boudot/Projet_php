@@ -10,24 +10,16 @@
     login_test('login');
 
 
-    if(!isset($_GET) || !isset($_GET['id']) || !isset($_GET['action'])) {
+    if(!isset($_GET) || !isset($_GET['messageid']) || !isset($_GET['action']) || !isset($_GET['roomid'])) {
 
         header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/unknown.php');
         exit();
 
     }
 
-    if ($_GET['action'] == 'accept') {
+    if ($_GET['action'] == 'delete') {
         
-        $answer = $_SESSION['user']->get_this_room($_GET['id'])->accept();
-
-    } else if ($_GET['action'] == 'refuse' || $_GET['action'] == 'leave') {
-
-        $answer = $_SESSION['user']->get_this_room($_GET['id'])->leave();
-
-    } else if ($_GET['action'] == 'delete') {
-
-        $answer = $_SESSION['user']->get_this_room($_GET['id'])->delete_room();
+        $answer = $_SESSION['user']->get_this_room($_GET['roomid'])->get_this_message($_GET['messageid'])->delete();
 
     } else {
 
