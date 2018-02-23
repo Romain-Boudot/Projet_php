@@ -85,3 +85,51 @@
 [16-Feb-2018 16:55:10 UTC] PHP Notice:  Undefined offset: 1 in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 75
 [16-Feb-2018 16:55:10 UTC] PHP Stack trace:
 [16-Feb-2018 16:55:10 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:03:49 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:03:49 UTC] PHP Stack trace:
+[16-Feb-2018 17:03:49 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:03:50 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:03:50 UTC] PHP Stack trace:
+[16-Feb-2018 17:03:50 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:03:50 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:03:50 UTC] PHP Stack trace:
+[16-Feb-2018 17:03:50 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:03:51 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:03:51 UTC] PHP Stack trace:
+[16-Feb-2018 17:03:51 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:03:51 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:03:51 UTC] PHP Stack trace:
+[16-Feb-2018 17:03:51 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:03:52 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:03:52 UTC] PHP Stack trace:
+[16-Feb-2018 17:03:52 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:03:52 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:03:52 UTC] PHP Stack trace:
+[16-Feb-2018 17:03:52 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:04:11 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:04:11 UTC] PHP Stack trace:
+[16-Feb-2018 17:04:11 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:04:12 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:04:12 UTC] PHP Stack trace:
+[16-Feb-2018 17:04:12 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:04:12 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:04:12 UTC] PHP Stack trace:
+[16-Feb-2018 17:04:12 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:04:12 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:04:12 UTC] PHP Stack trace:
+[16-Feb-2018 17:04:12 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:06:08 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:06:08 UTC] PHP Stack trace:
+[16-Feb-2018 17:06:08 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:06:10 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:06:10 UTC] PHP Stack trace:
+[16-Feb-2018 17:06:10 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[16-Feb-2018 17:06:31 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 65
+[16-Feb-2018 17:06:31 UTC] PHP Stack trace:
+[16-Feb-2018 17:06:31 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[23-Feb-2018 09:15:18 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 63
+[23-Feb-2018 09:15:18 UTC] PHP Stack trace:
+[23-Feb-2018 09:15:18 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0
+[23-Feb-2018 10:42:00 UTC] PHP Notice:  Undefined index: value in D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php on line 94
+[23-Feb-2018 10:42:00 UTC] PHP Stack trace:
+[23-Feb-2018 10:42:00 UTC] PHP   1. {main}() D:\3-EPSI\wampserver\wamp64\www\talk_with_me\auth_check.php:0

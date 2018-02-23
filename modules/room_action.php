@@ -17,7 +17,7 @@
 
     }
 
-    if ($_GET['action'] == 'accept') {
+    if ($_GET['action'] == 'accept') {  
         
         $answer = $_SESSION['user']->get_this_room($_GET['id'])->accept($_GET['id']);
 
