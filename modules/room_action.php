@@ -9,21 +9,28 @@
     // check if session is up
     login_test('login');
 
-    if (is_null($_GET['token']) || !isset($_GET['action'])) {
+    if (!isset($_GET['token'])) {
 
-        header("location: ../talk_with_me/auth_check.php?id=".$_GET['id']."%26action=".$_GET['action']." vers captcha avec action et id en get");
+        header("location: ../talk_with_me/auth_check.php?id=".$_GET['id']."&action=".$_GET['action']);
+        exit();
+
+    } else if (is_null($_GET['token'])) {
+
+        header("location: ../talk_with_me/auth_check.php?id=".$_GET['id']."&action=".$_GET['action']);
+        exit();
 
     }
 
     if (!$_SESSION['user']->token_check($_GET['action'], $_GET['id'], $_GET['token'])) { 
         
-        header("location: ../talk_with_me/error/unknown.php"); 
+        header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/denied.php');
+        exit();
 
     }
 
     if(!isset($_GET) || !isset($_GET['id']) || !isset($_GET['action'])) {
 
-        header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/denied.php');
+        header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/unknown.php');
         exit();
 
     }

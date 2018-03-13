@@ -4,22 +4,14 @@
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
     session_start();
 
-    //login_test('login');
+    login_test('login');
 
-    //'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/auth_check.php';
+    $action = $_GET['action'];
+    $id = $_GET['id'];
 
-    //$action = $_GET['action'];
-    //$id = $_GET['id'];
+    $token = $_SESSION['user']->gen_token($action, $id);
 
-    //$token = gen_token($action, $id);
-
-    //$url = "\"http://" . $_SERVER['HTTP_HOST'] . "/modules/room_action.php?action=" . $action . "&id=" . $id . "&token=" . $token . "\"";
-
-    $url = "\"http://localhost/modules/room_action.php?action=delete&id=56&token=qZDQZdqzdqzdqzdqDQZdqz\"";
- 
-    //"http://localhost/talk_with_me/auth_check.php?url=http://localhost/modules/room_action.php?action=delete%26id=56"
-
-
+    $url = "\"http://" . $_SERVER["HTTP_HOST"] . "/modules/room_action.php?action=" . $action . "&id=" . $id . "&token=" . $token . "\"";
 
 ?>
 
@@ -90,7 +82,8 @@
                     <input id="captcha" type="range" min="1" max="100" class="slider" id="myRange" value="1">
                 </div>   
                 <div id="linkid">    
-                    <a class="btn btn-primary btn-lg disabled mt-3" href=<?php echo $url; ?> role="button" aria-disabled="true" id="button">Accepter</a>
+                    <a class="btn btn-primary btn-lg mt-3 disabled" href=<?php echo $url; ?> role="button" aria-disabled="true" id="button">Accepter</a>
+                    <a class="btn btn-primary btn-lg mt-3" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>" role="button">Retour</a>
                 </div>
                 
                 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -99,9 +92,9 @@
                 
                     $("#captcha").change(function() {
 
-                        var enable = "btn btn-primary btn-lg"
+                        var enable = "btn btn-primary btn-lg mt-3"
 
-                        var disabled = "btn btn-primary btn-lg disabled"
+                        var disabled = "btn btn-primary btn-lg mt-3 disabled"
 
                         var value = $("#captcha").val()
 

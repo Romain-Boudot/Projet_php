@@ -31,10 +31,13 @@
 
         public function token_check($action, $id, $token) {
 
-            $answer = $this->token_list[$action . $id].token_check($action, $id, $token);
+            if (isset($this->token_list[$action . $id])) {
             
-            unset($this->token_list[$action . $id]);
-
+                $answer = $this->token_list[$action . $id]->token_check($action, $id, $token);
+                unset($this->token_list[$action . $id]);
+            
+            }
+            
             return $answer;
 
         }
