@@ -1,0 +1,9 @@
+[23-Feb-2018 10:01:12 UTC] PHP Fatal error:  Call to undefined function cryp() in C:\wamp64\www\talk_with_me\login.php on line 18
+[23-Feb-2018 10:01:12 UTC] PHP Stack trace:
+[23-Feb-2018 10:01:12 UTC] PHP   1. {main}() C:\wamp64\www\talk_with_me\login.php:0
+[23-Feb-2018 10:02:48 UTC] PHP Notice:  Undefined index: b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86 in C:\wamp64\www\talk_with_me\login.php on line 18
+[23-Feb-2018 10:02:48 UTC] PHP Stack trace:
+[23-Feb-2018 10:02:48 UTC] PHP   1. {main}() C:\wamp64\www\talk_with_me\login.php:0
+[23-Feb-2018 10:02:58 UTC] PHP Notice:  Undefined index: b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86 in C:\wamp64\www\talk_with_me\login.php on line 18
+[23-Feb-2018 10:02:58 UTC] PHP Stack trace:
+[23-Feb-2018 10:02:58 UTC] PHP   1. {main}() C:\wamp64\www\talk_with_me\login.php:0
