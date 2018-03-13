@@ -90,30 +90,40 @@
                     <input id="captcha" type="range" min="1" max="100" class="slider" id="myRange" value="1">
                 </div>   
                 <div id="linkid">    
-                    <a class="btn btn-primary btn-lg" href=<?php echo $url; ?> role="button">Accepter</a>
+                    <a class="btn btn-primary btn-lg disabled mt-3" href=<?php echo $url; ?> role="button" aria-disabled="true" id="button">Accepter</a>
                 </div>
                 
                 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
                 <script>
                 
-                    $("#captcha").change(function(){
+                    $("#captcha").change(function() {
+
+                        var enable = "btn btn-primary btn-lg"
+
+                        var disabled = "btn btn-primary btn-lg disabled"
 
                         var value = $("#captcha").val()
 
-                        if (value == 100) {
+                        if (value >= 98) {
 
-                            alert('ouiiiiiiii')
+                            $("#button").attr("class", enable)
+
+                            $("#captcha").val(100)
 
                         }
                          
-                        if (value < 100)
-                    {
-                        $("#captcha").val(0)
-                    } 
-                        var link = $("#link").innerHTML = <a class="btn btn-primary btn-lg" href=<?php echo $url; ?> role="button">Accepter</a>
-                    })
+                        if (value < 98) {
 
+                            $("#button").attr("class", disabled)
+
+                            $("#captcha").val(0)
+
+                        } 
+                })
+
+                    
+                    //<a class="btn btn-primary btn-lg" href=<?php //echo $url; ?> role="button">Accepter</a>
                 </script>
             
             </div>    
