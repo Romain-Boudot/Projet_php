@@ -9,7 +9,7 @@
         private $login;
         private $last_name;
         private $first_name;
-        private $room_list = array();
+        private $room_list = array(); // a virer
         private $token_list = array();
 
 
@@ -20,9 +20,22 @@
         }
 
       
-        public function token_gen($action, $id) {
+        public function gen_token($action, $id) {
 
+            $this->token_list[$action . $id] = new Token($action, $id);
+
+            return $this->token_list[$action . $id]->get_token();
+
+        }
+
+
+        public function token_check($action, $id, $token) {
+
+            $answer = $this->token_list[$action . $id].token_check($action, $id, $token);
             
+            unset($this->token_list[$action . $id]);
+
+            return $answer;
 
         }
 

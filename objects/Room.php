@@ -9,7 +9,7 @@ class Room {
     private $name;
     private $isadmin;
     private $isvalidate;
-    private $messages = array();
+    private $messages = array(); // a virer
     private $invited_users;
     private $last_message_id = 0;
 
