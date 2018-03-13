@@ -21,7 +21,7 @@
 
 </head>
 
-<body>
+<body class="pt-80px pb-80px">
 
     <div id="current_id" hidden><?php echo $_SESSION['user']->get_var('id') ?></div>
     <div id="room_id" hidden>-1</div>

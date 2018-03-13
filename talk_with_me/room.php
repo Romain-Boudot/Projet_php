@@ -35,7 +35,7 @@
     
 </head>
 
-<body>
+<body class="pt-80px pb-80px">
 
     <div id="current_room" hidden><?php echo $_GET['id']; ?></div>
     <div id="current_id" hidden><?php echo $_SESSION['user']->get_var('id') ?></div>
