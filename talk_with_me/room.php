@@ -40,7 +40,7 @@
     <div id="current_room" hidden><?php echo $_GET['id']; ?></div>
     <div id="current_id" hidden><?php echo $_SESSION['user']->get_var('id') ?></div>
 
-    <nav class="navbar fixed-top navbar-dark bg-dark">
+    <nav class="navbar fixed-top navbar-dark bg-dark blue-shadow">
         <a class="navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
 
         <div class="d-flex">
