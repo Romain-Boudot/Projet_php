@@ -22,7 +22,7 @@
       
 </head>
 
-<body class="pt-80px">
+<body class="pt-80px pb-80px">
     
     <nav class="navbar fixed-top navbar-dark bg-dark blue-shadow">
         <div class="d-flex">
