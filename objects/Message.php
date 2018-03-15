@@ -30,7 +30,7 @@ class Message {
         }
 
         if ($output_type == "js") echo "[". $ismine . ",\"";
-        echo "<div class='container-fluid bg-light p-3 rounded'>";
+        echo "<div class='container-fluid bg-light p-3 rounded' id='id" . $this->id . "'>";
         echo "<span class='font-weight-light pr-2 text-little'>" . $this->date . "</span>";
         echo "<span class='text-danger border border-bottom-0 border-top-0 border-left-0 border-secondary pr-2 mr-2'>" . $this->author . "</span>";
         echo $this->content;
@@ -39,7 +39,15 @@ class Message {
 
             echo "<a href='#' role='button' class='close' aria-label='Close'>";
             echo "<span aria-hidden='true'>&times;</span>";
-            echo "</a>";  
+            echo "</a>";
+
+            if ($ismine == 1) {
+
+                echo "<button onclick='edit(" . $this->id . ")' class='close' aria-label='Close'>";
+                echo "<span aria-hidden='true' class='fas fa-edit'></span>";
+                echo "</button>";
+
+            }
 
         }
 

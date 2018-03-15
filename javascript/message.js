@@ -204,3 +204,9 @@ function add_message(answer) {
     }
 
 }
+
+function edit() {
+    
+
+
+}
