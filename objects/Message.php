@@ -21,23 +21,31 @@ class Message {
     }
 
 
-    public function print_this_message() {
+    public function print_this_message($output_type) {
 
-        echo '<div class="container-fluid bg-light p-3 rounded">';
-        echo '<span class="font-weight-light pr-2 text-little">' . $this->date . '</span>';
-        echo '<span class="text-danger border border-bottom-0 border-top-0 border-left-0 border-secondary pr-2 mr-2">' . $this->author . '</span>';
+        $ismine = 0;
+
+        if ($this->author_id == $this->room->get_var('user')->get_var('id')) {
+            $ismine = 1;
+        }
+
+        if ($output_type == "js") echo "[". $ismine . ",\"";
+        echo "<div class='container-fluid bg-light p-3 rounded'>";
+        echo "<span class='font-weight-light pr-2 text-little'>" . $this->date . "</span>";
+        echo "<span class='text-danger border border-bottom-0 border-top-0 border-left-0 border-secondary pr-2 mr-2'>" . $this->author . "</span>";
         echo $this->content;
 
-        if ($this->author_id == $this->room->get_var('user')->get_var('id') || $this->room->get_var('isadmin') == 1) {
+        if ($ismine == 1 || $this->room->get_var('isadmin') == 1) {
 
-            echo '<a href="#" role="button" class="close" aria-label="Close">';
-            echo '<span aria-hidden="true">&times;</span>';
-            echo '</a>';  
+            echo "<a href='#' role='button' class='close' aria-label='Close'>";
+            echo "<span aria-hidden='true'>&times;</span>";
+            echo "</a>";  
 
         }
 
-        echo '</div>';
-        echo '<br>';
+        echo "</div>";
+        echo "<br>";
+        if ($output_type == "js") echo "\"]";
 
     }
 

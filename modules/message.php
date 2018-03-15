@@ -14,10 +14,14 @@
         foreach($answer as &$msg) {
             
 
-            $_SESSION['user']->get_this_room($_GET['id'])->get_this_message($msg['id'])->print_this_message();
+            $_SESSION['user']->get_this_room($_GET['id'])->get_this_message($msg['id'])->print_this_message("js");
             
         }
 
+    } else {
+
+        echo "[-1,\"\"]";
+    
     }
 
 ?>
