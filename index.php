@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, userscalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
     <title>Talk with me!</title>
       
@@ -25,8 +26,8 @@
 <body class="pt-80px pb-80px">
     
     <nav class="navbar fixed-top navbar-dark bg-dark blue-shadow">
-        <div class="d-flex"><button id="btn_slide_menu_trigger" type="button" class="btn btn-dark resp-640-sh ft-sz-btn">
-            <span id="btn_slide_menu_trigger" style="font-size: 100%" class="glyphicon glyphicon-th-list"></span>
+        <div class="d-flex">
+            <span id="btn_slide_menu_trigger" style="font-size: 100%" class="text-light clickable fas fa-bars"></span>
             <a class="resp-640-hd navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
         </div>
 

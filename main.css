@@ -56,6 +56,7 @@
 #slide_menu a,
 #slide_menu a:hover { text-decoration: none; color: inherit;}
 #slide_menu .active { color: white; border-bottom: .25rem solid white;}
+#btn_slide_menu_trigger { display: none; }
 
 .resp-640-sh { display: none; }
 
@@ -64,5 +65,6 @@
     .resp-640-hd    { display: none; }
     .resp-640-sh    { display: block; }
     #slide_menu     { display: block; }
+    #btn_slide_menu_trigger { display: block; }
 
 }
