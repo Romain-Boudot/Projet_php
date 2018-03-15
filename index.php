@@ -25,10 +25,8 @@
 <body class="pt-80px pb-80px">
     
     <nav class="navbar fixed-top navbar-dark bg-dark blue-shadow">
-        <div class="d-flex">
-            <button id="btn_slide_menu_trigger" type="button" class="btn btn-dark resp-640-sh ft-sz-btn">
-                <span>&equiv;</span>
-            </button>
+        <div class="d-flex"><button id="btn_slide_menu_trigger" type="button" class="btn btn-dark resp-640-sh ft-sz-btn">
+            <span id="btn_slide_menu_trigger" style="font-size: 100%" class="glyphicon glyphicon-th-list"></span>
             <a class="resp-640-hd navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
         </div>
 
