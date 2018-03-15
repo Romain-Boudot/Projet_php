@@ -220,7 +220,7 @@ class Room {
 
         foreach ($this->messages as &$message) {
 
-            $message->print_this_message();
+            $message->print_this_message("php");
 
         }
 

@@ -94,6 +94,14 @@ document.getElementById('message').onkeypress = function(key) {
 
 }
 
+window.addEventListener('load', function () {
+    Notification.requestPermission(function (status) {
+        Notification.permission = status;
+    });
+});
+
+
+
 
 var moment = setInterval(function(){
 
@@ -176,6 +184,23 @@ function pull_message() {
 
 function add_message(answer) {
 
-    document.getElementById('messages_container').innerHTML += answer
+    console.log(answer)
+
+    answer = JSON.parse(answer);
+
+    console.log(answer)
+
+    if (answer[0] != -1) {
+
+        document.getElementById('messages_container').innerHTML += answer[1];
+   
+        if (answer[0] == 0) {
+            var notification = new Notification(' MARCASSIN',{body: 'Vous avez réçu un nouveau message' } );
+            notification.onshow = function () { 
+                setTimeout(notification.close.bind(notification), 5000); 
+            }
+        }
+
+    }
 
 }
