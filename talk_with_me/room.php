@@ -28,6 +28,15 @@
             
     }
 
+    $token = bin2hex(mcrypt_create_iv(42, MCRYPT_DEV_URANDOM));
+
+    $db = $data_base->db_connexion();
+
+    $statment = $db->prepare("UPDATE users SET token = :token WHERE id = :id");
+
+    $statment->execute(array(
+        ":token" => $token,
+        ":id" => $_SESSION['user']['id']));
 
 ?>
 
@@ -48,8 +57,9 @@
 
 <body class="pt-80px pb-80px">
 
-    <div id="current_room" hidden><?php echo $_GET['id']; ?></div>
-    <div id="current_id" hidden><?php echo $_SESSION['user']['id'] ?></div>
+    <input id="current_room" type="hidden" value="<?php echo $_GET['id']; ?>">
+    <input id="current_id" type="hidden" value="<?php echo $_SESSION['user']['id']; ?>">
+    <input id="tokenUser" type="hidden" value="<?php echo $token; ?>">
 
     <nav class="navbar fixed-top navbar-dark bg-dark blue-shadow">
         <div class="d-flex">

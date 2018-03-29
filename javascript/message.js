@@ -1,54 +1,22 @@
-var invited_users = []
-var current_room_id = document.getElementById('current_room').innerHTML
-var current_user_id = document.getElementById('current_id').innerHTML
-var room_id = document.getElementById('current_room').innerHTML
+var ws = new WebSocket('ws://localhost:8080');
 
-
-// fonction de récuperation de l'objet XMLHTTPrequest ( xhr )
-
-function getXMLHTTP() {
-
+function send_message() {
     
-    // vérifie si le module 'xhr' est supporter
+    var content = document.getElementById('message').value
+    document.getElementById('message').value = ''
 
-    if(window.XMLHttpRequest || window.ActiveXObject) {
+    if (content != '') {
+
+        var current_user_id = document.getElementById('current_id').value
+        var token = document.getElementById('tokenUser').value
+
+        ws.send('msg\\' + current_user_id + '\\' + token + '\\' + content)
         
-        if(window.ActiveXObject) {
+    } else { // si le contenue est vide
 
-            try {
-
-                var xhr = new ActiveXObject("Msxml2.XMLHTTP");
-                return xhr
-
-            } catch(e) {
-
-                var xhr = new ActiveXObject("Microsoft.XMLHTTP");
-                return xhr
-
-            }
-
-        } else {
-
-            var xhr = new XMLHttpRequest(); 
-            return xhr
-
-        }
-        
-    } else {
-
-
-        // sinon alerter l'utilisateur que son navigateur ne le supporte pas
-        
-        alert("Votre navigateur ne supporte pas l'XMLhttpRequest")
+        alert('Votre message est vide')
         
     }
-    
-}
-
-
-document.getElementById('message').onkeypress = function(key) {
-
-    if (key.keyCode == 13) send_message()
 
 }
 
@@ -58,106 +26,44 @@ window.addEventListener('load', function () {
     });
 });
 
+document.getElementById('message').onkeypress = function(key) {
 
-var source = new EventSource("../modules/message.php?id=" + room_id);
-
-source.onmessage = function(event) {
-    add_message(event.data);
-}
-
-
-function send_message() {
-
-    
-    var content = document.getElementById('message').value
-    document.getElementById('message').value = ''
-
-    xhr = getXMLHTTP();
-
-
-    if (content != '') {
-
-        data = "roomid=" + room_id + "&content=" + content
-
-        // lors de la reception de la réponse éxécute la fonction de callback show_result(' la réponse de la requete ')
-        
-        xhr.onreadystatechange = function() {
-            
-
-            if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-                validation(xhr.responseText);
-            }
-            
-        }
-
-        
-        // ouvre une requete xhr vers le module search_request.php en GET avec comme parametre le but de la recherche
-        // pouis l'envoie
-
-        xhr.open("POST", "../modules/send_message.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send(data);
-        
-    } else { // si le contenue est vide
-        
-
-        alert('Votre message est vide')
-        
-    }
+    if (key.keyCode == 13) send_message()
 
 }
 
 
-function validation(answer) {
 
-    console.log(answer);
-    return;
+ws.onopen = function() {
 
-    if (answer == 1) alert('Une erreur est survenue')
+    var current_room_id = document.getElementById('current_room').value
+    var current_user_id = document.getElementById('current_id').value
+    var token = document.getElementById('tokenUser').value
 
-    if (answer == 2) alert('Votre session a expirer')
-
-}
-
-function pull_message() {
-
-
-    xhr = getXMLHTTP();
-
-        
-    xhr.onreadystatechange = function() {
-        
-
-        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-            add_message(xhr.responseText);
-        }
-        
-    }
-
-
-    xhr.open("POST", "../modules/message.php?id=" + room_id, true);
-    xhr.send(null);
+    ws.send('jon\\' + current_room_id + '\\' + current_user_id + '\\' + token);
 
 }
 
+ws.onmessage = function(data) {
 
-function add_message(answer) {
+    console.log(data.data);
 
-    console.log(answer);
+    data = JSON.parse(data.data);
+ 
+    if (data[0] == -1) {
 
-    answer = JSON.parse(answer);
+        console.log(data[1]);
 
-    if (answer[0] != -1) {
-
-        document.getElementById('messages_container').innerHTML += answer[1];
-   
-        if (answer[0] == 0) {
+    } else {
+        
+        document.getElementById('messages_container').innerHTML += data[1];        
+        
+        if (data[0] == 0) {
             var notification = new Notification(' MARCASSIN',{body: 'Vous avez réçu un nouveau message' } );
             notification.onshow = function () { 
                 setTimeout(notification.close.bind(notification), 5000); 
             }
         }
-
     }
 
 }
