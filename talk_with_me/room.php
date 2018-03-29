@@ -8,14 +8,24 @@
 
     if(isset($_GET) && isset($_GET['id'])) {
 
+        $room = User::get_this_room($data_base, $_GET['id']);
 
-        if ($_SESSION['user']->have_access($_GET['id']) == false) {
+        if ($room != false) {
+            
+            if ($room->have_access($data_base, $_GET['id']) == false) {
+                
+                header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/denied.php');
+                exit();
+                
+            }
+
+        } else {
 
             header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/denied.php');
             exit();
 
         }
-
+            
     }
 
 
@@ -30,6 +40,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, userscalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="../../main.css">
     <title>Talk with me !</title>
     
@@ -38,25 +49,33 @@
 <body class="pt-80px pb-80px">
 
     <div id="current_room" hidden><?php echo $_GET['id']; ?></div>
-    <div id="current_id" hidden><?php echo $_SESSION['user']->get_var('id') ?></div>
+    <div id="current_id" hidden><?php echo $_SESSION['user']['id'] ?></div>
 
     <nav class="navbar fixed-top navbar-dark bg-dark blue-shadow">
-        <a class="navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
+        <div class="d-flex">
+            <span id="btn_slide_menu_trigger" style="font-size: 100%" class="text-light clickable fas fa-bars"></span>
+            <a class="resp-640-hd navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
+        </div>
 
         <div class="d-flex">
-            <span class="navbar-text text-warning"><?php echo $_SESSION['user']->get_var("login"); ?></span>
-            <a class='btn btn-outline-secondary ml-4' href="<?php echo $location_create; ?>" role="button">Créer une salle</a>
-            <button type="button" class="btn btn-outline-secondary ml-2">
-                Notifications<span class="badge badge-light ml-1">4</span>
-            </button>
-            <a class="btn btn-outline-secondary ml-2" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php" role="button">Déconnexion</a>
+            <span class="navbar-text text-warning"><?php echo $_SESSION['user']['login']; ?></span>
+            <a class='btn btn-outline-secondary ml-4 resp-640-hd' href="<?php echo $location_create; ?>" role="button">Créer une salle</a>
+            <a class="btn btn-outline-secondary ml-2 resp-640-hd" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php" role="button">Déconnexion</a>
         </div>
 
     </nav>
 
+    <div id="slide_menu" class="container bg-dark pt-2 text-center">
+        <ul>
+            <li><a href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>Accueil</a></li>
+            <li><a href="<?php echo $location_create; ?>">Créer une salle</a></li>
+            <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php">Déconnexion</a></li>
+        </ul>
+    </div>
+
     <div id="messages_container" style="scroll-behavior: smooth;" class="mw-1200 mt-100px container-fluid">
         
-        <?php $_SESSION['user']->get_this_room($_GET['id'])->print_messages(); ?>
+        <?php User::get_this_room($data_base, $_GET['id'])->print_messages($data_base); ?>
 
     </div>
 

@@ -8,14 +8,11 @@
 
     login_test('home');
 
-
-    $_SESSION['user'] = new User;
-
     $erreur = false;
 
     if(isset($_POST) && isset($_POST['login']) && isset($_POST['password'])) {
 
-        $answer = $_SESSION['user']->data_base->password_check($_POST['login'], $_POST['password']);
+        $answer = $data_base->password_check($_POST['login'], $_POST['password']);
         
         if($answer != false) {
 
@@ -23,8 +20,11 @@
             setcookie('login', $_POST['login'], time() + 24*3600*7, null, null, false, true);
 
             
-            $_SESSION['user']->init($answer['id'], $answer['login'], $answer['last_name'], $answer['first_name']);
+            $_SESSION['user']['id'] = $answer['id'];
             
+           
+            $_SESSION['user']['login'] = $answer['login'];
+           
            
             $_SESSION['connected'] = true;
 
@@ -70,7 +70,7 @@
             <form action="<?php echo $location_login . '/index.php' ; ?>" method="post">
 
                 <label class="login-resp-label">Nom d'Utilisateur</label>
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 input-group-login">
                     <div class="input-group-prepend">
                         <span class="input-group-text login-label" style="width: 150px;">Nom d'Utilisateur</span>
                     </div>
@@ -78,7 +78,7 @@
                 </div>
 
                 <label class="login-resp-label">Mot De Passe</label>
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 input-group-login">
                     <div class="input-group-prepend">
                         <span class="input-group-text login-label" style="width: 150px;">Mot De Passe</span>
                     </div>

@@ -3,27 +3,31 @@
 class Room {
 
 
-    private $user;
     private $id;
     private $author;
     private $name;
     private $isadmin;
     private $isvalidate;
-    private $messages = array(); // a virer
     private $invited_users;
     private $last_message_id = 0;
 
 
-    public function __construct($t_user, $t_id, $t_author, $t_name, $t_isadmin, $t_isvalidate) {
+    public function __construct($t_id, $t_author, $t_name, $t_isadmin, $t_isvalidate) {
 
 
-        $this->user = $t_user;
         $this->id = $t_id;
         $this->author = $t_author;
         $this->name = $t_name;
         $this->isadmin = $t_isadmin;
         $this->isvalidate = $t_isvalidate;
 
+    }
+
+    public function have_access($data_base, $room_id) {
+
+        if ($this->isvalidate == 1) return true;
+        else return false;
+        
     }
 
 
@@ -41,17 +45,17 @@ class Room {
 
     // parametrage de la room
 
-    public function accept() {
+    public function accept($data_base) {
 
         if ($this->isvalidate == 0) {
 
-            $db = $this->user->data_base->db_connexion();
+            $db = $data_base->db_connexion();
 
 
             $statment = $db->prepare("UPDATE assouser SET isvalidate = 1 WHERE userid = :userid AND roomid = :roomid ");
 
 
-            $statment->execute(array(":userid" => $this->user->get_var('id'), ":roomid" => $this->id));
+            $statment->execute(array(":userid" => $_SESSION['user']['id'], ":roomid" => $this->id));
 
 
             $this->isvalidate = 1;
@@ -66,27 +70,32 @@ class Room {
     }
 
 
-    public function leave() {
+    public function leave($data_base) {
 
         // manque une verif admin
 
-        $db = $this->user->data_base->db_connexion();
+        $db = $data_base->db_connexion();
 
 
         $statment = $db->prepare("DELETE FROM assouser WHERE userid = :userid AND roomid = :roomid ");
 
 
-        $statment->execute(array(":userid" => $this->user->get_var('id'), ":roomid" => $this->id));
+        $statment->execute(array(":userid" => $_SESSION['user']['id'], ":roomid" => $this->id));
 
 
     }
 
 
-    public function delete_room() {
+    public function delete_room($data_base) {
 
-        // manque une verif admin
+        if ($this->isadmin == 0) {
+            
+            header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/unknown.php');
+            exit();
 
-        $db = $this->user->data_base->db_connexion();
+        }
+
+        $db = $data_base->db_connexion();
 
         $statment = $db->prepare("DELETE FROM message WHERE roomid = :roomid");
 
@@ -103,10 +112,10 @@ class Room {
     }
     
     
-    public function add_user_room($invited_users) {
+    public function add_user_room($data_base, $invited_users, $rid) {
     
     
-        $db = $this->user->data_base->db_connexion();
+        $db = $data_base->db_connexion();
         
     
         foreach ($invited_users as &$user) {
@@ -114,10 +123,7 @@ class Room {
 
             $statment = $db->prepare("INSERT INTO assouser (roomid, userid, isadmin, isvalidate) VALUES (:room_id, :invited, 0 , 0)");
 
-            $statment->execute(array(":room_id" => $this->id, ":invited" => $user));
-
-
-            $this->invited_users[$user] = $user;
+            $statment->execute(array(":room_id" => $rid, ":invited" => $user));
         
         }
     
@@ -126,16 +132,16 @@ class Room {
 
     // messages de la room
 
-    public function get_new_messages() {
+    public function get_new_messages($data_base) {
 
 
-        $db = $this->user->data_base->db_connexion();
+        $db = $data_base->db_connexion();
 
         $statment = $db->prepare("SELECT id, roomid, authorid, (
             SELECT login FROM users WHERE id = m . authorid
         ) as author, content, date FROM message m WHERE roomid = :roomid AND id > :lastMsgId ORDER BY date asc");
 
-        $statment->execute(array(":roomid" => $this->id, ":lastMsgId" => $this->last_message_id));
+        $statment->execute(array(":roomid" => $this->id, ":lastMsgId" => $_SESSION['room' . $this->id]));
 
         $statment = $statment->fetchAll(PDO::FETCH_ASSOC);
 
@@ -144,13 +150,13 @@ class Room {
 
             foreach($statment as &$message) {
                 
-                $this->messages[$message['id']] = new Message($this, $message['id'], $message['author'], $message['content'], $message['date'], $message['authorid']);
+                $messages[$message['id']] = new Message($this, $message['id'], $message['author'], $message['content'], $message['date'], $message['authorid']);
 
-                if ($message['id'] > $this->last_message_id) $this->last_message_id = $message['id'];
+                if ($message['id'] > $_SESSION['room' . $this->id]) $_SESSION['room' . $this->id] = $message['id'];
                 
             }
 
-            return $statment;
+            return $messages;
             
         } else {
 
@@ -161,11 +167,9 @@ class Room {
     }
 
 
-    private function get_old_messages() {
-
+    private function get_old_messages($data_base) {
         
-        $db = $this->user->data_base->db_connexion();
-
+        $db = $data_base->db_connexion();
 
 
         $statment = $db->prepare("SELECT id, roomid, authorid, (
@@ -176,76 +180,59 @@ class Room {
 
         $statment = $statment->fetchAll(PDO::FETCH_ASSOC);
 
+        $messages = array();
 
-        $this->messages = array();
+        $_SESSION['room' . $this->id] = 0;
 
         foreach($statment as &$message) {
 
-            $this->messages[$message['id']] = new Message($this, $message['id'], $message['author'], $message['content'], $message['date'], $message['authorid']);
-            if ($message['id'] > $this->last_message_id) $this->last_message_id = $message['id'];
+            $messages[$message['id']] = new Message($this, $message['id'], $message['author'], $message['content'], $message['date'], $message['authorid']);
+            
+            if ($message['id'] > $_SESSION['room' . $this->id]) $_SESSION['room' . $this->id] = $message['id'];
 
         }
+
+        return $messages;
 
     }
 
     
-    public function send_message($content) {
+    public function send_message($data_base, $content) {
 
 
         $date = date("o-m-d H:i:s", time());
 
-        $db = $this->user->data_base->db_connexion();
+        $db = $data_base->db_connexion();
 
         $statment = $db->prepare("INSERT INTO message (roomid, authorid, content, date) VALUES (:roomid, :authorid, :content, :date)");
 
         $statment->execute(array(
             ":roomid" => $this->id,
-            ":authorid" => $this->user->get_var('id'),
+            ":authorid" => $_SESSION['user']['id'],
             ":content" => $content,
             ":date" => $date));
 
     }
 
-
-    public function get_this_message($msg_id) {
+    // obsolete
+    /* public function get_this_message($msg_id) {
 
         return $this->messages[$msg_id];
 
-    }
+    } */
 
 
-    public function print_messages() {
+    public function print_messages($data_base) {
 
-        $this->get_old_messages();
+        $messages = $this->get_old_messages($data_base);
 
-        foreach ($this->messages as &$message) {
+        foreach ($messages as &$message) {
 
             $message->print_this_message("php");
 
         }
 
     }
-
-
-    // affichage de la room
-
-    /* public function print_this_room() {
-
-        if($this->isadmin == 1) {
-
-            $this->print_admin_room();
-        
-        } else if($this->isvalidate == 0) {
-        
-            $this->print_validation_room();
-        
-        } else {
-        
-            $this->print_basic_room();
-        
-        }
-
-    } */
 
 
     public function print_basic_room() {
@@ -264,7 +251,7 @@ class Room {
         echo '</a>';
         echo '</div>';
         echo '<div class="w-100 bg-secondary text-white p-4 text-truncate">';
-        echo 'L\'historique des messages est desactiver'; // last message
+        echo 'L\'historique des messages est désactivé'; // last message
         echo '</div>';
         echo '</div>';
 
@@ -286,7 +273,7 @@ class Room {
         echo '</a>';
         echo '</div>';
         echo '<div class="w-100 bg-primary text-white p-4 text-truncate">';
-        echo 'L\'historique des messages est desactiver'; // last message
+        echo 'L\'historique des messages est désactivé'; // last message
         echo '</div>';    
         echo '</div>';
     

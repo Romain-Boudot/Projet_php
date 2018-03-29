@@ -21,7 +21,7 @@
 
     #login-wrapper  { margin: 0; height: 100vh; width: 100vw; }
     .login-label    { display: none; }
-    .input-group .form-control:not(:first-child) { border-radius: .25rem; }
+    .input-group-login .form-control:not(:first-child) { border-radius: .25rem; }
     .login-resp-label { display: block; }
 
 }
@@ -41,7 +41,7 @@
 
 #slide_menu {
     display: none;
-    position: absolute;
+    position: fixed;
     width: 210px;
     height: calc(100vh - 56px);
     top: 56px;
@@ -59,12 +59,17 @@
 #btn_slide_menu_trigger { display: none; }
 
 .resp-640-sh { display: none; }
+.resp-label-572 { display: none; color: #495057;}
 
-@media (max-width: 768px) {
+@media (max-width: 572px) {
 
     .resp-640-hd    { display: none; }
     .resp-640-sh    { display: block; }
     #slide_menu     { display: block; }
     #btn_slide_menu_trigger { display: block; }
+
+    .resp-label-572 { display: block; }
+    .resp-label-572-hd { display: none; }
+    .resp-572-rounded .form-control:not(:first-child) { border-radius: .25rem; }
 
 }

@@ -1,52 +1,10 @@
 var invited_users = []
 var current_room_id = document.getElementById('current_room').innerHTML
 var current_user_id = document.getElementById('current_id').innerHTML
+var room_id = document.getElementById('current_room').innerHTML
 
 
 // fonction de récuperation de l'objet XMLHTTPrequest ( xhr )
-
-function getXMLHTTP() {
-
-    
-    // vérifie si le module 'xhr' est supporter
-
-    if(window.XMLHttpRequest || window.ActiveXObject) {
-        
-        if(window.ActiveXObject) {
-
-            try {
-
-                var xhr = new ActiveXObject("Msxml2.XMLHTTP");
-                return xhr
-
-            } catch(e) {
-
-                var xhr = new ActiveXObject("Microsoft.XMLHTTP");
-                return xhr
-
-            }
-
-        } else {
-
-            var xhr = new XMLHttpRequest(); 
-            return xhr
-
-        }
-        
-    } else {
-
-
-        // sinon alerter l'utilisateur que son navigateur ne le supporte pas
-        
-        alert("Votre navigateur ne supporte pas l'XMLhttpRequest")
-        
-    }
-    
-}
-
-
-room_id = document.getElementById('current_room').innerHTML
-
 
 function getXMLHTTP() {
 
@@ -101,19 +59,17 @@ window.addEventListener('load', function () {
 });
 
 
+var source = new EventSource("../modules/message.php?id=" + room_id);
 
-
-var moment = setInterval(function(){
-
-    pull_message();
-
-}, 1000)
+source.onmessage = function(event) {
+    add_message(event.data);
+}
 
 
 function send_message() {
 
     
-    content = document.getElementById('message').value
+    var content = document.getElementById('message').value
     document.getElementById('message').value = ''
 
     xhr = getXMLHTTP();
@@ -154,6 +110,9 @@ function send_message() {
 
 function validation(answer) {
 
+    console.log(answer);
+    return;
+
     if (answer == 1) alert('Une erreur est survenue')
 
     if (answer == 2) alert('Votre session a expirer')
@@ -184,11 +143,9 @@ function pull_message() {
 
 function add_message(answer) {
 
-    console.log(answer)
+    console.log(answer);
 
     answer = JSON.parse(answer);
-
-    console.log(answer)
 
     if (answer[0] != -1) {
 

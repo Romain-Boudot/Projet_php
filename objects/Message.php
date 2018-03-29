@@ -23,9 +23,10 @@ class Message {
 
     public function print_this_message($output_type) {
 
+
         $ismine = 0;
 
-        if ($this->author_id == $this->room->get_var('user')->get_var('id')) {
+        if ($this->author_id == $_SESSION['user']['id']) {
             $ismine = 1;
         }
 

@@ -9,7 +9,7 @@
     $action = $_GET['action'];
     $id = $_GET['id'];
 
-    $token = $_SESSION['user']->gen_token($action, $id);
+    $token = gen_token($action, $id);
 
     $url = "\"http://" . $_SERVER["HTTP_HOST"] . "/modules/room_action.php?action=" . $action . "&id=" . $id . "&token=" . $token . "\"";
 

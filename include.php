@@ -57,8 +57,30 @@
 
     }
 
-    function token_gen() {
-        
+    
+    function gen_token($action, $id) {
+
+        $_SESSION['token_list'][$action . $id] = new Token($action, $id);
+
+        return $_SESSION['token_list'][$action . $id]->get_token();
+
     }
+
+
+    
+    function token_check($action, $id, $token) {
+
+        if (isset($_SESSION['token_list'][$action . $id])) {
+        
+            $answer = $_SESSION['token_list'][$action . $id]->token_check($action, $id, $token);
+            unset($_SESSION['token_list'][$action . $id]);
+        
+        }
+        
+        return $answer;
+
+    }
+
+    $data_base = new Data_base;
 
 ?>

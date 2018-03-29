@@ -170,6 +170,8 @@ function creation_callback(answer) {
 
     // la page php renvoie l'état de la requete sous forme JSON
 
+    console.log(answer)
+
     answer = JSON.parse(answer)
 
 

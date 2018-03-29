@@ -32,11 +32,8 @@
         </div>
 
         <div class="d-flex">
-            <span class="navbar-text text-warning"><?php echo $_SESSION['user']->get_var("login"); ?></span>
-            <a class='btn btn-outline-secondary ml-4 resp-640-hd' href="<?php echo $location_create; ?>" role="button">Créer une salle</a>
-            <button type="button" class="btn btn-outline-secondary ml-2 resp-640-hd">
-                Notifications<span class="badge badge-light ml-1">4</span>
-            </button>
+            <span class="navbar-text text-warning"><?php echo $_SESSION['user']['login']; ?></span>
+            <a class='btn btn-outline-secondary ml-4 resp-640-hd' href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/talk_with_me/create_room.php" role="button">Créer une salle</a>
             <a class="btn btn-outline-secondary ml-2 resp-640-hd" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php" role="button">Déconnexion</a>
         </div>
 
@@ -45,7 +42,7 @@
     <div id="slide_menu" class="container bg-dark pt-2 text-center">
         <ul>
             <li class="active"><a href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>Accueil</a></li>
-            <li><a href="<?php echo $location_create; ?>">Créer une salle</a></li>
+            <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/talk_with_me/create_room.php">Créer une salle</a></li>
             <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php">Déconnexion</a></li>
         </ul>
     </div>
@@ -53,7 +50,7 @@
     <div class="container">
 
             
-        <?php $_SESSION['user']->print_users_rooms(); ?>
+        <?php User::print_users_rooms($data_base); ?>
             
         
     </div>
