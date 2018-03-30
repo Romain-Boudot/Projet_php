@@ -28,6 +28,8 @@
 
 <?php
 
+    /////////////////////////// obsolete
+
     // load or reload a session ! have to be the first line
     include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
     session_start();

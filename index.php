@@ -50,7 +50,7 @@
     <div class="container">
 
             
-        <?php User::print_users_rooms($data_base); ?>
+        <?php User::print_users_rooms(); ?>
             
         
     </div>

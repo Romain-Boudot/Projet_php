@@ -20,7 +20,7 @@
     }
 
 
-    $users = $data_base->search($_GET['search']);
+    $users = Data_base::search($_GET['search']);
 
 
     if(sizeof($users) > 25) 

@@ -20,12 +20,12 @@
 
         if (!isset($_GET['token'])) {
             
-            header("location: ../talk_with_me/auth_check.php?id=".$_GET['id']."&action=".$_GET['action']);
+            header("location: http://" . $_SERVER['HTTP_HOST'] . "/talk_with_me/auth_check.php?id=".$_GET['id']."&action=".$_GET['action']);
             exit();
             
         } else if (is_null($_GET['token'])) {
             
-            header("location: ../talk_with_me/auth_check.php?id=".$_GET['id']."&action=".$_GET['action']);
+            header("location: http://" . $_SERVER['HTTP_HOST'] . "/talk_with_me/auth_check.php?id=".$_GET['id']."&action=".$_GET['action']);
             exit();
             
         }
@@ -41,15 +41,15 @@
 
     if ($_GET['action'] == 'accept') {  
         
-        $answer = User::get_this_room($data_base, $_GET['id'])->accept($data_base);
+        $answer = User::get_this_room($_GET['id'])->accept();
 
     } else if ($_GET['action'] == 'refuse' || $_GET['action'] == 'leave') {
 
-        $answer = User::get_this_room($data_base, $_GET['id'])->leave($data_base);
+        $answer = User::get_this_room($_GET['id'])->leave();
 
     } else if ($_GET['action'] == 'delete') {
 
-        $answer = User::get_this_room($data_base, $_GET['id'])->delete_room($data_base);
+        $answer = User::get_this_room($_GET['id'])->delete_room();
 
     } else {
 

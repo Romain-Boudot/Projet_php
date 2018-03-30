@@ -8,11 +8,11 @@
 
     if(isset($_GET) && isset($_GET['id'])) {
 
-        $room = User::get_this_room($data_base, $_GET['id']);
+        $room = User::get_this_room($_GET['id']);
 
         if ($room != false) {
             
-            if ($room->have_access($data_base, $_GET['id']) == false) {
+            if ($room->have_access($_GET['id']) == false) {
                 
                 header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/denied.php');
                 exit();
@@ -30,13 +30,14 @@
 
     $token = bin2hex(mcrypt_create_iv(42, MCRYPT_DEV_URANDOM));
 
-    $db = $data_base->db_connexion();
+    $db = Data_base::db_connexion();
 
     $statment = $db->prepare("UPDATE users SET token = :token WHERE id = :id");
 
     $statment->execute(array(
         ":token" => $token,
-        ":id" => $_SESSION['user']['id']));
+        ":id" => $_SESSION['user']['id']
+    ));
 
 ?>
 
@@ -45,13 +46,7 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, userscalable=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../main.css">
-    <title>Talk with me !</title>
+    <?php head_include("Marcassin"); ?>
     
 </head>
 
@@ -85,12 +80,9 @@
 
     <div id="messages_container" style="scroll-behavior: smooth;" class="mw-1200 mt-100px container-fluid">
         
-        <?php User::get_this_room($data_base, $_GET['id'])->print_messages($data_base); ?>
+        <?php User::get_this_room($_GET['id'])->print_messages(); ?>
 
     </div>
-
-
-    <div id="scroll_bot" hidden>bla bla </div>
 
     <div id="send_bar" class="p-2 w-100 bg-grey fixed-bottom">
 
@@ -103,7 +95,7 @@
 
     </div>
 
-    <script src="../../javascript/message.js"></script>
+    <script src="/javascript/message.js"></script>
     
 </body>
 

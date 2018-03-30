@@ -81,6 +81,4 @@
 
     }
 
-    $data_base = new Data_base;
-
 ?>

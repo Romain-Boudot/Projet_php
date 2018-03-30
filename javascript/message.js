@@ -44,6 +44,10 @@ ws.onopen = function() {
 
 }
 
+ws.onerror = function(e) {
+    popup_alert('une erreur est survenue');
+}
+
 ws.onmessage = function(data) {
 
     console.log(data.data);
@@ -66,4 +70,8 @@ ws.onmessage = function(data) {
         }
     }
 
+    window.scrollBy(0, 9999999);
+
 }
+
+window.scrollBy(0, 9999999);

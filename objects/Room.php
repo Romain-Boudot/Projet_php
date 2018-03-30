@@ -23,7 +23,7 @@ class Room {
 
     }
 
-    public function have_access($data_base, $room_id) {
+    public function have_access($room_id) {
 
         if ($this->isvalidate == 1) return true;
         else return false;
@@ -45,11 +45,11 @@ class Room {
 
     // parametrage de la room
 
-    public function accept($data_base) {
+    public function accept() {
 
         if ($this->isvalidate == 0) {
 
-            $db = $data_base->db_connexion();
+            $db = Data_base::db_connexion();
 
 
             $statment = $db->prepare("UPDATE assouser SET isvalidate = 1 WHERE userid = :userid AND roomid = :roomid ");
@@ -70,11 +70,11 @@ class Room {
     }
 
 
-    public function leave($data_base) {
+    public function leave() {
 
         // manque une verif admin
 
-        $db = $data_base->db_connexion();
+        $db = Data_base::db_connexion();
 
 
         $statment = $db->prepare("DELETE FROM assouser WHERE userid = :userid AND roomid = :roomid ");
@@ -86,7 +86,7 @@ class Room {
     }
 
 
-    public function delete_room($data_base) {
+    public function delete_room() {
 
         if ($this->isadmin == 0) {
             
@@ -95,7 +95,7 @@ class Room {
 
         }
 
-        $db = $data_base->db_connexion();
+        $db = Data_base::db_connexion();
 
         $statment = $db->prepare("DELETE FROM message WHERE roomid = :roomid");
 
@@ -112,10 +112,10 @@ class Room {
     }
     
     
-    public function add_user_room($data_base, $invited_users, $rid) {
+    public function add_user_room($invited_users, $rid) {
     
     
-        $db = $data_base->db_connexion();
+        $db = Data_base::db_connexion();
         
     
         foreach ($invited_users as &$user) {
@@ -132,10 +132,10 @@ class Room {
 
     // messages de la room
 
-    public function get_new_messages($data_base) {
+    public function get_new_messages() {
 
 
-        $db = $data_base->db_connexion();
+        $db = Data_base::db_connexion();
 
         $statment = $db->prepare("SELECT id, roomid, authorid, (
             SELECT login FROM users WHERE id = m . authorid
@@ -167,9 +167,9 @@ class Room {
     }
 
 
-    private function get_old_messages($data_base) {
+    private function get_old_messages() {
         
-        $db = $data_base->db_connexion();
+        $db = Data_base::db_connexion();
 
 
         $statment = $db->prepare("SELECT id, roomid, authorid, (
@@ -197,12 +197,12 @@ class Room {
     }
 
     
-    public function send_message($data_base, $content) {
+    public function send_message($content) {
 
 
         $date = date("o-m-d H:i:s", time());
 
-        $db = $data_base->db_connexion();
+        $db = Data_base::db_connexion();
 
         $statment = $db->prepare("INSERT INTO message (roomid, authorid, content, date) VALUES (:roomid, :authorid, :content, :date)");
 
@@ -222,9 +222,9 @@ class Room {
     } */
 
 
-    public function print_messages($data_base) {
+    public function print_messages() {
 
-        $messages = $this->get_old_messages($data_base);
+        $messages = $this->get_old_messages();
 
         foreach ($messages as &$message) {
 

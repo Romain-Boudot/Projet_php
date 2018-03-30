@@ -10,7 +10,7 @@
         private $room_list = array(); // a virer
 
       
-        public function __construct($id, $data_base) {
+        public function __construct($id) {
 
             $this->id = $t_id;
             $this->last_name = $t_last_name;
@@ -31,9 +31,9 @@
         }
 
 
-        public function get_this_room($data_base, $room_id) {
+        public function get_this_room($room_id) {
 
-            $db = $data_base->db_connexion();
+            $db = Data_base::db_connexion();
 
             $statment = $db->prepare(
                 "SELECT roomid as rid, isadmin, isvalidate, (
@@ -62,10 +62,10 @@
         }
 
 
-        private function get_rooms($data_base) {
+        private function get_rooms() {
 
 
-            $db = $data_base->db_connexion();
+            $db = Data_base::db_connexion();
 
 
             $statment = $db->prepare(
@@ -104,10 +104,10 @@
         }
 
 
-        public function print_users_rooms($data_base) {
+        public function print_users_rooms() {
 
 
-            $room_list = User::get_rooms($data_base);
+            $room_list = User::get_rooms();
 
             if(sizeof($room_list) > 0) {
     
@@ -157,10 +157,10 @@
         }
 
 
-        public function create_room($data_base, $room_name, $invited_users) {
+        public function create_room($room_name, $invited_users) {
         
 
-            $db = $data_base->db_connexion();
+            $db = Data_base::db_connexion();
 
 
             $statment = $db->prepare("INSERT INTO room (name, adminid) VALUES (:room_name, :sessionid)");
@@ -182,7 +182,7 @@
 
             // on ajoute les utilisateur à la room
 
-            Room::add_user_room($data_base, $invited_users, $last_id);
+            Room::add_user_room($invited_users, $last_id);
         
         }
 

@@ -43,7 +43,7 @@
 
         // we add a new room in the database
 
-        User::create_room($data_base, $room_name, $invited_users);
+        User::create_room($room_name, $invited_users);
 
 
         echo "[0]"; // the room is created, we informe the user

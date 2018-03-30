@@ -54,7 +54,7 @@ class Message {
 
         if ($this->author_id == $this->room->get_var('user')->get_var('id') || $this->room->get_var('isadmin') == 1) {
 
-            $db = $this->room->get_var('user')->data_base->db_connexion();
+            $db = Data_base::db_connexion();
 
             $statment = $db->prepare("DELETE FROM message WHERE id = :msgid");
 
