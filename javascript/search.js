@@ -1,6 +1,5 @@
 var invited_users = []
-var current_room_id = document.getElementById('room_id').innerHTML
-var current_user_id = document.getElementById('current_id').innerHTML
+var current_user_id = document.getElementById('current_id').value
 
 
 // fonction de récuperation de l'objet XMLHTTPrequest ( xhr )

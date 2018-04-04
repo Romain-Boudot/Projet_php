@@ -1,6 +1,6 @@
 <?php
     // load or reload a session ! have to be the first line
-    include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/includes/include.php';
     session_start();
 
     // test of the login of the user
@@ -46,7 +46,10 @@
 
 <head>
 
-    <?php head_include("Marcassin"); ?>
+    <?php 
+        $title = 'Marcassin';
+        include $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
+    ?>
     
 </head>
 
@@ -56,27 +59,8 @@
     <input id="current_id" type="hidden" value="<?php echo $_SESSION['user']['id']; ?>">
     <input id="tokenUser" type="hidden" value="<?php echo $token; ?>">
 
-    <nav class="navbar fixed-top navbar-dark bg-dark blue-shadow">
-        <div class="d-flex">
-            <span id="btn_slide_menu_trigger" style="font-size: 100%" class="text-light clickable fas fa-bars"></span>
-            <a class="resp-640-hd navbar-brand" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>MARCASSIN</a>
-        </div>
-
-        <div class="d-flex">
-            <span class="navbar-text text-warning"><?php echo $_SESSION['user']['login']; ?></span>
-            <a class='btn btn-outline-secondary ml-4 resp-640-hd' href="<?php echo $location_create; ?>" role="button">Créer une salle</a>
-            <a class="btn btn-outline-secondary ml-2 resp-640-hd" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php" role="button">Déconnexion</a>
-        </div>
-
-    </nav>
-
-    <div id="slide_menu" class="container bg-dark pt-2 text-center">
-        <ul>
-            <li><a href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>Accueil</a></li>
-            <li><a href="<?php echo $location_create; ?>">Créer une salle</a></li>
-            <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php">Déconnexion</a></li>
-        </ul>
-    </div>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php'; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/modules/modif_room.php'; ?>
 
     <div id="messages_container" style="scroll-behavior: smooth;" class="mw-1200 mt-100px container-fluid">
         

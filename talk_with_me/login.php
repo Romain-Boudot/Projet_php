@@ -1,7 +1,7 @@
 <?php 
 
     // load or reload a session ! have to be the first line
-    include $_SERVER['DOCUMENT_ROOT'] . '/include.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/includes/include.php';
     session_start();
 
     // check si une session est en cours, si non redirige vers #accueil
@@ -49,7 +49,10 @@
 
     <head>
 
-        <?php head_include("Marcassin"); ?>
+    <?php 
+        $title = 'Identifiez-vous';
+        include $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
+    ?>
 
     </head>
 

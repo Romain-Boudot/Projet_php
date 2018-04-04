@@ -3,7 +3,10 @@
 
 <head>
 
-    <?php head_include("Marcassin"); ?>
+    <?php 
+        $title = 'Access denied';
+        include $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
+    ?>
 
 </head>
 

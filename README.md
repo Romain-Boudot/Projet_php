@@ -26,5 +26,6 @@
 - [ ] As user I can delete all messages in MY rooms
 - [x] As user I can see the old message of a room
 
-## [Accueil](index.php)
+### A revoir :
 
+- captcha pas asser secure

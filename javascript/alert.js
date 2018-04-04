@@ -10,10 +10,29 @@ function popup_alert(message) {
     setTimeout(function() {
         document.getElementById('alert_popup').style = 'opacity:1';
         document.getElementById('alert_popup').firstElementChild.style = 'opacity:1';
-    }, 200)
+    }, 10)
+
+    callback;
 
 }
 
+function popup_create_room() {
+    document.getElementById('roomcreation').style = 'display:block;opacity:0';
+    setTimeout(function(){
+        document.getElementById('roomcreation').style = 'display:block;opacity:1';
+    }, 10);
+}
+
 function close_popup_alert() {
-    document.getElementById('alert_popup').previousElementSibling.nextElementSibling.remove();
+    document.getElementById('alert_popup').style = 'opacity:0';
+    setTimeout(function() {
+        document.getElementById('alert_popup').remove();
+    }, 200)
+}
+
+function close_create_room() {
+    document.getElementById('roomcreation').style = 'display:block;opacity:0';
+    setTimeout(function(){
+        document.getElementById('roomcreation').style = 'display:none;opacity:0';
+    }, 200);
 }
