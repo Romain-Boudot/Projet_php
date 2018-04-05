@@ -68,3 +68,7 @@
     #btn_slide_menu_trigger { display: block; }
 
 }
+
+.edit_input { background-color: #e2e2e2; border: 0; padding: 10px; margin: 0; outline-color: #f8f9fa; width: 42vw }
+/*.button_edit { background-color: #cecece; border: 0; padding: 0; margin: 0; outline-color: #f8f9fa; color: #007bff; }*/
+.span_text:visited { color: green; }

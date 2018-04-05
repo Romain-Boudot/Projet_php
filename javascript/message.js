@@ -136,7 +136,7 @@ function send_message() {
 
         
         // ouvre une requete xhr vers le module search_request.php en GET avec comme parametre le but de la recherche
-        // pouis l'envoie
+        // puis l'envoie
 
         xhr.open("POST", "../modules/send_message.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -205,8 +205,55 @@ function add_message(answer) {
 
 }
 
-function edit() {
-    
 
+function edit(message_id) {
+    
+    $('span#id'+message_id).click (function(){
+
+        if(!$(this).children('input').length) {
+            
+            $(this).html(function(){
+
+                return "<input type='text' name='" + message_id + "' id='" + message_id + "' class='edit_input' value='" + $(this).html() + "'>";           
+            });
+          
+            $(this).children('input').focus();
+        
+        }
+    
+    });
+    
+    
+    $('span#id'+message_id).focusout(null,function() {
+        
+        $(this).html(function() {
+            
+            return $(this).children('input').val();
+        
+        });
+        
+        $.ajax({
+            
+            url  :  './../modules/message_edit.php?action=edit&roomid=' + room_id + 'messageid=' + message_id + '',
+            type :  'POST',
+            data :   'messageid' + message_id + '&roomid' + room_id,
+            
+            success : function(code_html, statut) {
+                        
+                //alert('succes');
+                    
+            }, //erreur, ma requete est bien envoyer, mais est surement mal executer.
+            
+            error : function(resultat, statut, erreur) {
+                
+                alert('erreur');
+                
+            },
+        
+        });
+    
+    });
+    
+    //alert(message_id);
 
 }
