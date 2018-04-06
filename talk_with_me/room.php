@@ -59,8 +59,7 @@
     <input id="current_id" type="hidden" value="<?php echo $_SESSION['user']['id']; ?>">
     <input id="tokenUser" type="hidden" value="<?php echo $token; ?>">
 
-    <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php'; ?>
-    <?php include $_SERVER['DOCUMENT_ROOT'] . '/modules/modif_room.php'; ?>
+    <?php $modif_room = true; include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php'; ?>
 
     <div id="messages_container" style="scroll-behavior: smooth;" class="mw-1200 mt-100px container-fluid">
         

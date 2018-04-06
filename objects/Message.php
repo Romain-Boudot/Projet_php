@@ -31,16 +31,24 @@ class Message {
         }
 
         if ($output_type == "js") echo "[". $ismine . ",\"";
-        echo "<div class='container-fluid bg-light p-3 rounded'>";
+        echo "<div id='" . $this->id . "' class='container-fluid bg-light p-3 rounded'>";
         echo "<span class='font-weight-light pr-2 text-little'>" . $this->date . "</span>";
         echo "<span class='text-danger border border-bottom-0 border-top-0 border-left-0 border-secondary pr-2 mr-2'>" . $this->author . "</span>";
-        echo $this->content;
+        echo "<span class='editable' id='contentid" . $this->id . "'>" . $this->content . "</span>";
 
         if ($ismine == 1 || $this->room->get_var('isadmin') == 1) {
 
-            echo "<a href='#' role='button' class='close' aria-label='Close'>";
+            echo "<div onclick='del(\"" . $this->id . "\")' role='button' class='close clickable' aria-label='Close'>";
             echo "<span aria-hidden='true'>&times;</span>";
-            echo "</a>";  
+            echo "</div>";  
+
+        }
+
+        if ($ismine == 1) {
+
+            echo "<div onclick='edit(\"" . $this->id . "\")' role='button' class='close clickable' aria-label='Close'>";
+            echo "<span aria-hidden='true' style='font-size:80%;' class='mr-2 fas fa-edit span_text'></span>";
+            echo "</div>";  
 
         }
 

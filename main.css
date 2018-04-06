@@ -12,6 +12,12 @@
 .h-100vh        { height: 100vh; }
 .blue-shadow    { -moz-box-shadow: 0px 5px 0px 0px #007bff; -webkit-box-shadow: 0px 5px 0px 0px #007bff; -o-box-shadow: 0px 5px 0px 0px #007bff; box-shadow: 0px 5px 0px 0px #007bff;}
 
+.w-auto{width: auto}
+
+.editable {
+    
+}
+
 /* color */
 
 .red{background-color:#F44336}

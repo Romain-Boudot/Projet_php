@@ -1,4 +1,50 @@
-<div id="modif_room" class='h-0vh pt-80px'>
+<?php
+    // load or reload a session ! have to be the first line
+    include $_SERVER['DOCUMENT_ROOT'] . '/includes/include.php';
+    session_start();
+
+    // test of the login of the user
+    login_test('login');
+
+    if(isset($_GET) && isset($_GET['id'])) {
+
+        $room = User::get_this_room($_GET['id']);
+
+        if ($room != false) {
+            
+            if ($room->have_access($_GET['id']) == false) {
+                
+                header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/denied.php');
+                exit();
+                
+            }
+
+        } else {
+
+            header('location: http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/error/denied.php');
+            exit();
+
+        }
+            
+    }
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <?php 
+        $title = 'Marcassin';
+        include $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
+    ?>
+
+</head>
+
+<body class="pt-80px">
+
+    <?php $modif_room = true; include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php'; ?>
 
     <div id="creation_container" class="container mw-900">
 
@@ -16,7 +62,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text resp-label-572-hd" id="basic-addon1" style="width: 180px;">Nom de la salle</span>
                     </div>
-                    <input type="text" id="name" class="form-control" maxlength="30" placeholder="random things"/>
+                    <input type="text" id="name" class="form-control" maxlength="30" placeholder="random things" />
                 </div>
 
                 <label class="resp-label-572">Nom d'Utilisateur</label>
@@ -24,11 +70,13 @@
                     <div class="input-group-prepend resp-572-rounded">
                         <span class="input-group-text resp-label-572-hd" id="basic-addon2" style="width: 180px;">Recherche d'utilisateur</span>
                     </div>
-                    <input id="search" type="text" class="form-control" placeholder="Pseudo" onkeyup="search_db(this.value)"/>
+                    <input id="search" type="text" class="form-control" placeholder="Pseudo" onkeyup="search_db(this.value)" />
                 </div>
 
                 <div id="search_result" class="p-2 border text-left mb-1" style="display: none">
-                    <div id="search_result_title">Résultats de la recherche<hr></div>
+                    <div id="search_result_title">Résultats de la recherche
+                        <hr>
+                    </div>
                     <div id="search_element"></div>
                 </div>
 
@@ -47,4 +95,6 @@
 
     <script src="/javascript/search.js"></script>
 
-</div>
+</body>
+
+</html>

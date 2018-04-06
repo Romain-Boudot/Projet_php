@@ -12,7 +12,7 @@
 
     if(isset($_POST) && isset($_POST['login']) && isset($_POST['password'])) {
 
-        $answer = Data_base::password_check($_POST['login'], $_POST['password']);
+        $answer = Data_base::password_check($_POST['login'], hash("sha512", $_POST['password'], false));
         
         if($answer != false) {
 

@@ -6,7 +6,15 @@
 
     <div class="d-flex">
         <span class="navbar-text text-warning"><?php echo $_SESSION['user']['login']; ?></span>
+        <?php if (isset($modif_room)) {
+            ?>
+        <a class="btn btn-outline-secondary ml-2 resp-640-hd" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>/talk_with_me/modif_room.php' >Modifier la salle</a>
+            <?php
+        } else {
+            ?>
         <a class="btn btn-outline-secondary ml-2 resp-640-hd" href='http://<?php echo $_SERVER['HTTP_HOST']; ?>/talk_with_me/create_room.php' >Créer une salle</a>
+            <?php
+        } ?>
         <a class="btn btn-outline-secondary ml-2 resp-640-hd" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php" role="button">Déconnexion</a>
     </div>
 
@@ -15,7 +23,15 @@
 <div id="slide_menu" class="container bg-dark pt-2 text-center">
     <ul>
         <li><a href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>Accueil</a></li>
+        <?php if (isset($modif_room)) {
+            ?>
+        <li><a href='http://<?php echo $_SERVER['HTTP_HOST']; ?>/talk_with_me/modif_room.php' >Modifier la salle</a></li>
+            <?php
+        } else {
+            ?>
         <li><a href='http://<?php echo $_SERVER['HTTP_HOST']; ?>/talk_with_me/create_room.php' >Créer une salle</a></li>
+            <?php
+        } ?>
         <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php">Déconnexion</a></li>
     </ul>
 </div>
