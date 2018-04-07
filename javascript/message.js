@@ -14,8 +14,24 @@ function send_message() {
         
     } else { // si le contenue est vide
 
-        alert('Votre message est vide')
+        popup_alert('Votre message est vide', 'green', 'check', '')
         
+    }
+
+}
+
+function on_blur(target) {
+
+    target.setAttribute("contenteditable", "false");
+    var content = target.innerHTML
+    send_edit(content, $(target).attr('id'))
+
+}
+
+function on_key_press(key, target) {
+
+    if (key.keyCode == 13) {
+        target.blur();
     }
 
 }
@@ -48,24 +64,6 @@ function edit(id) {
 
 }
 
-document.querySelector('.editable').onkeypress = function(key) {
-
-    if (key.keyCode == 13) {
-        this.blur();
-    }
-    /* document.getElementById('message').focus(); */
-
-}
-
-document.querySelector('.editable').onblur = function(key) {
-
-    this.setAttribute("contenteditable", "false");
-    var content = this.innerHTML
-    send_edit(content, $(this).attr('id'))
-    /* document.getElementById('message').focus(); */
-
-}
-
 function send_edit(content, id) {
 
     var token = document.getElementById('tokenUser').value
@@ -85,7 +83,7 @@ ws.onopen = function() {
 }
 
 ws.onerror = function(e) {
-    popup_alert('une erreur est survenue');
+    popup_alert('une erreur est survenue', 'green', 'check', '');
 }
 
 ws.onmessage = function(data) {
@@ -98,7 +96,7 @@ ws.onmessage = function(data) {
     // -2 delete
     // -3 edit
     // 0 msg normal
-    // 1 msg a moi
+    // 1 msg cacher
  
     if (data[0] == -1) {
 
@@ -110,7 +108,7 @@ ws.onmessage = function(data) {
         document.getElementById(data[1]).remove();
 
     } else if (data[0] == -3) {
-        
+            
         document.getElementById('contentid' + data[1]).innerText = data[3];
         
     } else if (data[0] == 0 || data[0] == 1) {

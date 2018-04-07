@@ -17,6 +17,42 @@
         return false;
         
     }
+
+    function search_delete_user($answer, $invited_users) {
+
+        $deleteusers = [];
+
+        foreach($answer as &$user) {
+
+            if (!in_array($user['userid'], $invited_users)) {
+
+                $deleteusers[sizeof($deleteusers)] = $user['userid'];
+
+            }
+
+        }
+
+        return $deleteusers;
+
+    }
+
+    function search_invite_users($answer, $invited_users) {
+
+        $inviteusers = [];
+
+        foreach($invited_users as &$user) {
+
+            if (!in_array($user, $answer)) {
+
+                $inviteusers[sizeof($inviteusers)] = $user;
+
+            }
+
+        }
+
+        return $inviteusers;
+
+    }
     
     if(isset($_POST) && isset($_POST['name'])) {
         
@@ -44,14 +80,29 @@
 
         }
 
+        $db = Data_base::db_connexion();
+
+        $statment = $db->prepare("SELECT userid FROM assouser WHERE roomid = :id");
+
+        $statment->execute(array(
+            ":id" => $_POST['id']
+        ));
+
+        $answer = $statment->fetchAll(PDO::FETCH_ASSOC);
+
+        $deleteusers = search_delete_user($answer, $invited_users);
+
+        $inviteusers = search_invite_users($answer, $invited_users);
+
         // we add a new room in the database
 
-        User::create_room($room_name, $invited_users);
-
+        User::modif_room($_POST['id'], $room_name, $deleteusers, $inviteusers);
 
         echo "[0]"; // the room is created, we informe the user
         exit(); // stop the script
+
     }
     
     echo '[1]'; // the room is not created, we informe the user
+
 ?>

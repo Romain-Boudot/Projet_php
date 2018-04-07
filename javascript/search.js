@@ -1,7 +1,3 @@
-var invited_users = []
-var current_user_id = document.getElementById('current_id').value
-
-
 // fonction de récuperation de l'objet XMLHTTPrequest ( xhr )
 
 function getXMLHTTP() {

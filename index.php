@@ -20,7 +20,7 @@
       
 </head>
 
-<body class="pt-80px pb-80px">
+<body class="pt-90px resp-resize white-filter">
 
     <input type='hidden' id="current_id" value='<?php echo $_SESSION['user']['id']; ?>'>
     

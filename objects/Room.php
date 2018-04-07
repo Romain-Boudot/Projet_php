@@ -130,6 +130,24 @@ class Room {
     }
 
 
+    public function delete_user_room($deleteusers, $rid) {
+    
+    
+        $db = Data_base::db_connexion();
+    
+        foreach ($deleteusers as &$user) {
+
+            if ($user == $_SESSION['user']['id']) continue;
+
+            $statment = $db->prepare("DELETE FROM assouser WHERE roomid = :roomid AND userid = :userid");
+
+            $statment->execute(array(":roomid" => $rid, ":userid" => $user));
+        
+        }
+    
+    }
+
+
     // messages de la room
 
     public function get_new_messages() {
@@ -237,7 +255,7 @@ class Room {
 
     public function print_basic_room() {
 
-        echo '<div id="id' . $this->id . '" class="col row jumbotron jumbotron-fluid border border-secondary rounded m-1 p-0 clickable flex-div" onclick="';
+        echo '<div id="id' . $this->id . '" class="shadow-2 col row jumbotron jumbotron-fluid border border-secondary rounded m-1 p-0 clickable flex-div" onclick="';
         echo 'location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room.php?id=' . $this->id . '\'">';
         echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-secondary p-2 text-center">';
         echo $this->name;
@@ -259,7 +277,7 @@ class Room {
 
     public function print_admin_room() {
 
-        echo '<div id="id' . $this->id . '" class="col row jumbotron jumbotron-fluid border border-primary rounded p-0 m-1 clickable flex-div" onclick="';
+        echo '<div id="id' . $this->id . '" class="shadow-2 col row jumbotron jumbotron-fluid border border-primary rounded p-0 m-1 clickable flex-div" onclick="';
         echo 'location.href=\'http://' . $_SERVER['HTTP_HOST'] . '/talk_with_me/room.php?id=' . $this->id . '\'">';
         echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-primary p-2 text-center">';
         echo $this->name;
@@ -282,7 +300,7 @@ class Room {
 
     public function print_validation_room() {
 
-        echo '<div id="id' . $this->id . '" class="col row jumbotron jumbotron-fluid border border-success rounded p-0 m-1 flex-div">';
+        echo '<div id="id' . $this->id . '" class="shadow-2 col row jumbotron jumbotron-fluid border border-success rounded p-0 m-1 flex-div">';
         echo '<div class="col border border-bottom-0 border-left-0 border-top-0 border-success p-2 text-center">';
         echo $this->name;
         echo '</div>';

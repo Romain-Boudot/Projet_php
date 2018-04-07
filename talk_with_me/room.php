@@ -6,6 +6,8 @@
     // test of the login of the user
     login_test('login');
 
+    $room;
+
     if(isset($_GET) && isset($_GET['id'])) {
 
         $room = User::get_this_room($_GET['id']);
@@ -53,7 +55,7 @@
     
 </head>
 
-<body class="pt-80px pb-80px">
+<body class="pt-90px pb-90px resp-resize white-filter">
 
     <input id="current_room" type="hidden" value="<?php echo $_GET['id']; ?>">
     <input id="current_id" type="hidden" value="<?php echo $_SESSION['user']['id']; ?>">
@@ -67,7 +69,7 @@
 
     </div>
 
-    <div id="send_bar" class="p-2 w-100 bg-grey fixed-bottom">
+    <div id="send_bar" class="resp-resize shadow-2-t p-2 w-100-un fixed-bottom">
 
         <div class="input-group mw-1200 container-fluid">
             <input id="message" type="text" class="form-control" placeholder="Message" maxlength="1000">

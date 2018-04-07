@@ -148,7 +148,7 @@
                     
             } else {
                     
-                echo "<div class='jumbotron jumbotron-fluid border border-secondary rounded p-4'>";
+                echo "<div class='shadow-2 jumbotron jumbotron-fluid border border-secondary rounded p-4'>";
                 echo "<p class='d-inline'>Vous n'avez accès à aucune salle, mais vous pouvez en créer une !</p>";
                 echo "</div>";
                 
@@ -183,6 +183,23 @@
             // on ajoute les utilisateur à la room
 
             Room::add_user_room($invited_users, $last_id);
+        
+        }
+
+        public function modif_room($roomid, $room_name, $deleteusers, $inviteusers) {
+        
+
+            $db = Data_base::db_connexion();
+
+            $statment = $db->prepare("UPDATE room SET name = :name");
+            
+            $statment->execute(array(":name" => $room_name));
+
+            // on ajoute les utilisateur à la room
+
+            Room::add_user_room($inviteusers, $roomid);
+
+            Room::delete_user_room($deleteusers, $roomid);
         
         }
 

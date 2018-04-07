@@ -34,7 +34,7 @@ class Message {
         echo "<div id='" . $this->id . "' class='container-fluid bg-light p-3 rounded'>";
         echo "<span class='font-weight-light pr-2 text-little'>" . $this->date . "</span>";
         echo "<span class='text-danger border border-bottom-0 border-top-0 border-left-0 border-secondary pr-2 mr-2'>" . $this->author . "</span>";
-        echo "<span class='editable' id='contentid" . $this->id . "'>" . $this->content . "</span>";
+        echo "<span onblur='on_blur(this)' onkeydown='on_key_press(event, this)' class='editable' id='contentid" . $this->id . "'>" . $this->content . "</span>";
 
         if ($ismine == 1 || $this->room->get_var('isadmin') == 1) {
 

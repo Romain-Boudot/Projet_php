@@ -8,7 +8,7 @@
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang='fr'>
 
 <head>
 
@@ -19,16 +19,16 @@
 
 </head>
 
-<body class="pt-80px">
+<body class="pt-90px resp-resize white-filter">
 
     <div id="current_id" hidden><?php echo $_SESSION['user']['id']; ?></div>
     <div id="room_id" hidden>-1</div>
     
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php'; ?>
 
-    <div id="creation_container" class="container mw-900">
+    <div class="container mw-900">
 
-        <div class='container border rounded p-4 text-center bg-light'>
+        <div id="creation_container" class='container p-4 text-center'>
 
             <h2>Création de salle</h2>
 
