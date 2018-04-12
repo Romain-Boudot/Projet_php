@@ -15,7 +15,7 @@
 
     <ul>
 
-        <!-- <li><a href='http://<?php echo $_SERVER['HTTP_HOST']; ?>'>Accueil</a></li> -->
+        <li><div class="clickable" onclick="location.href = 'http://<?php echo $_SERVER['HTTP_HOST']; ?>'" >Accueil</div></li>
 
         <?php
 
