@@ -88,7 +88,9 @@ ws.onerror = function(e) {
 
 ws.onmessage = function(data) {
 
-    console.log(data.data);
+    //console.log(data.data);
+
+    console.log(data);
 
     data = JSON.parse(data.data);
 
@@ -111,6 +113,20 @@ ws.onmessage = function(data) {
             
         document.getElementById('contentid' + data[1]).innerText = data[3];
         
+    } else if (data[0] == -4) {
+
+        var inn = document.getElementById('logedin');
+
+        inn.innerHTML = "";
+
+        for (var cpt = 1; cpt < data.length; cpt++) {
+
+            inn.innerHTML += "<li><div class='people'><span class='dot green'></span>" + data[cpt] + "</div></li>";
+
+        }
+
+        
+
     } else if (data[0] == 0 || data[0] == 1) {
         
         document.getElementById('messages_container').innerHTML += data[1];        

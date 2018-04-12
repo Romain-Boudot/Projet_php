@@ -34,12 +34,13 @@
 
         ?>
 
-        <li></li>
+    </ul>
 
+    <ul class='mt-2 text-left' id='logedin'>
     </ul>
 
     <ul class="bottom-float">
-        <li><div class="clickable" onclick="location.href = 'http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php'">Déconnexion</div></li>
+        <li style="height: 54px;"><div style="line-height: 52px;" class="clickable" onclick="location.href = 'http://<?php echo $_SERVER['HTTP_HOST']; ?>/modules/disconnect.php'">Déconnexion</div></li>
     </ul>
 
 </div>
